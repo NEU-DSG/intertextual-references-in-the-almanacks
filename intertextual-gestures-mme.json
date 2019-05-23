@@ -1721,7 +1721,7 @@
        ]
      },
      {
-      "excerpt":"<seg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" source=\"bibliography.xml#Reid_Inquiry\" ana=\"a:intertextual-echo\" cert=\"low\">enthu\n                  <lb break=\"no\"\/>siasm as a disease—<\/seg>",
+      "excerpt":"<seg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" source=\"bibliography.xml#Reid_Inquiry\" ana=\"a:intertextual_echo\" cert=\"low\">enthu\n                  <lb break=\"no\"\/>siasm as a disease—<\/seg>",
       "sources": [
          {
           "cert":"low",
@@ -1729,11 +1729,11 @@
          }
        ],
       "type": [
-        "intertextual-echo"
+        "intertextual_echo"
        ]
      },
      {
-      "excerpt":"<seg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" ana=\"a:intertextual-echo\" source=\"bibliography.xml#De_Staël_Germany\" cert=\"low\">That light of the soul—that spark\n          <lb\/>of glory which will continue to burn on\n          <choice>\n                     <abbr>thro’<\/abbr>\n                     <expan>through<\/expan>\n                  <\/choice> eternity\n            <lb\/>I mean a stronger portion of feeling—perception—exist\n            <lb break=\"no\"\/>ence than belongs to the dull &amp; weake. It is heroism\n            <lb\/>in the Soldier—self renunciation in the Statsman—self de\n            <lb break=\"no\"\/>votion in the Martyr—adoration &amp; fruition of existence\n            <lb\/>in the Recluse. Oh it is the appetite of hunger in\n            <lb\/>the soul for knowledge virtue &amp; immotality. That it does\n          <lb\/>not find fuel enough in this clayey world to feed it<\/seg>",
+      "excerpt":"<seg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" ana=\"a:intertextual_echo\" source=\"bibliography.xml#De_Staël_Germany\" cert=\"low\">That light of the soul—that spark\n          <lb\/>of glory which will continue to burn on\n          <choice>\n                     <abbr>thro’<\/abbr>\n                     <expan>through<\/expan>\n                  <\/choice> eternity\n            <lb\/>I mean a stronger portion of feeling—perception—exist\n            <lb break=\"no\"\/>ence than belongs to the dull &amp; weake. It is heroism\n            <lb\/>in the Soldier—self renunciation in the Statsman—self de\n            <lb break=\"no\"\/>votion in the Martyr—adoration &amp; fruition of existence\n            <lb\/>in the Recluse. Oh it is the appetite of hunger in\n            <lb\/>the soul for knowledge virtue &amp; immotality. That it does\n          <lb\/>not find fuel enough in this clayey world to feed it<\/seg>",
       "sources": [
          {
           "cert":"low",
@@ -1741,7 +1741,7 @@
          }
        ],
       "type": [
-        "intertextual-echo"
+        "intertextual_echo"
        ]
      },
      {

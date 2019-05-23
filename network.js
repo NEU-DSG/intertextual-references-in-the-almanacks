@@ -29,9 +29,9 @@ var colorDrama = "#C2185B",
   colorVerse = "#43A047";
 
 // color scale for curves
-var scaleColor2 = d3.scaleOrdinal()
-      .domain(["Drama", "Drama: Prose", "Drama: Verse", "Fiction", "Fiction: Letter", "Fiction: Novel", "Fiction: Other", "Non-fiction", "Non-fiction: Essay", "Non-fiction: Letter", "Non-fiction: Other", "Verse", "Verse: Lyric", "Verse: Narrative", "Verse: Other"])
-      .range([colorDrama, colorDrama, colorDrama, colorFiction, colorFiction, colorFiction, colorFiction, colorNonFiction, colorNonFiction, colorNonFiction, colorNonFiction, colorVerse, colorVerse, colorVerse, colorVerse]);
+var scaleColor2 = d3.scaleOrdinal(d3.schemeBlues[6])
+      /*.domain(["philosophy", "religious-writings", "literature", "life-writings", "nonfiction", "reviews"])*/
+      /*.range([colorDrama, colorDrama, colorDrama, colorFiction, colorFiction, colorFiction, colorFiction, colorNonFiction, colorNonFiction, colorNonFiction, colorNonFiction, colorVerse, colorVerse, colorVerse, colorVerse])*/;
 
 
 // function to make list of texts
@@ -39,32 +39,28 @@ function makePath(data) {
   var elemPrev, increment, y,
       countElem = 0,
       countTotal = 0;
-  console.log(data);
+  //console.log(data);
   data.forEach( function(i) {
     console.log(i);
-    /*if ( countTotal === 0 ) { elemPrev = i.element; }
-    else if ( elemPrev !== i.element ) { countElem = 0; }*/
+    if ( countTotal === 0 ) { elemPrev = i.gesture; }
+    else if ( elemPrev !== i.gesture ) { countElem = 0; }
 
     increment = 4; /*((i.targetData.prop * networkHeight) / i.targetData.value) * countElem;*/
-    y = i.y + increment;
+    y = i.typeDatum.y + increment;
 
     i.path = [
-      { "x": i.x - 4, "y": i.y/*,
-        "filename": i.filename, 
-        "element": i.element,
-        "mainGenre": i.mainGenre*/},
-      { "x": i.x - (wC/10), "y": i.y/*,
-        "filename": i.filename, 
-        "element": i.element,
-        "mainGenre": i.mainGenre*/},
-      { "x": i.x + (wC/10), "y": y/*, 
-        "filename": i.filename, 
-        "element": i.element,
-        "mainGenre": i.mainGenre*/},
-      { "x": i.x + 4, "y": y/*, 
-        "filename": i.filename, 
-        "element": i.element,
-        "mainGenre": i.mainGenre*/} ];
+      { "x": i.genreDatum.x - 4, "y": i.genreDatum.y,
+        'genre': i.genreDatum.key,
+        'type': i.typeDatum.key},
+      { "x": i.genreDatum.x - (wC / 10), "y": i.genreDatum.y,
+        'genre': i.genreDatum.key,
+        'type': i.typeDatum.key},
+      { "x": i.typeDatum.x + (wC / 10), "y": y,
+        'genre': i.genreDatum.key,
+        'type': i.typeDatum.key},
+      { "x": i.typeDatum.x + 4, "y": y,
+        'genre': i.genreDatum.key,
+        'type': i.typeDatum.key} ];
     countElem++;
     countTotal++;
     elemPrev = i.element;
@@ -89,7 +85,11 @@ dispatch.on("dataLoaded.network", function(allData){
   for (var key of genres.keys()) {
     var bibEntries = genres.get(key),
         bibGestures = [],
-        targets = [];
+        targets = [],
+        genreObj = {
+          'key': key, 
+          'value': bibEntries
+        };
     /*for (var keyInner of bibEntries.keys()) {
       var theseGestures = bibEntries.get(keyInner);
       bibGestures = bibGestures.concat(theseGestures);
@@ -100,25 +100,27 @@ dispatch.on("dataLoaded.network", function(allData){
       });
       if ( matchesType ) { targets.push(type); }
     });
-    bibEntries.forEach( function(entry) {
-      entry['type'].forEach( function(type) {
-        var pathDatum = {
-          'genre': key,
-          'gesture': entry,
-          'type': type
-        };
-        console.log(pathDatum);
-      });
-      
-    });
-    genreList.push({
+    genreList.push(genreObj/*{
       'key': key, 
       'value': bibEntries,
       'sourceData': bibEntries,
       'targetData': targets
+    }*/);
+    bibEntries.forEach( function(entry) {
+      entry['type'].forEach( function(type) {
+        var pathDatum = {
+          /*'genre': key,*/
+          'genreDatum': genreObj,
+          'gesture': entry,
+          /*'type': type,*/
+          'typeDatum': typeList.filter(typeObj => typeObj['key'] === type)[0]
+        };
+        //console.log(pathDatum);
+        pathsList.push(pathDatum);
+      });
     });
   }
-  //console.log(genreList);
+  console.log(pathsList);
   // Create labels for genres.
   var genreLabels,
       totalGestures = 0,
@@ -196,7 +198,7 @@ dispatch.on("dataLoaded.network", function(allData){
       });
   // Create curves joining genres to the types of quotes represented.
   var linkLines = svgC.selectAll('.links');
-  linkLines.data(makePath(genreList))
+  linkLines.data(makePath(pathsList))
       .enter()
     .append('g')
       .classed('links', true)
@@ -204,5 +206,5 @@ dispatch.on("dataLoaded.network", function(allData){
       .classed('path-links', true)
       .datum(d => d.path)
       .attr('d', curve)
-      .style('stroke-width', 1);
+      .style('stroke', 'black'/*function(d) { return scaleColor2(0); }*/)
 });

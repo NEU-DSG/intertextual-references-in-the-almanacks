@@ -4,24 +4,24 @@ var m = {t:10,r:10,b:10,l:10},
 
 var svgC = d3.select("#column-center")
   .append("svg")
-  .attr("width", wC)
-  .attr("height", hC)
+    .attr("width", wC)
+    .attr("height", hC)
   .append('g')
-  .attr('class','plot')
-  .attr('transform','translate('+ m.l+','+ m.t +')');
+    .attr('class','plot')
+    .attr('transform','translate('+ m.l+','+ m.t +')');
 
 d3.select('#colC-title')
-  .style('width',wC + 'px');
+    .style('width',wC + 'px');
 
 var col1 = wC/5,
-  col2 = (wC/5)*4,
-  networkHeight = hC * 0.85
-  clicked = 0;
+    col2 = (wC/5)*4,
+    networkHeight = hC * 0.85
+    clicked = 0;
 
 var curve = d3.line()
-  .x(function(d){ return d.x})
-  .y(function(d){ return d.y})
-  .curve(d3.curveBundle.beta(0.85));
+    .x( function(d) { return d.x; })
+    .y( function(d) { return d.y; })
+    .curve(d3.curveBundle.beta(0.85));
 
 var colorDrama = "#C2185B",
   colorFiction = "#673AB7",
@@ -35,85 +35,174 @@ var scaleColor2 = d3.scaleOrdinal()
 
 
 // function to make list of texts
-function makePath(data){
+function makePath(data) {
+  var elemPrev, increment, y,
+      countElem = 0,
+      countTotal = 0;
+  console.log(data);
+  data.forEach( function(i) {
+    console.log(i);
+    /*if ( countTotal === 0 ) { elemPrev = i.element; }
+    else if ( elemPrev !== i.element ) { countElem = 0; }*/
 
-  var elemPrev, y,
-    countElem = 0,
-    countTotal = 0;
+    increment = 4; /*((i.targetData.prop * networkHeight) / i.targetData.value) * countElem;*/
+    y = i.y + increment;
 
-  data.forEach(function(i){
-
-    if(countTotal == 0){ elemPrev = i.element; }
-    else if(elemPrev !== i.element){ countElem = 0; }
-
-    increment = ((i.targetData.prop*networkHeight)/i.targetData.value) * countElem;
-
-    y = i.targetData.y + increment;
-
-    i.path = [{"x": i.sourceData.x - 4, "y": i.sourceData.y, "filename": i.filename, "element": i.element, "mainGenre": i.mainGenre},
-      {"x": i.sourceData.x - (wC/10), "y": i.sourceData.y, "filename": i.filename, "element": i.element, "mainGenre": i.mainGenre},
-      {"x": i.targetData.x + (wC/10), "y": y, "filename": i.filename, "element": i.element, "mainGenre": i.mainGenre},
-      {"x": i.targetData.x + 4, "y": y, "filename": i.filename, "element": i.element, "mainGenre": i.mainGenre}];
-
+    i.path = [
+      { "x": i.x - 4, "y": i.y/*,
+        "filename": i.filename, 
+        "element": i.element,
+        "mainGenre": i.mainGenre*/},
+      { "x": i.x - (wC/10), "y": i.y/*,
+        "filename": i.filename, 
+        "element": i.element,
+        "mainGenre": i.mainGenre*/},
+      { "x": i.x + (wC/10), "y": y/*, 
+        "filename": i.filename, 
+        "element": i.element,
+        "mainGenre": i.mainGenre*/},
+      { "x": i.x + 4, "y": y/*, 
+        "filename": i.filename, 
+        "element": i.element,
+        "mainGenre": i.mainGenre*/} ];
     countElem++;
     countTotal++;
     elemPrev = i.element;
   })
-
   return data;
-
 };
 
 // dispatch.on("dataLoaded.network",function(meta, metaTop, metaTopGenre, elemDistTop, elemTop){
-dispatch.on("dataLoaded.network",function(allData){
+dispatch.on("dataLoaded.network", function(allData){
   var genres = allData.genres,
       gestures = allData.gestures,
-      genreList = [];
-  for (var key of genres.keys()) {
-    genreList.push({'key': key, 'value': genres.get(key)});
+      genreList = [],
+      typeMap = allData['types'],
+      typeList = [],
+      pathsList = [];
+  for (var key of typeMap.keys()) {
+    typeList.push({ 
+      'key': key,
+      'value': meta['types'].get(key)
+    });
   }
+  for (var key of genres.keys()) {
+    var bibEntries = genres.get(key),
+        bibGestures = [],
+        targets = [];
+    /*for (var keyInner of bibEntries.keys()) {
+      var theseGestures = bibEntries.get(keyInner);
+      bibGestures = bibGestures.concat(theseGestures);
+    }*/
+    typeList.forEach( function(type) {
+      var matchesType = bibGestures.some( function(instance) {
+        return instance['type'].includes(type['key']);
+      });
+      if ( matchesType ) { targets.push(type); }
+    });
+    bibEntries.forEach( function(entry) {
+      entry['type'].forEach( function(type) {
+        var pathDatum = {
+          'genre': key,
+          'gesture': entry,
+          'type': type
+        };
+        console.log(pathDatum);
+      });
+      
+    });
+    genreList.push({
+      'key': key, 
+      'value': bibEntries,
+      'sourceData': bibEntries,
+      'targetData': targets
+    });
+  }
+  //console.log(genreList);
   // Create labels for genres.
   var genreLabels,
       totalGestures = 0,
       ypos = 0,
-      countGestures = function(map) {
-        var numGestures = 0;
-        map.forEach( function(val) {
-          numGestures += val.length;
-        });
-        return numGestures;
-      },
-      genreAxis = svgC.selectAll('.label-genre')
-        .append('g')
-          .attr('class', 'axis')
-          .data(genreList)
-          .enter();
+      genreAxis = svgC.append('g')
+          .classed('axis axis-left', true);
   // Add labels for each genre.
-  genreLabels = genreAxis.append('text')
-      .attr('class', 'label-plot')
+  genreLabels = genreAxis.selectAll('.label-plot')
+      .data(genreList)
+      .enter()
+    .append('text')
+      .classed('label-plot', true)
       .attr("fill", "#292826")
-      .text( function(d) { 
-        console.log(d);
-        totalGestures += countGestures(d.value);
+      .text( function(d) {
+        /* While we're looking at this datum, add to the running count of IT 
+           gestures (needed for label placement). */
+        totalGestures += d.value.length;
+        //console.log(d);
         return d.key;
       });
   // Position the genre labels along their axis. Use a 4px gap in between ranges.
   var gapPx = 4,
       hCFree = hC - ( genreList.length * gapPx );
   genreLabels
-      .attr("x", function() { return col1 - 4; })
+      .attr("x", function(d) { 
+        d.x = col1 - 4;
+        return d.x;
+      })
       .attr("y", function(d, i) {
-        var numGestures = countGestures(d.value),
+        var numGestures = d.value.length,
             // Place labels halfway within the datum's range.
             yPx = ( (numGestures / 2) * hCFree) / totalGestures,
             position = ypos + yPx + gapPx;
         // Use the full range of this datum to determine where the next should start.
         ypos += (yPx * 2) + (gapPx / 2);
+        d.y = ypos;
         //console.log(position);
         return position;
       });
-  
   // Create border rectangles for genre?
   // Create labels for @type.
-  // 
+  var typeAxis, typeLabels,
+      totalTypes = 0;
+  typeAxis = svgC.append('g')
+      .classed('axis axis-right', true);
+  typeLabels = typeAxis.selectAll('.label-plot')
+      .data(typeList)
+      .enter()
+    .append('text')
+      .classed('label-plot', true)
+      .attr("fill", "#292826")
+      .text( function(d) {
+        totalTypes += d.value.length;
+        //console.log(d);
+        return d.key;
+      });
+  ypos = 0;
+  hCFree = hC - ( typeList.length * gapPx );
+  typeLabels
+      .attr("x", function(d) { 
+        d.x = col2;
+        return d.x;
+      })
+      .attr("y", function(d, i) {
+        var numGestures = d.value.length,
+            // Place labels halfway within the datum's range.
+            yPx = ( (numGestures / 2) * hCFree) / totalTypes,
+            position = ypos + yPx + gapPx;
+        // Use the full range of this datum to determine where the next should start.
+        ypos += (yPx * 2) + (gapPx / 2);
+        //console.log(yPx);
+        d.y = ypos;
+        //console.log(position);
+        return position;
+      });
+  // Create curves joining genres to the types of quotes represented.
+  var linkLines = svgC.selectAll('.links');
+  linkLines.data(makePath(genreList))
+      .enter()
+    .append('g')
+      .classed('links', true)
+    .append('path')
+      .classed('path-links', true)
+      .datum(d => d.path)
+      .attr('d', curve)
+      .style('stroke-width', 1);
 });

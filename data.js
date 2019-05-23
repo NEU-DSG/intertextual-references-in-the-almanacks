@@ -31,7 +31,7 @@ var dispatch = d3.dispatch("dataLoaded",
   "highlight","highlightmeta","highlightelem","unhighlight");
 
 var name = "persName";
-document.getElementById("element").innerHTML = "Person Names";
+//document.getElementById("element").innerHTML = "Person Names";
 var redraws = 0;
 
 var meta;
@@ -42,22 +42,35 @@ function drawNetwork(){
 
   d3.json('intertextual-gestures-mme.json').then( function(data) {
     meta = data;
-    console.log(meta);
+    //console.log(meta);
     
-    // Create Map of distinct genre values with the bibliography IDs and MME gestures they map to.
-    var genreGrp = new Map(),
+    /* Create Map of distinct genre values with the bibliography IDs and MME 
+       gestures to which they map. */
+    var totalExcerpts = 0,
+        genreGrp = new Map(),
         qTypes = new Map();
     meta['bibliography'].forEach( function(entry) {
       var id = entry['id'],
           mainGenre = entry['genreBroad'],
-          gestures = meta['gestures'],
-          grpInner = genreGrp.get(mainGenre) || new Map();
-      gestures = gestures.filter(gesture => gesture['sources'].some(src => src.id === id));
-      grpInner.set(id, gestures);
-      genreGrp.set(mainGenre, grpInner);
+          gestures = genreGrp.get(mainGenre) || [];
+      // Retrieve only the IT gestures matching the current entry's ID. 
+      gestures = gestures.concat(meta['gestures'].filter(gesture => gesture['sources'].some(src => src.id === id)));
+      genreGrp.set(mainGenre, gestures);
+    });
+    /*  */
+    meta['gestures'].forEach( function(gesture) {
+      var types = gesture.type;
+      types.forEach( function(typeStr) {
+        var qTypeEntry = qTypes.get(typeStr) || [];
+        qTypeEntry.push(gesture);
+        qTypes.set(typeStr, qTypeEntry);
+      });
+      totalExcerpts++;
     });
     meta['genres'] = genreGrp;
+    meta['types'] = qTypes;
     console.log(meta);
+    //console.log(totalExcerpts);
     
     /*var colorScaleGenres = d3.scaleOrdinal()
         .domain(['philosophy', 'religious-writings', 'literature', 'life-writings', 'nonfiction', 'reviews']);*/
@@ -66,12 +79,11 @@ function drawNetwork(){
     
     
     function dataTransform(meta, elem){
-
       // create array of distinct in-text element values
       var elemDist = d3.nest()
-        .key(function(d){return d.element})
-        .rollup(function(d){return d.length})
-        .entries(elem);
+          .key( function(d) { return d.element; })
+          .rollup( function(d) { return d.length; })
+          .entries(elem);
 
       elemDist.sort(function(a,b){
           return b["value"]-a["value"];
@@ -163,8 +175,8 @@ function drawNetwork(){
       });
 
       elemTop.forEach(function(i){
-        i.sourceData = metaObj[i.mainGenre]
-        i.targetData = elemDistObj[i.element]
+        i.sourceData = metaObj[i.mainGenre];
+        i.targetData = elemDistObj[i.element];
       });
 
       return {

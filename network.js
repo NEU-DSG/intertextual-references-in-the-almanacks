@@ -36,34 +36,42 @@ var scaleColor2 = d3.scaleOrdinal(d3.schemeBlues[6])
 
 // function to make list of texts
 function makePath(data) {
-  var elemPrev, increment, y,
-      countElem = 0,
+  var increment, instancePrev, y,
+      countInstance = 0,
       countTotal = 0;
-  //console.log(data);
-  data.forEach( function(i) {
-    //console.log(i);
-    if ( countTotal === 0 ) { elemPrev = i.gesture; }
-    else if ( elemPrev !== i.gesture ) { countElem = 0; }
+  data.forEach( function(pathJoin, index) {
+    //console.log(pathJoin);
+    var genre = pathJoin.genreDatum,
+        genreX = genre.x,
+        genreY = genre.y,
+        type = pathJoin.typeDatum,
+        typeX = type.x;
+    if ( countTotal === 0 ) { instancePrev = pathJoin.gesture; }
+    else if ( instancePrev !== pathJoin.gesture ) { countInstance = 0; }
 
-    increment = ((i.genreDatum.percent * networkHeight) / i.genreDatum.value.length) * countElem;
-    y = i.typeDatum.y + increment;
+    increment = ((genre.percent * networkHeight) / genre.value.length) * countInstance;
+    y = type.y + increment;
 
-    i.path = [
-      { "x": i.genreDatum.x - 4, "y": i.genreDatum.y,
-        'genre': i.genreDatum.key,
-        'type': i.typeDatum.key},
-      { "x": i.genreDatum.x + (wC / 10), "y": i.genreDatum.y,
-        'genre': i.genreDatum.key,
-        'type': i.typeDatum.key},
-      { "x": i.typeDatum.x - (wC / 10), "y": y,
-        'genre': i.genreDatum.key,
-        'type': i.typeDatum.key},
-      { "x": i.typeDatum.x + 4, "y": y,
-        'genre': i.genreDatum.key,
-        'type': i.typeDatum.key} ];
-    countElem++;
+    pathJoin.path = [
+      { "x": genreX - 4, "y": genreY,
+        'genre': genre.key,
+        'type': type.key
+      },
+      { "x": genreX + (wC / 10), "y": genreY,
+        'genre': genre.key,
+        'type': type.key
+      },
+      { "x": typeX - (wC / 10), "y": y,
+        'genre': genre.key,
+        'type': type.key
+      },
+      { "x": typeX + 4, "y": y,
+        'genre': genre.key,
+        'type': type.key
+      } ];
+    countInstance++;
     countTotal++;
-    elemPrev = i.element;
+    instancePrev = pathJoin.gesture;
   })
   return data;
 };
@@ -90,29 +98,18 @@ dispatch.on("dataLoaded.network", function(allData){
           'key': key, 
           'value': bibEntries
         };
-    /*for (var keyInner of bibEntries.keys()) {
-      var theseGestures = bibEntries.get(keyInner);
-      bibGestures = bibGestures.concat(theseGestures);
-    }*/
     typeList.forEach( function(type) {
       var matchesType = bibGestures.some( function(instance) {
         return instance['type'].includes(type['key']);
       });
       if ( matchesType ) { targets.push(type); }
     });
-    genreList.push(genreObj/*{
-      'key': key, 
-      'value': bibEntries,
-      'sourceData': bibEntries,
-      'targetData': targets
-    }*/);
+    genreList.push(genreObj);
     bibEntries.forEach( function(entry) {
       entry['type'].forEach( function(type) {
         var pathDatum = {
-          /*'genre': key,*/
           'genreDatum': genreObj,
           'gesture': entry,
-          /*'type': type,*/
           'typeDatum': typeList.filter(typeObj => typeObj['key'] === type)[0]
         };
         //console.log(pathDatum);
@@ -188,15 +185,12 @@ dispatch.on("dataLoaded.network", function(allData){
       })
       .attr("y", function(d, i) {
         var numGestures = d.value.length,
-            percentTotal = hCFree / typeList.length,
-            // Place labels halfway within the datum's range.
+            // Place labels at regular intervals along their axis.
             yPx = hCFree / typeList.length,
             position = ypos + yPx + gapPx;
         // Use the full range of this datum to determine where the next should start.
         ypos += yPx + (gapPx / 2);
         d.y = ypos;
-        console.log(numGestures);
-        console.log(position);
         return position;
       });
   // Create curves joining genres to the types of quotes represented.

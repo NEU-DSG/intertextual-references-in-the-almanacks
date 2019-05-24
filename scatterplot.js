@@ -52,7 +52,6 @@ svgL.append("g")
     .style('transform', 'rotate(-30deg)');
 svgL.selectAll('.domain').remove();
 
-var elemTopData;
 
 dispatch.on("dataLoaded.scatterplot",function(allData){
   var bibliography = allData.bibliography,
@@ -61,18 +60,22 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       gestures = allData.gestures;
 
   // force-layout
-  /*var forceX = d3.forceX()
-    .x( function(d) { console.log(d); return scaleX(d.genre) + 10; });
+  var forceX = d3.forceX()
+    .x( function(d) { 
+      /*console.log(d);*/ 
+      return scaleX(d.genre)/* + 10*/; 
+    });
   var forceY = d3.forceY()
     .y( function(d) { return scaleY(d.date); });
   var simulation = d3.forceSimulation()
     .force("collide", d3.forceCollide(4))
     .force("forceX", forceX )
     .force("forceY", forceY );
-  simulation.first = 0;*/
+  simulation.first = 0;
 
   // create circles for metadata
-  var dotData = [],
+  var dotEnter,
+      dotData = [],
       dot = svgL.selectAll(".dots");
    gestures.forEach( function(d) {
      var folderDate = folders[d.folder].date;
@@ -94,7 +97,7 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
     .append("circle")
       .attr("class","dots")
       .attr("cx", function(d) { 
-        d.x = scaleX(d.genre);
+        d.x = scaleX(d.genre) + 4;
         return d.x;
       })
       .attr("cy", function(d) { 
@@ -106,26 +109,24 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       .style("stroke", getGenreColor)
       .style("stroke-width", "1px")
       .style("opacity", 0.5);
-
-    /*simulation.on("tick", function() {
-      dot
-        .attr("cx", function(d) { return d.x; })
+    
+    console.log(simulation);
+    simulation.on("tick", function() {
+      dot.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
     })
-    .nodes(meta);*/
+    .nodes(dotData);
 
   // interactions
-  dot
-   .on("mouseenter",function(d){
+  /*dot.on("mouseenter",function(d){
      var i = 1
-      if(d.isTop == 1){
+      if (d.isTop == 1){
         dispatch.call("highlight",this,d,i);
       };
    })
    .on("mouseout",function(d){
      dispatch.call("unhighlight", null, d);
-   });
-
+   });*/
 });
 
 dispatch.on("highlight.scatterplot",function(d){
@@ -134,7 +135,7 @@ dispatch.on("highlight.scatterplot",function(d){
     .transition()
     .duration(100)
     // .style("fill","black")
-    .style("stroke",function(e){ return scaleColor(e.genre); })
+    .style("stroke", function(e) { return scaleColor(e.genre); })
     .style("stroke-width","1px")
     .style("opacity",1);
   svgL.selectAll(".dots")

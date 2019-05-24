@@ -13,102 +13,106 @@ svgL = d3.select("#column-left")
     .attr("transform","translate("+ m.l +","+ m.t +")");
 
 // scale for scatterplot
+var genreValues = [ 'philosophy', 'religious-writings', 'literature', 'life-writings', 'nonfiction', 'reviews' ],
+    genreRange = [];
+genreValues.forEach( function(label, index) {
+  var col = 40 + ((wL-30) * (index / genreValues.length));
+  genreRange.push(col);
+});
 var scaleX = d3.scaleOrdinal()
-  .domain([ "Drama", "Fiction", "Non-fiction", "Verse" ])
-  .range([ 10+(wL*0.1), 10+(wL*0.3), 10+(wL*0.5), 10+(wL*0.7)]);
-var scaleY = d3.scaleTime()
-  .domain([ new Date(1500,0,1), new Date(1875,0,1) ])
-  .range([ hL-40, 0 ]);
-var scaleColor = d3.scaleOrdinal()
-  .domain(["Drama", "Fiction", "Non-fiction", "Verse"])
-  .range(["#C2185B", "#673AB7", "#00ACC1", "#43A047"]);
-  // 700 pink, 500 deep purple, 600 cyan, 600 green
+      .domain(genreValues)
+      .range(genreRange),
+    scaleY = d3.scaleTime()
+      .domain([ new Date(1804,0,1), new Date(1858,0,1) ])
+      .range([ hL-40, 40 ]);
 
 // domain for scatterplot
 var axisY = d3.axisLeft()
     .scale(scaleY)
-    .ticks(d3.timeYear.every(50))
+    .ticks(d3.timeYear.every(10))
     .tickFormat(d3.timeFormat("%Y"))
     .tickSize(0);
 var axisX = d3.axisTop()
     .scale(scaleX)
+    .tickValues(genreValues)
     .tickSize(0);
 
 svgL.append("g")
     .attr("id","axis-y")
-    .attr("transform", "translate(20,0)")
-    .attr("font-family","sans-serif")
-    .attr("font-size","10px")
+    .classed('axis axis-left axisColor', true)
+    .attr('transform', 'translate(20,0)')
     .attr("fill","#292826")
-    .classed('axis axis-top axisColor', true)
-    .call(axisY)
-  .select(".domain")
-    .remove();
+    .call(axisY);
 svgL.append("g")
     .attr("id","axis-x")
-    .attr("transform", "translate(10,10)")
-    .attr("font-family","sans-serif")
-    .attr("font-size","10px")
-    .classed('axis axis-left axisColor', true)
+    .attr("transform", "translate(10,20)")
+    .classed('axis axis-small axis-top', true)
     .call(axisX)
-  .select(".domain")
-    .remove();
+  .selectAll('text')
+    .style('transform', 'rotate(-30deg)');
+svgL.selectAll('.domain').remove();
 
 var elemTopData;
 
 dispatch.on("dataLoaded.scatterplot",function(allData){
   var bibliography = allData.bibliography,
+      folders = allData.folders,
       genres = allData.genres,
       gestures = allData.gestures;
 
   // force-layout
-  var forceX = d3.forceX()
+  /*var forceX = d3.forceX()
     .x( function(d) { console.log(d); return scaleX(d.genre) + 10; });
   var forceY = d3.forceY()
-    .y( function(d) { return scaleY(d.pubDate); });
+    .y( function(d) { return scaleY(d.date); });
   var simulation = d3.forceSimulation()
     .force("collide", d3.forceCollide(4))
     .force("forceX", forceX )
     .force("forceY", forceY );
-  simulation.first = 0;
+  simulation.first = 0;*/
 
   // create circles for metadata
-  var dot = svgL.selectAll(".dots")
-    .data(meta, function(d) {
-      return d.filename;
-    });
-
-  //dot.exit().remove();
-
-  dotEnter = dot.enter()
+  var dotData = [],
+      dot = svgL.selectAll(".dots");
+   gestures.forEach( function(d) {
+     var folderDate = folders[d.folder].date;
+      folderDate = new Date(folderDate, 0, 1);
+      d.sources.forEach( function(src) {
+        var dotObj = {
+          'gesture': d,
+          'date': folderDate,
+          'genre': src['genreBroad']
+        };
+        if ( dotObj.genre ) {
+          dotData.push(dotObj);
+        } else {
+          console.warn('Skipping '+src.id);
+        }
+      });
+   });
+   dot.data(dotData).enter()
     .append("circle")
-    .attr("class","dots")
-    .attr("cx", function(d) { d.x = scaleX(d.genre)+10; return d.x; })
-    .attr("cy", function(d) { d.y = scaleY(d.pubDate); return d.y; });
+      .attr("class","dots")
+      .attr("cx", function(d) { 
+        d.x = scaleX(d.genre);
+        return d.x;
+      })
+      .attr("cy", function(d) { 
+        d.y = scaleY(d.date);
+        return d.y;
+      })
+      .attr("r", 2.5)
+      .style("fill", getGenreColor)
+      .style("stroke", getGenreColor)
+      .style("stroke-width", "1px")
+      .style("opacity", 0.5);
 
-  dot = dot.merge(dotEnter)
-    .attr("r", function(d){
-      if(d.isTop == 1){ return 3; }
-      else{ return 2.5; }
-    })
-    .style("fill", function(d){
-      if(d.isTop == 1){ return scaleColor(d.genre); }
-      else{ return "none"; }
-    })
-    .style("stroke", function(d){
-      if(d.isTop == 0){ return scaleColor(d.genre); }
-    })
-    .style("stroke-width", function(d){
-      if(d.isTop == 0){ return "1px"; }
-    })
-    .style("opacity", 0.8);
-
-    simulation.on("tick", function() {
+    /*simulation.on("tick", function() {
       dot
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
     })
-    .nodes(meta);
+    .nodes(meta);*/
 
   // interactions
   dot

@@ -33,7 +33,7 @@ var getGenreColor = function(d) {
         'nonfiction':         '#999999',  // gray
         'reviews':            '#FF7F00'   // orange
       },
-      thisGenre = d[0].genre;
+      thisGenre = d.genre;
   return genreColors[thisGenre];
 };
 
@@ -207,5 +207,5 @@ dispatch.on("dataLoaded.network", function(allData){
       .classed('path-links', true)
       .datum(d => d.path)
       .attr('d', curve)
-      .style('stroke', getGenreColor)
+      .style('stroke', d => getGenreColor(d[0]))
 });

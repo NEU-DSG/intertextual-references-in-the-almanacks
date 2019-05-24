@@ -1,6 +1,5 @@
 dispatch.on("dataLoaded.list",function(allData){
   var gestures = allData.gestures;
-  console.log(gestures);
 
   list = d3.select("#column-right")
     .select(".list")

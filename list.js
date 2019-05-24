@@ -1,33 +1,16 @@
-var elemTopData,
-  metaTopData;
-
-// dispatch.on("dataLoaded.list", function(meta, metaTop, metaTopGenre, elemDistTop, elemTop){
 dispatch.on("dataLoaded.list",function(allData){
-  var metaTop = allData.metaTop,
-  metaTopGenre = allData.metaTopGenre,
-  elemTop = allData.elemTop,
-  elemDistTop = allData.elemDistTop;
+  var gestures = allData.gestures;
+  console.log(gestures);
 
-  elemTopData = elemTop;
-  metaTopData = metaTop;
-
-  list = d3.select("#column-right").select(".list")
-    .selectAll(".collection")
-    .data(metaTop);
-
-  list.exit().remove();
-
-  listEnter = list.enter()
+  list = d3.select("#column-right")
+    .select(".list")
+    .selectAll(".collection");
+  listItems = list.data(gestures).enter()
     .append('li')
-    .attr("class","collection");
+      .attr("class","collection")
+      .text(d => d.plaintext);
 
-  list.merge(listEnter)
-    .html(function(d){ return "<b>Title:</b> " + d.title + " <br> <b>Author:</b> " + d.author})
-    .attr("id", function(d){ return d.filename; })
-    .style("color", function(d) {return scaleColor(d.genre); })
-    .style("opacity", 0.8);
-
-  var i = 0;
+  /*var i = 0;
   d3.selectAll(".collection")
     .on("mouseenter",function(d){
       dispatch.call("highlight", null, d, i);
@@ -36,29 +19,18 @@ dispatch.on("dataLoaded.list",function(allData){
     })
     .on("mouseleave",function(d){
       dispatch.call("unhighlight", null, d);
-    })
-    .on("click",function(d){
+    });*/
+    /*.on("click",function(d){
       window.open(d.url);
-    });
+    })*/
 
 });
 
 dispatch.on("highlight.list", function(d,i){
 
-  // d3.selectAll(".collection")
-  //   .filter(function(e){
-  //     if(d.filename == e.filename){ console.log("they match!");}
-  //     return d.filename == e.filename; })
-  //   .classed("selectedItem",true); //don't think this happens
-
   d3.selectAll(".collection")
     .transition()
     .duration(100)
-    // .style("font-weight",function(e){
-    //   if(d.filename == e.filename){
-    //     return "bold";
-    //   }
-    // })
     .style("opacity",function(e){
       if(d.filename != e.filename){
         return 0.2;

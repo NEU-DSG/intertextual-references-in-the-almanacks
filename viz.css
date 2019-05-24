@@ -73,8 +73,9 @@ h2{
 }
 
 #column-right ol{
+  padding-left: 0;
+  height: 100%;
   overflow: auto;
-  height: 480px;
 }
 
 .container{
@@ -91,10 +92,11 @@ svg{
 }
 
 .collection{
-  font-size: 11px;
-  margin: 10px 0;
+  font-size: 12px;
   line-height: 150%;
-  cursor: pointer;
+  list-style-position: inside;
+  margin: 10px 0;
+  opacity: 0.85;
 }
 
 ol::-webkit-scrollbar {

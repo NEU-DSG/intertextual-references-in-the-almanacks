@@ -1,8 +1,9 @@
-var m = { t:10, r:10, b:10, l:10 },
+var svgL,
+    m = { t:10, r:10, b:10, l:10 },
     wL = document.getElementById("column-left").clientWidth - m.l - m.r,
     hL = document.getElementById("column-left").clientHeight - m.t - m.b;
 
-var svgL = d3.select("#column-left")
+svgL = d3.select("#column-left")
   .append("svg")
     .attr("width", wL)
     .attr("height", hL)
@@ -11,85 +12,15 @@ var svgL = d3.select("#column-left")
     .attr("height", hL-40)
     .attr("transform","translate("+ m.l +","+ m.t +")");
 
-var legend = svgL.append("g")
-    .attr("class","legend")
-    .style("opacity",0);
-
-legend
-  .append("path")
-    .attr("id","legendLineFilled")
-    .style("fill", "none")
-    .style("stroke", "#292826")
-    .style("stroke-width", "0.5px");
-
-legend
-  .append("path")
-    .attr("id","legendLineUnfilled")
-    .style("fill", "none")
-    .style("stroke", "#292826")
-    .style("stroke-width", "0.5px");
-
-legend
-  .append("text")
-    .attr("id","legendTextFilled1")
-    .text("includes one of")
-    .style("font-size", "8px")
-    .style("fill", "#292826")
-    .attr("text-anchor","middle");
-legend
-  .append("text")
-    .attr("id","legendTextFilled2")
-    .text("the top 20 names")
-    .style("font-size", "8px")
-    .style("fill", "#292826")
-    .attr("text-anchor","middle");
-
-legend
-  .append("text")
-    .attr("id","legendTextUnfilled1")
-    .text("doesn't include one of")
-    .style("font-size", "8px")
-    .style("fill", "#292826")
-    .attr("text-anchor","middle");
-legend
-  .append("text")
-    .attr("id","legendTextUnfilled2")
-    .text("the top 20 names")
-    .style("font-size", "8px")
-    .style("fill", "#292826")
-    .attr("text-anchor","middle");
-
-function positionLegendLines(indicator){
-  var cx, cy;
-  if(indicator == 1){
-    dotFilled = svgL.selectAll(".dots")
-      .filter(function(d){ return (d.isTop == 1) && (d.filename == "bacon.sermonelec.xml"); });
-    cx = dotFilled.attr("cx");
-    cy = dotFilled.attr("cy");
-  }
-  if(indicator == 0){
-    dotUnfilled = svgL.selectAll(".dots")
-      .filter(function(d){ return (d.isTop == 0) && (d.filename == "sidney.clorinda.xml"); });
-    cx = dotUnfilled.attr("cx");
-    cy = dotUnfilled.attr("cy");
-  }
-  return {
-    cx: +cx,
-    cy: +cy
-  }
-};
-
 // scale for scatterplot
 var scaleX = d3.scaleOrdinal()
-  .domain(["Drama","Fiction","Non-fiction","Verse"])
-  .range([10+(wL*0.1),10+(wL*0.3),10+(wL*0.5),10+(wL*0.7)]);
-
+  .domain([ "Drama", "Fiction", "Non-fiction", "Verse" ])
+  .range([ 10+(wL*0.1), 10+(wL*0.3), 10+(wL*0.5), 10+(wL*0.7)]);
 var scaleY = d3.scaleTime()
-  .domain([new Date(1500,0,1), new Date(1875,0,1)])
-  .range([hL-40,0]);
-
+  .domain([ new Date(1500,0,1), new Date(1875,0,1) ])
+  .range([ hL-40, 0 ]);
 var scaleColor = d3.scaleOrdinal()
-  .domain(["Drama","Fiction","Non-fiction","Verse"])
+  .domain(["Drama", "Fiction", "Non-fiction", "Verse"])
   .range(["#C2185B", "#673AB7", "#00ACC1", "#43A047"]);
   // 700 pink, 500 deep purple, 600 cyan, 600 green
 
@@ -99,48 +30,42 @@ var axisY = d3.axisLeft()
     .ticks(d3.timeYear.every(50))
     .tickFormat(d3.timeFormat("%Y"))
     .tickSize(0);
-
 var axisX = d3.axisTop()
     .scale(scaleX)
     .tickSize(0);
 
 svgL.append("g")
-  .attr("id","axis-y")
-  .attr("transform", "translate(20,0)")
-  .attr("font-family","sans-serif")
-  .attr("font-size","10px")
-  .attr("fill","#292826")
-  .attr('class', 'axisColor')
-  .call(axisY)
+    .attr("id","axis-y")
+    .attr("transform", "translate(20,0)")
+    .attr("font-family","sans-serif")
+    .attr("font-size","10px")
+    .attr("fill","#292826")
+    .classed('axis axis-top axisColor', true)
+    .call(axisY)
   .select(".domain")
-  .remove();
-
+    .remove();
 svgL.append("g")
-  .attr("id","axis-x")
-  .attr("transform", "translate(10,10)")
-  .attr("font-family","sans-serif")
-  .attr("font-size","10px")
-  .attr('class', 'axisColor')
-  .call(axisX)
+    .attr("id","axis-x")
+    .attr("transform", "translate(10,10)")
+    .attr("font-family","sans-serif")
+    .attr("font-size","10px")
+    .classed('axis axis-left axisColor', true)
+    .call(axisX)
   .select(".domain")
-  .remove();
+    .remove();
 
 var elemTopData;
 
 dispatch.on("dataLoaded.scatterplot",function(allData){
-  var meta = allData.meta,
-  metaTop = allData.metaTop,
-  metaTopGenre = allData.metaTopGenre,
-  elemTop = allData.elemTop,
-  elemDistTop = allData.elemDistTop;
-
-  elemTopData = elemTop;
+  var bibliography = allData.bibliography,
+      genres = allData.genres,
+      gestures = allData.gestures;
 
   // force-layout
   var forceX = d3.forceX()
-    .x(function(d) { return scaleX(d.genre)+10; });
+    .x( function(d) { console.log(d); return scaleX(d.genre) + 10; });
   var forceY = d3.forceY()
-    .y(function(d) { return scaleY(d.pubDate); });
+    .y( function(d) { return scaleY(d.pubDate); });
   var simulation = d3.forceSimulation()
     .force("collide", d3.forceCollide(4))
     .force("forceX", forceX )
@@ -153,7 +78,7 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       return d.filename;
     });
 
-  dot.exit().remove();
+  //dot.exit().remove();
 
   dotEnter = dot.enter()
     .append("circle")
@@ -184,49 +109,6 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
         .attr("cy", function(d) { return d.y; });
     })
     .nodes(meta);
-
-    // place legend
-    legend
-      .transition()
-      .delay(3000)
-      .duration(2000)
-      .style("opacity",0.6);
-
-    var cxFilled, cxUnfilled;
-
-    svgL.select("#legendLineFilled")
-      .attr("d",function(){
-        start = positionLegendLines(1);
-        cxFilled = start.cx;
-        return "M " + (start.cx-8) + " " + (start.cy) +
-          " L " + (start.cx-28) + " " + (start.cy) +
-          " L " + (start.cx-28) + " 450";
-      });
-
-    svgL.select("#legendLineUnfilled")
-      .attr("d",function(){
-        start = positionLegendLines(0);
-        cxUnfilled = start.cx;
-        return "M " + (start.cx+8) + " " + (start.cy) +
-          " L " + (start.cx+18) + " " + (start.cy) +
-          " L " + (start.cx+18) + " 420";
-      });
-
-    svgL.select("#legendTextFilled1")
-      .attr("x",cxFilled-28)
-      .attr("y",460);
-
-    svgL.select("#legendTextFilled2")
-      .attr("x",cxFilled-28)
-      .attr("y",470);
-
-    svgL.select("#legendTextUnfilled1")
-      .attr("x",cxUnfilled+18)
-      .attr("y",430);
-
-    svgL.select("#legendTextUnfilled2")
-      .attr("x",cxUnfilled+18)
-      .attr("y",440);
 
   // interactions
   dot

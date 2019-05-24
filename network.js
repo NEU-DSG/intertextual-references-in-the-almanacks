@@ -45,34 +45,36 @@ function makePath(data) {
         genreX = genre.x,
         genreY = genre.y,
         type = pathJoin.typeDatum,
-        typeX = type.x;
-    if ( countTotal === 0 ) { instancePrev = pathJoin.gesture; }
-    else if ( instancePrev !== pathJoin.gesture ) { countInstance = 0; }
+        typeX = type.x,
+        typeY = type.y;
+    if ( countTotal === 0 ) { instancePrev = genre.key; }
+    else if ( instancePrev !== genre.key ) { countInstance = 0; }
 
     increment = ((genre.percent * networkHeight) / genre.value.length) * countInstance;
-    y = type.y + increment;
+    y = genre.y + increment;
 
     pathJoin.path = [
-      { "x": genreX - 4, "y": genreY,
+      { "x": genreX - 4, "y": y,
         'genre': genre.key,
         'type': type.key
       },
-      { "x": genreX + (wC / 10), "y": genreY,
+      { "x": genreX + (wC / 10), "y": y,
         'genre': genre.key,
         'type': type.key
       },
-      { "x": typeX - (wC / 10), "y": y,
+      { "x": typeX - (wC / 10), "y": typeY,
         'genre': genre.key,
         'type': type.key
       },
-      { "x": typeX + 4, "y": y,
+      { "x": typeX + 4, "y": typeY,
         'genre': genre.key,
         'type': type.key
       } ];
     countInstance++;
     countTotal++;
-    instancePrev = pathJoin.gesture;
+    instancePrev = genre.key;
   })
+  console.log(data);
   return data;
 };
 

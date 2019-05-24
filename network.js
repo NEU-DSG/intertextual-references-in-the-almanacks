@@ -1,4 +1,4 @@
-var m = {t:10,r:10,b:10,l:10},
+var m = { t:10, r:10, b:10, l:10 },
     wC = document.getElementById("column-center").clientWidth - m.l - m.r,
     hC = document.getElementById("column-center").clientHeight - m.t - m.b;
 
@@ -23,15 +23,19 @@ var curve = d3.line()
     .y( function(d) { return d.y; })
     .curve(d3.curveBundle.beta(0.85));
 
-var colorDrama = "#C2185B",
-  colorFiction = "#673AB7",
-  colorNonFiction = "#00ACC1",
-  colorVerse = "#43A047";
-
 // color scale for curves
-var scaleColor2 = d3.scaleOrdinal(d3.schemeBlues[6])
-      /*.domain(["philosophy", "religious-writings", "literature", "life-writings", "nonfiction", "reviews"])*/
-      /*.range([colorDrama, colorDrama, colorDrama, colorFiction, colorFiction, colorFiction, colorFiction, colorNonFiction, colorNonFiction, colorNonFiction, colorNonFiction, colorVerse, colorVerse, colorVerse, colorVerse])*/;
+var getGenreColor = function(d) {
+  var genreColors = {
+        'philosophy': '#C2185B',
+        'religious-writings': '#673AB7',
+        'literature': '#00ACC1',
+        'life-writings': '#43A047',
+        'nonfiction': '#999999',
+        'reviews': '#FF7F00'
+      },
+      thisGenre = d[0].genre;
+  return genreColors[thisGenre];
+};
 
 
 // function to make list of texts
@@ -40,10 +44,8 @@ function makePath(data) {
       countInstance = 0,
       countTotal = 0;
   data.forEach( function(pathJoin, index) {
-    //console.log(pathJoin);
     var genre = pathJoin.genreDatum,
         genreX = genre.x,
-        genreY = genre.y,
         type = pathJoin.typeDatum,
         typeX = type.x,
         typeY = type.y;
@@ -74,7 +76,7 @@ function makePath(data) {
     countTotal++;
     instancePrev = genre.key;
   })
-  console.log(data);
+  //console.log(data);
   return data;
 };
 
@@ -119,7 +121,7 @@ dispatch.on("dataLoaded.network", function(allData){
       });
     });
   }
-  console.log(pathsList);
+  //console.log(pathsList);
   // Create labels for genres.
   var genreLabels,
       totalGestures = 0,
@@ -205,5 +207,5 @@ dispatch.on("dataLoaded.network", function(allData){
       .classed('path-links', true)
       .datum(d => d.path)
       .attr('d', curve)
-      .style('stroke', 'black'/*function(d) { return scaleColor2(0); }*/)
+      .style('stroke', /*'black'*/ getGenreColor)
 });

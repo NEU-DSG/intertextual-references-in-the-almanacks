@@ -203,6 +203,6 @@ font-size: 14px;
 
 .path-links {
   fill: none;
-  opacity: 0.1;
+  opacity: 0.25;
   stroke-width: 1;
 }

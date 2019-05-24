@@ -1043,26 +1043,6 @@
    },
   "gestures": [
      {
-      "excerpt":"<seg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" xml:id=\"an001\" source=\"bibliography.xml#Grove_System bibliography.xml#Stewart_Philosophical_Essays\" cert=\"medium\"><!-- MME \"appears to be distilling\" from two sources; Sandy and Noelle -->This morning I read a\n             <lb\/>“few sentences of the <hi rend=\"underline()\">certainty of<\/hi> morality!\n             I used to choose that the will of God (whom\n             <lb\/>\n             <hi rend=\"underline()\">I love<\/hi>) should be the fountain &amp; origin of\n             <lb\/>all morality— But my ideas have alwys\n             <lb\/>been confused—as led to faith &amp; piety before\n             <lb\/>the theory of morals. But could it not exist\n             <lb\/>in the eternal and have no relation or obli-\n             <lb break=\"no\"\/>gation to man were man only a <hi rend=\"underline()\">body<\/hi> with-\n             <lb break=\"no\"\/>out any attributes of spirit. Where would be\n             <lb\/>\n             <del>the<\/del> what is falsly called the <quote source=\"bibliography.xml#Grove_System\">moral <hi rend=\"underline()\">sense<\/hi><\/quote>\n             <pb ed=\"HM\" n=\"451b\"\/>\n             <pb ed=\"GT\" n=\"F32\"\/>\n             <pb ed=\"BP\" n=\"3\"\/>\n             <lb\/>—where any congruity between the eternal\n             <lb\/>obligations of right conduct and <subst>\n             <del>the<\/del>\n             <add>a<\/add>\n             <\/subst> creature\n             <lb\/>without any <hi rend=\"underline()\">principles inherent<\/hi>, <choice>\n             <abbr>w’h<\/abbr>\n             <expan>which<\/expan>\n             <\/choice> are\n             <lb\/>adopted to morality? All application of\n             <lb\/>religion must thus be <hi rend=\"underline()\">miraculous<\/hi>.<\/seg>",
-      "folder":"emerson.folder36.xml",
-      "plaintext":"This morning I read a “few sentences of the certainty of morality! I used to choose that the will of God (whom I love) should be the fountain & origin of all morality— But my ideas have alwys been confused—as led to faith & piety before the theory of morals. But could it not exist in the eternal and have no relation or obligation to man were man only a body without any attributes of spirit. Where would be the what is falsly called the moral sense —where any congruity between the eternal obligations of right conduct and the a creature without any principles inherent, w’h which are adopted to morality? All application of religion must thus be miraculous.",
-      "sources": [
-         {
-          "cert":"medium",
-          "id":"Grove_System",
-          "genreBroad":"philosophy"
-         },
-         {
-          "cert":"medium",
-          "id":"Stewart_Philosophical_Essays",
-          "genreBroad":"philosophy"
-         }
-       ],
-      "type": [
-        "seg"
-       ]
-     },
-     {
       "excerpt":"<quote xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" source=\"bibliography.xml#Grove_System\">moral <hi rend=\"underline()\">sense<\/hi><\/quote>",
       "folder":"emerson.folder36.xml",
       "plaintext":"moral sense",
@@ -2365,21 +2345,6 @@
        ],
       "type": [
         "reference"
-       ]
-     },
-     {
-      "excerpt":"<seg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" xml:id=\"an008\" source=\"b:IT99999\"><!-- Quoting a common phrase, thus the IT99999. Correct? -->flowers of imajanation<\/seg>",
-      "folder":"emerson.folder39.xml",
-      "plaintext":"flowers of imajanation",
-      "sources": [
-         {
-          "cert":"high",
-          "id":"IT99999",
-          "genreBroad":null
-         }
-       ],
-      "type": [
-        "seg"
        ]
      },
      {
@@ -3811,21 +3776,6 @@
        ],
       "type": [
         "reference"
-       ]
-     },
-     {
-      "excerpt":"<seg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" xml:id=\"an016\" source=\"bibliography.xml#Wollaston_Religion\"><!-- \"Appears to be considering assertions made by\"; Sandy and Noelle question -->What <persName key=\"WW1\">Wo<unclear reason=\"damaged\">llas<\/unclear>\n                            <lb break=\"no\"\/>ton<\/persName> quotes from <persName key=\"LMP1\">Plut.<\/persName> that the\n            immortality &amp;c and the doctrine <supplied reason=\"damaged\" source=\"#gt\">of<\/supplied>\n                         <lb\/>\n                  <choice>\n                            <abbr>Pro.<\/abbr>\n                            <expan>Providence<\/expan>\n                         <\/choice> stands &amp;c does not appear solid, unless by immortality\n            b<supplied reason=\"damaged\" source=\"#editors\">e<\/supplied>\n                         <lb\/>intended <hi rend=\"underline()\">future existence<\/hi>— Admit this,\n            or that the soul is <supplied reason=\"damaged\" source=\"#gt\">na-<\/supplied>\n                         <lb break=\"no\"\/>turally immortal—and <choice>\n                            <abbr>tho’<\/abbr>\n                            <expan>though<\/expan>\n                         <\/choice> it <hi rend=\"underline()\">argues<\/hi> strongly a\n            superint<supplied reason=\"damaged\" source=\"#gt\">ending<\/supplied>\n                         <lb\/>Govoner—yet does not <hi rend=\"underline()\">prove<\/hi> it— It may enter into the\n            <lb\/>design of a moral <choice>\n                            <abbr>gov<hi rend=\"sup()\">t<\/hi>\n                     <\/abbr>\n                            <expan>government<\/expan>\n                         <\/choice> of free agents that their actions sh<supplied reason=\"damaged\" source=\"#gt\">ould<\/supplied>\n                         <lb\/>take their own course in general—that it is the province of\n            <lb\/>Omnipotent Power to overrule the chaos of human affairs,\n            <lb\/>after they have taken what may be called a <hi rend=\"underline()\">natural<\/hi>\n            cou<supplied reason=\"damaged\" source=\"#gt\">rse.<\/supplied>\n               <\/seg>",
-      "folder":"emerson.folder06.xml",
-      "plaintext":"What Wollas ton quotes from Plut. that the immortality &c and the doctrine of Pro. Providence stands &c does not appear solid, unless by immortality be intended future existence— Admit this, or that the soul is naturally immortal—and tho’ though it argues strongly a superintending Govoner—yet does not prove it— It may enter into the design of a moral govt government of free agents that their actions should take their own course in general—that it is the province of Omnipotent Power to overrule the chaos of human affairs, after they have taken what may be called a natural course.",
-      "sources": [
-         {
-          "cert":"high",
-          "id":"Wollaston_Religion",
-          "genreBroad":"religious-writings"
-         }
-       ],
-      "type": [
-        "seg"
        ]
      },
      {

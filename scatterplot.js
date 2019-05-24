@@ -1,63 +1,63 @@
-var m = {t:10,r:10,b:10,l:10},
+var m = { t:10, r:10, b:10, l:10 },
     wL = document.getElementById("column-left").clientWidth - m.l - m.r,
     hL = document.getElementById("column-left").clientHeight - m.t - m.b;
 
 var svgL = d3.select("#column-left")
   .append("svg")
-  .attr("width", wL)
-  .attr("height", hL)
+    .attr("width", wL)
+    .attr("height", hL)
   .append("g")
-  .attr("class","plot")
-  .attr("height", hL-40)
-  .attr("transform","translate("+ m.l +","+ m.t +")");
+    .attr("class","plot")
+    .attr("height", hL-40)
+    .attr("transform","translate("+ m.l +","+ m.t +")");
 
 var legend = svgL.append("g")
-  .attr("class","legend")
-  .style("opacity",0);
+    .attr("class","legend")
+    .style("opacity",0);
 
 legend
   .append("path")
-  .attr("id","legendLineFilled")
-  .style("fill", "none")
-  .style("stroke", "#292826")
-  .style("stroke-width", "0.5px");
+    .attr("id","legendLineFilled")
+    .style("fill", "none")
+    .style("stroke", "#292826")
+    .style("stroke-width", "0.5px");
 
 legend
   .append("path")
-  .attr("id","legendLineUnfilled")
-  .style("fill", "none")
-  .style("stroke", "#292826")
-  .style("stroke-width", "0.5px");
+    .attr("id","legendLineUnfilled")
+    .style("fill", "none")
+    .style("stroke", "#292826")
+    .style("stroke-width", "0.5px");
 
 legend
   .append("text")
-  .attr("id","legendTextFilled1")
-  .text("includes one of")
-  .style("font-size", "8px")
-  .style("fill", "#292826")
-  .attr("text-anchor","middle");
+    .attr("id","legendTextFilled1")
+    .text("includes one of")
+    .style("font-size", "8px")
+    .style("fill", "#292826")
+    .attr("text-anchor","middle");
 legend
   .append("text")
-  .attr("id","legendTextFilled2")
-  .text("the top 20 names")
-  .style("font-size", "8px")
-  .style("fill", "#292826")
-  .attr("text-anchor","middle");
+    .attr("id","legendTextFilled2")
+    .text("the top 20 names")
+    .style("font-size", "8px")
+    .style("fill", "#292826")
+    .attr("text-anchor","middle");
 
 legend
   .append("text")
-  .attr("id","legendTextUnfilled1")
-  .text("doesn't include one of")
-  .style("font-size", "8px")
-  .style("fill", "#292826")
-  .attr("text-anchor","middle");
+    .attr("id","legendTextUnfilled1")
+    .text("doesn't include one of")
+    .style("font-size", "8px")
+    .style("fill", "#292826")
+    .attr("text-anchor","middle");
 legend
   .append("text")
-  .attr("id","legendTextUnfilled2")
-  .text("the top 20 names")
-  .style("font-size", "8px")
-  .style("fill", "#292826")
-  .attr("text-anchor","middle");
+    .attr("id","legendTextUnfilled2")
+    .text("the top 20 names")
+    .style("font-size", "8px")
+    .style("fill", "#292826")
+    .attr("text-anchor","middle");
 
 function positionLegendLines(indicator){
   var cx, cy;

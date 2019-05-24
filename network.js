@@ -26,12 +26,12 @@ var curve = d3.line()
 // color scale for curves
 var getGenreColor = function(d) {
   var genreColors = {
-        'philosophy': '#C2185B',
-        'religious-writings': '#673AB7',
-        'literature': '#00ACC1',
-        'life-writings': '#43A047',
-        'nonfiction': '#999999',
-        'reviews': '#FF7F00'
+        'philosophy':         '#C2185B',  // red
+        'religious-writings': '#673AB7',  // purple
+        'literature':         '#00ACC1',  // blue
+        'life-writings':      '#43A047',  // green
+        'nonfiction':         '#999999',  // gray
+        'reviews':            '#FF7F00'   // orange
       },
       thisGenre = d[0].genre;
   return genreColors[thisGenre];
@@ -207,5 +207,5 @@ dispatch.on("dataLoaded.network", function(allData){
       .classed('path-links', true)
       .datum(d => d.path)
       .attr('d', curve)
-      .style('stroke', /*'black'*/ getGenreColor)
+      .style('stroke', getGenreColor)
 });

@@ -41,21 +41,21 @@ function makePath(data) {
       countTotal = 0;
   //console.log(data);
   data.forEach( function(i) {
-    console.log(i);
+    //console.log(i);
     if ( countTotal === 0 ) { elemPrev = i.gesture; }
     else if ( elemPrev !== i.gesture ) { countElem = 0; }
 
-    increment = 4; /*((i.targetData.prop * networkHeight) / i.targetData.value) * countElem;*/
+    increment = ((i.genreDatum.percent * networkHeight) / i.genreDatum.value.length) * countElem;
     y = i.typeDatum.y + increment;
 
     i.path = [
       { "x": i.genreDatum.x - 4, "y": i.genreDatum.y,
         'genre': i.genreDatum.key,
         'type': i.typeDatum.key},
-      { "x": i.genreDatum.x - (wC / 10), "y": i.genreDatum.y,
+      { "x": i.genreDatum.x + (wC / 10), "y": i.genreDatum.y,
         'genre': i.genreDatum.key,
         'type': i.typeDatum.key},
-      { "x": i.typeDatum.x + (wC / 10), "y": y,
+      { "x": i.typeDatum.x - (wC / 10), "y": y,
         'genre': i.genreDatum.key,
         'type': i.typeDatum.key},
       { "x": i.typeDatum.x + 4, "y": y,
@@ -146,17 +146,19 @@ dispatch.on("dataLoaded.network", function(allData){
       hCFree = hC - ( genreList.length * gapPx );
   genreLabels
       .attr("x", function(d) { 
-        d.x = col1 - 4;
-        return d.x;
+        d.x = col1 + 4;
+        return col1 - 4;
       })
       .attr("y", function(d, i) {
         var numGestures = d.value.length,
+            percentTotal = numGestures / totalGestures,
             // Place labels halfway within the datum's range.
             yPx = ( (numGestures / 2) * hCFree) / totalGestures,
             position = ypos + yPx + gapPx;
+        d.y = ypos;
+        d.percent = percentTotal;
         // Use the full range of this datum to determine where the next should start.
         ypos += (yPx * 2) + (gapPx / 2);
-        d.y = ypos;
         //console.log(position);
         return position;
       });
@@ -181,19 +183,20 @@ dispatch.on("dataLoaded.network", function(allData){
   hCFree = hC - ( typeList.length * gapPx );
   typeLabels
       .attr("x", function(d) { 
-        d.x = col2;
-        return d.x;
+        d.x = col2 - 4;
+        return col2 + 4;
       })
       .attr("y", function(d, i) {
         var numGestures = d.value.length,
+            percentTotal = hCFree / typeList.length,
             // Place labels halfway within the datum's range.
-            yPx = ( (numGestures / 2) * hCFree) / totalTypes,
+            yPx = hCFree / typeList.length,
             position = ypos + yPx + gapPx;
         // Use the full range of this datum to determine where the next should start.
-        ypos += (yPx * 2) + (gapPx / 2);
-        //console.log(yPx);
+        ypos += yPx + (gapPx / 2);
         d.y = ypos;
-        //console.log(position);
+        console.log(numGestures);
+        console.log(position);
         return position;
       });
   // Create curves joining genres to the types of quotes represented.

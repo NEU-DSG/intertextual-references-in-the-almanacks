@@ -1,3 +1,5 @@
-# Women Writers Online Collection
+# Intertextual References in the _Almanacks_ of Mary Moody Emerson
 
-This visualization represents the textbase of women writers online, a collection of 401 electronically-encoded historical texts by women writers. The right-sided visualization shows a holistic view of the collection by genre and publication year. The center visualization is a bipartite network showing the relationship of words and phrases of a particular in-text element to the genre of the text it resides in. Four in-text elements are included in the visualization and are populated by clicking the respective button. The third piece is a list of the texts included in the collection. The intention is that with increased user interaction, the user can filter down to a smaller number of texts and can see them in the right column.
+This visualization maps “intertextual gestures”—references to other works—within manuscripts written by Mary Moody Emerson. 
+
+This git repository builds on Sarah Campbell and Zheng-yan Yu’s visualization [“In the Text of Women Writers”](https://wwp.northeastern.edu/lab/names-viz/index.html), published by the [Northeastern University Women Writers Project](https://wwp.northeastern.edu). The original repository can be found on GitHub at <https://github.com/sarahsoup/wwo>.

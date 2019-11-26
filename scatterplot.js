@@ -1,15 +1,16 @@
 var svgL,
     m = { t:10, r:10, b:10, l:10 },
-    wL = document.getElementById("column-left").clientWidth - m.l - m.r,
-    hL = document.getElementById("column-left").clientHeight - m.t - m.b;
+    colContainer = document.querySelector("#column-left > .col-content"),
+    wL = colContainer.clientWidth/* - m.l - m.r*/,
+    hL = colContainer.clientHeight/* - m.t - m.b*/;
 
-svgL = d3.select("#column-left")
+svgL = d3.select("#column-left > .col-content")
   .append("svg")
     .attr("width", wL)
     .attr("height", hL)
   .append("g")
     .attr("class","plot")
-    .attr("height", hL-40)
+    .attr("height", hL)
     .attr("transform","translate("+ m.l +","+ m.t +")");
 
 // scale for scatterplot

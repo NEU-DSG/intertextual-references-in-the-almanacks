@@ -4,13 +4,17 @@ html{
 }
 
 body{
+  margin: 0;
+  padding: 0 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   font-family: sans-serif;
   color: #292826;
 }
 
 .header{
-  margin-left: 40px;
-  padding: 10px;
+  padding: 0.5rem 0.5rem 1.5rem;
 }
 
 #title{
@@ -51,40 +55,49 @@ h2{
   font-weight: lighter;
 }
 
-#colL-title{
-  margin-left: 50px;
-}
-
-#colC-title{
-  text-align: center;
-  margin-left: 0px;
-}
-
-#colR-title{
-  margin-bottom: 5px;
-}
-
-#column-left{ float: left; width: 30%; }
-#column-right{ float: right; width: 20%; }
-#column-center{ display: inline-block; width: 50%; }
-
-#column-left, #column-center, #column-right{
-  height: 520px;
-}
-
-#column-right ol{
-  padding-left: 0;
-  height: 100%;
-  overflow: auto;
-}
-
 .container{
-  margin: 30px 50px 0;
+  padding-bottom: 0.5rem;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
   font-weight: lighter;
 }
 
-svg{
-  padding-top: 40px;
+#column-left{
+  float: left;
+  width: 30%;
+}
+#column-right{
+  float: right;
+  width: 20%;
+  overflow: hidden;
+}
+#column-center{ 
+  display: inline-block;
+  width: 50%;
+}
+
+#column-left, #column-center, #column-right{
+  display: flex;
+  flex-direction: column;
+}
+
+.col-title {
+  margin-left: auto;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.col-content {
+  flex: 1 1 auto;
+}
+
+#list-container{
+  overflow: auto;
+}
+.col ol{
+  padding-left: 0;
 }
 
 .axisColor text{

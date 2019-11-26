@@ -1,14 +1,15 @@
 var m = { t:10, r:10, b:10, l:10 },
-    wC = document.getElementById("column-center").clientWidth - m.l - m.r,
-    hC = document.getElementById("column-center").clientHeight - m.t - m.b;
+    colContainer = document.querySelector("#column-center > .col-content"),
+    wC = colContainer.clientWidth/* - m.l - m.r*/,
+    hC = colContainer.clientHeight/* - m.t - m.b*/;
 
-var svgC = d3.select("#column-center")
+var svgC = d3.select("#column-center > .col-content")
   .append("svg")
     .attr("width", wC)
     .attr("height", hC)
   .append('g')
     .attr('class','plot')
-    .attr('transform','translate('+ m.l+','+ m.t +')');
+    /*.attr('transform','translate('+ m.l+','+ m.t +')')*/;
 
 d3.select('#colC-title')
     .style('width',wC + 'px');

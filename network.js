@@ -1,4 +1,4 @@
-var m = { t:10, r:10, b:10, l:10 },
+var m = { t:5, r:10, b:10, l:0 },
     colContainer = document.querySelector("#column-center > .col-content"),
     wC = colContainer.clientWidth/* - m.l - m.r*/,
     hC = colContainer.clientHeight/* - m.t - m.b*/;
@@ -9,7 +9,7 @@ var svgC = d3.select("#column-center > .col-content")
     .attr("height", hC)
   .append('g')
     .attr('class','plot')
-    /*.attr('transform','translate('+ m.l+','+ m.t +')')*/;
+    .attr('transform','translate('+ m.l+','+ m.t +')');
 
 d3.select('#colC-title')
     .style('width',wC + 'px');

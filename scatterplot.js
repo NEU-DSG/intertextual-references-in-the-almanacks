@@ -1,5 +1,5 @@
 var svgL,
-    m = { t:10, r:10, b:10, l:10 },
+    m = { t:5, r:10, b:10, l:10 },
     colContainer = document.querySelector("#column-left > .col-content"),
     wL = colContainer.clientWidth/* - m.l - m.r*/,
     hL = colContainer.clientHeight/* - m.t - m.b*/;
@@ -94,7 +94,11 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
         }
       });
    });
-   dot.data(dotData).enter()
+   
+   dot = dot.data(dotData);
+   dot.exit().remove();
+   
+   dotEnter = dot.enter()
     .append("circle")
       .attr("class","dots")
       .attr("cx", function(d) { 
@@ -104,14 +108,15 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       .attr("cy", function(d) { 
         d.y = scaleY(d.date);
         return d.y;
-      })
+      });
+    
+    dot = dot.merge(dotEnter)
       .attr("r", 2.5)
       .style("fill", getGenreColor)
       .style("stroke", getGenreColor)
       .style("stroke-width", "1px")
-      .style("opacity", 0.5);
+      .style("opacity", 0.8);
     
-    console.log(simulation);
     simulation.on("tick", function() {
       dot.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });

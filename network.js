@@ -1,4 +1,4 @@
-var m = { t:5, r:10, b:10, l:0 },
+var m = { t:5, r:10, b:10, l:-5 },
     colContainer = document.querySelector("#column-center > .col-content"),
     wC = colContainer.clientWidth/* - m.l - m.r*/,
     hC = colContainer.clientHeight/* - m.t - m.b*/;

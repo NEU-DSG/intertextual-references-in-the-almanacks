@@ -64,23 +64,22 @@ h2{
   font-weight: lighter;
 }
 
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
 #column-left{
   float: left;
   width: 30%;
 }
 #column-right{
   float: right;
-  width: 20%;
+  width: 25%;
   overflow: hidden;
 }
 #column-center{ 
-  display: inline-block;
-  width: 50%;
-}
-
-#column-left, #column-center, #column-right{
-  display: flex;
-  flex-direction: column;
+  width: 45%;
 }
 
 .col-title {

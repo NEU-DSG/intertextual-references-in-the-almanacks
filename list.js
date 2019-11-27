@@ -13,38 +13,31 @@ dispatch.on("dataLoaded.list",function(allData){
   d3.selectAll(".collection")
     .on("mouseenter", function(d) {
       dispatch.call("highlight", null, d, i);
-      console.log(d);
-      d3.select(this)
-         .style("font-weight","bold");
     })
     .on("mouseleave", function(d) {
-      dispatch.call("unhighlight", null, d);
-      d3.select(this)
-          .style("font-weight", null);
+      dispatch.call("unhighlight", null);
     });
     /*.on("click",function(d){
       window.open(d.url);
     })*/
-
 });
 
-dispatch.on("highlight.list", function(d,i){
-
-  d3.selectAll(".collection")
-    .transition()
-    .duration(100)
-    .style("opacity",function(e){
-      if (d.filename != e.filename) {
-        return 0.2;
-      }
-      // else{ console.log(d.title); }
-    });
-
-  if (i == 1) {
-    var list = document.getElementById("list"),
-    targetli = document.getElementById(d.filename);
-    list.scrollTop = targetli.offsetTop - 298; //298 is offsetTop for the first element
+dispatch.on("highlight.list", function(d, i){
+  var targetItem,
+      list = document.getElementById("list"),
+      listItems = d3.selectAll(".collection");
+  if ( i === 1 ) {
+    targetItem = listItems.filter( function(k) {
+      return k.id === d.id;
+    }).node();
+    targetItem.scrollIntoView({block: 'center'});
   }
+  listItems
+      .transition()
+      .duration(100)
+      .style("opacity", function(e){
+        return d.id === e.id ? null : 0.2;
+      });
 });
 
 dispatch.on("highlightmeta.list",function(d,i){
@@ -52,7 +45,7 @@ dispatch.on("highlightmeta.list",function(d,i){
     .transition()
     .duration(100)
     .style("display",function(e){
-      if((e.isTop == 1) && (e.mainGenre == d.key)){
+      if ((e.isTop == 1) && (e.mainGenre == d.key)) {
         return "list-item";
       }
       else{ return "none"; }
@@ -87,17 +80,14 @@ dispatch.on("highlightelem.list",function(d,i){
     // });
 });
 
-dispatch.on("unhighlight.list", function(d){
-
+dispatch.on("unhighlight.list", function(){
   // d3.selectAll("collection")
   //   .classed("selectedItem",false);
   d3.selectAll(".collection")
-    .transition()
-    .duration(200)
-    // .style("font-weight","normal")
-    .style("display","list-item")
-    .style("opacity",1);
-
+      .transition()
+      .duration(200)
+      .style("display", "list-item")
+      .style("opacity", 1);
 });
 
 // dispatch.on("filterlistmeta", function(d){

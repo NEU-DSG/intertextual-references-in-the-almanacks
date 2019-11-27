@@ -125,18 +125,16 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
     .nodes(dotData);
 
   // interactions
-  /*dot.on("mouseenter",function(d){
-     var i = 1
-      if (d.isTop == 1){
-        dispatch.call("highlight",this,d,i);
-      };
-   })
-   .on("mouseout",function(d){
-     dispatch.call("unhighlight", null, d);
-   });*/
+  dot.on("mouseenter", function(d){
+        var i = 1;
+        dispatch.call("highlight", this, d.gesture, i);
+      })
+      .on("mouseout",function(d){
+         dispatch.call("unhighlight", null);
+      });
 });
 
-dispatch.on("highlight.scatterplot",function(gestureDatum){
+dispatch.on("highlight.scatterplot", function(gestureDatum){
   var lDots = svgL.selectAll(".dots");
   
   lDots
@@ -202,7 +200,7 @@ dispatch.on("highlightelem.scatterplot",function(d){
     .style("opacity", 0.2);
 });
 
-dispatch.on("unhighlight.scatterplot",function(d){
+dispatch.on("unhighlight.scatterplot", function(){
   svgL.selectAll(".dots")
     .transition()
     .duration(100)

@@ -215,15 +215,6 @@ dispatch.on("dataLoaded.network", function(allData){
       .style('stroke', d => getGenreColor(d[0]))
 });
 
-var setOpacity = function(selection) {
-  selection
-      .transition()
-      .duration(200)
-      .style('opacity', function(a) {
-        return elemSet.has(a.key) ? 1 : 0.1;
-      });
-};
-
 dispatch.on("highlight.network", function(gestureDatum){
   var labelSet = new Set();
   // Highlight links, and keep track of the labels which need to be highlighted.

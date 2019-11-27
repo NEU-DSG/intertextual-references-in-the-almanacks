@@ -44,6 +44,7 @@ function makePath(data) {
   data.forEach( function(pathJoin, index) {
     var genre = pathJoin.genreDatum,
         genreX = genre.x,
+        gestureId = pathJoin.gesture.id,
         type = pathJoin.typeDatum,
         typeX = type.x,
         typeY = type.y;
@@ -56,18 +57,22 @@ function makePath(data) {
     pathJoin.path = [
       { "x": genreX - 4, "y": y,
         'genre': genre.key,
+        'gesture': gestureId,
         'type': type.key
       },
       { "x": genreX + (wC / 10), "y": y,
         'genre': genre.key,
+        'gesture': gestureId,
         'type': type.key
       },
       { "x": typeX - (wC / 10), "y": typeY,
         'genre': genre.key,
+        'gesture': gestureId,
         'type': type.key
       },
       { "x": typeX + 4, "y": typeY,
         'genre': genre.key,
+        'gesture': gestureId,
         'type': type.key
       } ];
     countInstance++;
@@ -208,4 +213,55 @@ dispatch.on("dataLoaded.network", function(allData){
       .datum(d => d.path)
       .attr('d', curve)
       .style('stroke', d => getGenreColor(d[0]))
+});
+
+var setOpacity = function(selection) {
+  selection
+      .transition()
+      .duration(200)
+      .style('opacity', function(a) {
+        return elemSet.has(a.key) ? 1 : 0.1;
+      });
+};
+
+dispatch.on("highlight.network", function(gestureDatum){
+  var labelSet = new Set();
+  // Highlight links, and keep track of the labels which need to be highlighted.
+  svgC.selectAll('.path-links')
+      .transition()
+      .duration(200)
+      .style('opacity', function(a) {
+        var d = a[0],
+            opacityVal = 0;
+        if ( d.gesture == gestureDatum.id ) {
+          labelSet.add(d.genre);
+          labelSet.add(d.type);
+          opacityVal = 0.5;
+        }
+        return opacityVal;
+      });
+  // Highlight labels.
+  svgC.selectAll('.label-plot')
+      .transition()
+      .duration(200)
+      .style('opacity', function(a) {
+        return labelSet.has(a.key) ? 1 : 0.2;
+      });
+});
+
+/*dispatch.on("highlightmeta.network", function( ){
+  
+});*/
+
+/*dispatch.on("highlightelem.network", function( ){
+  
+});*/
+
+dispatch.on("unhighlight.network", function() {
+  svgC.selectAll(".path-links, .label-plot")
+      .transition()
+      .duration(200)
+      .style('opacity', 1)
+    .filter('.path-links')
+      .style('opacity', null);
 });

@@ -9,16 +9,19 @@ dispatch.on("dataLoaded.list",function(allData){
       .attr("class","collection")
       .text(d => d.plaintext);
 
-  /*var i = 0;
+  var i = 0;
   d3.selectAll(".collection")
-    .on("mouseenter",function(d){
+    .on("mouseenter", function(d) {
       dispatch.call("highlight", null, d, i);
-        // d3.select(this)
-        //   .style("font-weight","bold");
+      console.log(d);
+      d3.select(this)
+         .style("font-weight","bold");
     })
-    .on("mouseleave",function(d){
+    .on("mouseleave", function(d) {
       dispatch.call("unhighlight", null, d);
-    });*/
+      d3.select(this)
+          .style("font-weight", null);
+    });
     /*.on("click",function(d){
       window.open(d.url);
     })*/
@@ -31,13 +34,13 @@ dispatch.on("highlight.list", function(d,i){
     .transition()
     .duration(100)
     .style("opacity",function(e){
-      if(d.filename != e.filename){
+      if (d.filename != e.filename) {
         return 0.2;
       }
       // else{ console.log(d.title); }
     });
 
-  if(i == 1){
+  if (i == 1) {
     var list = document.getElementById("list"),
     targetli = document.getElementById(d.filename);
     list.scrollTop = targetli.offsetTop - 298; //298 is offsetTop for the first element

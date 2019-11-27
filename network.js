@@ -11,9 +11,6 @@ var svgC = d3.select("#column-center > .col-content")
     .attr('class','plot')
     .attr('transform','translate('+ m.l+','+ m.t +')');
 
-d3.select('#colC-title')
-    .style('width',wC + 'px');
-
 var col1 = wC/5,
     col2 = (wC/5)*4,
     networkHeight = hC * 0.85
@@ -89,6 +86,7 @@ dispatch.on("dataLoaded.network", function(allData){
       typeMap = allData['types'],
       typeList = [],
       pathsList = [];
+  
   for (var key of typeMap.keys()) {
     typeList.push({ 
       'key': key,
@@ -123,6 +121,7 @@ dispatch.on("dataLoaded.network", function(allData){
     });
   }
   //console.log(pathsList);
+  
   // Create labels for genres.
   var genreLabels,
       totalGestures = 0,

@@ -20,6 +20,7 @@ genreValues.forEach( function(label, index) {
   var col = 40 + ((wL-30) * (index / genreValues.length));
   genreRange.push(col);
 });
+
 var scaleX = d3.scaleOrdinal()
       .domain(genreValues)
       .range(genreRange),
@@ -135,86 +136,82 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
    });*/
 });
 
-dispatch.on("highlight.scatterplot",function(d){
-  svgL.selectAll(".dots")
-    .filter(function(e){ return e.filename == d.filename; })
+dispatch.on("highlight.scatterplot",function(gestureDatum){
+  var lDots = svgL.selectAll(".dots");
+  
+  lDots
+    .filter( function(d){ 
+      return gestureDatum.id !== d.gesture.id; })
     .transition()
     .duration(100)
-    // .style("fill","black")
-    .style("stroke", function(e) { return scaleColor(e.genre); })
-    .style("stroke-width","1px")
-    .style("opacity",1);
-  svgL.selectAll(".dots")
-    .filter(function(e){ return (e.filename != d.filename); })
+    .style("opacity", 0.4);
+  lDots
     .transition()
     .duration(100)
-    .style("opacity",0.2);
-  svgL.selectAll(".legend")
+    .style("opacity", 0.2);
+  lDots
+    .filter( function(d){ 
+      return gestureDatum.id == d.gesture.id; })
     .transition()
     .duration(100)
-    .style("opacity",0.1);
+    .style("stroke", getGenreColor)
+    .style("stroke-width", "1px")
+    .style("opacity", 1);
 });
 
 dispatch.on("highlightmeta.scatterplot",function(d){
   svgL.selectAll(".dots")
-    .filter(function(e){ return (e.isTop == 1) && (e.mainGenre == d.key); })
+    .filter( function(e){ return e.mainGenre == d.key; })
     .transition()
     .duration(100)
     // .style("fill","black")
-    .style("stroke",function(e){ return scaleColor(e.genre); })
-    .style("stroke-width","1px")
-    .style("opacity",1);
+    .style("stroke", getGenreColor)
+    .style("stroke-width", "1px")
+    .style("opacity", 1);
   svgL.selectAll(".dots")
-    .filter(function(e){ return (e.isTop == 0) || (e.mainGenre != d.key); })
+    .filter( function(e){ return e.mainGenre !== d.key; })
     .transition()
     .duration(100)
-    .style("opacity",0.2);
+    .style("opacity", 0.4);
   svgL.selectAll(".legend")
     .transition()
     .duration(100)
-    .style("opacity",0.1);
+    .style("opacity", 0.2);
 });
 
 dispatch.on("highlightelem.scatterplot",function(d){
   var idSet = new Set();
-  elemTopData.forEach(function(e){
-    if(d.key == e.element){ idSet.add(e.filename); }
+  elemTopData.forEach( function(e){
+    if (d.key == e.element) { idSet.add(e.filename); }
   });
   svgL.selectAll(".dots")
-    .filter(function(e){ return (e.isTop == 1) && (idSet.has(e.filename)); })
+    .filter( function(e){ return (e.isTop == 1) && (idSet.has(e.filename)); })
     .transition()
     .duration(100)
-    .style("stroke", function(e){ return scaleColor(e.genre); })
+    .style("stroke", getGenreColor)
     .style("stroke-width","1px")
-    .style("opacity",1);
+    .style("opacity", 1);
   svgL.selectAll(".dots")
-    .filter(function(e){ return !(idSet.has(e.filename)); })
+    .filter( function(e){ return !(idSet.has(e.filename)); })
     .transition()
     .duration(100)
-    .style("opacity",0.2);
+    .style("opacity", 0.4);
   svgL.selectAll(".legend")
     .transition()
     .duration(100)
-    .style("opacity",0.1);
+    .style("opacity", 0.2);
 });
 
 dispatch.on("unhighlight.scatterplot",function(d){
   svgL.selectAll(".dots")
     .transition()
     .duration(100)
-    .style("fill", function(d){
-      if(d.isTop == 1){ return scaleColor(d.genre); }
-      else{ return "none"; }
-    })
-    .style("stroke", function(d){
-      if(d.isTop == 0){ return scaleColor(d.genre); }
-    })
-    .style("stroke-width", function(d){
-      if(d.isTop == 0){ return "1px"; }
-    })
+    .style("fill", getGenreColor)
+    .style("stroke", getGenreColor)
+    .style("stroke-width", "1px")
     .style("opacity", 0.8);
   svgL.selectAll(".legend")
     .transition()
     .duration(100)
-    .style("opacity",0.6);
+    .style("opacity", 0.6);
 });

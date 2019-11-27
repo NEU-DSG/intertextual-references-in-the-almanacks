@@ -1,10 +1,8 @@
 
 // Get the modal
 var modal = document.getElementById('myModal');
-
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
@@ -25,14 +23,8 @@ window.onclick = function(event) {
     }
 }
 
-
-
 var dispatch = d3.dispatch("dataLoaded",
   "highlight","highlightmeta","highlightelem","unhighlight");
-
-var name = "persName";
-//document.getElementById("element").innerHTML = "Person Names";
-var redraws = 0;
 
 var meta;
 
@@ -49,14 +41,6 @@ function drawNetwork(){
     var totalExcerpts = 0,
         genreGrp = new Map(),
         qTypes = new Map();
-    meta['bibliography'].forEach( function(entry) {
-      var id = entry['id'],
-          mainGenre = entry['genreBroad'],
-          gestures = genreGrp.get(mainGenre) || [];
-      // Retrieve only the IT gestures matching the current entry's ID. 
-      gestures = gestures.concat(meta['gestures'].filter(gesture => gesture['sources'].some(src => src.id === id)));
-      genreGrp.set(mainGenre, gestures);
-    });
     /*  */
     meta['gestures'].forEach( function(gesture) {
       var types = gesture.type;
@@ -65,7 +49,17 @@ function drawNetwork(){
         qTypeEntry.push(gesture);
         qTypes.set(typeStr, qTypeEntry);
       });
+      gesture.id = totalExcerpts;
       totalExcerpts++;
+    });
+    meta['bibliography'].forEach( function(entry) {
+      var id = entry['id'],
+          mainGenre = entry['genreBroad'],
+          gestures = genreGrp.get(mainGenre) || [];
+      // Retrieve only the IT gestures matching the current entry's ID. 
+      gestures = gestures.concat(meta['gestures'].filter(
+        gesture => gesture['sources'].some(src => src.id === id)));
+      genreGrp.set(mainGenre, gestures);
     });
     meta['genres'] = genreGrp;
     meta['types'] = qTypes;

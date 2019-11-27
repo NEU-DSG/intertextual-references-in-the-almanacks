@@ -215,9 +215,11 @@ dispatch.on("dataLoaded.network", function(allData){
       .style('stroke', d => getGenreColor(d[0]))
 });
 
+/* On a "highlight" event, reduce the opacity of paths and labels which do not 
+  correspond to the target intertextual gesture. */
 dispatch.on("highlight.network", function(gestureDatum){
   var labelSet = new Set();
-  // Highlight links, and keep track of the labels which need to be highlighted.
+  // Highlight paths, and keep track of the labels which need to be highlighted.
   svgC.selectAll('.path-links')
       .transition()
       .duration(200)
@@ -248,6 +250,7 @@ dispatch.on("highlight.network", function(gestureDatum){
   
 });*/
 
+/* On an "unhighlight" event, restore the opacity of all paths and labels. */
 dispatch.on("unhighlight.network", function() {
   svgC.selectAll(".path-links, .label-plot")
       .transition()

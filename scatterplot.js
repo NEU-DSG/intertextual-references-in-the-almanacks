@@ -124,9 +124,11 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
     })
     .nodes(dotData);
 
-  // interactions
+  /* Define mouseover behaviors. Mousing over a circle on the scatterplot will 
+    trigger a "highlight" event, during which relevant network graph paths and 
+    intertextual gestures will be foregrounded. */
   dot.on("mouseenter", function(d){
-        var i = 1;
+        var i = 1; // Indicate that the scatterplot triggered the "highlight" event.
         dispatch.call("highlight", this, d.gesture, i);
       })
       .on("mouseout",function(d){
@@ -134,47 +136,46 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       });
 });
 
+/* During a "highlight" event, reduce opacity of any circles which do not match the 
+  target intertextual gesture. */
 dispatch.on("highlight.scatterplot", function(gestureDatum){
   var lDots = svgL.selectAll(".dots");
-  
   lDots
-    .filter( function(d){ 
-      return gestureDatum.id !== d.gesture.id; })
-    .transition()
-    .duration(100)
-    .style("opacity", 0.4);
+    .filter( function(d){ return gestureDatum.id !== d.gesture.id; })
+      .transition()
+      .duration(100)
+      .style("opacity", 0.4);
   lDots
-    .transition()
-    .duration(100)
-    .style("opacity", 0.2);
+      .transition()
+      .duration(100)
+      .style("opacity", 0.2);
   lDots
-    .filter( function(d){ 
-      return gestureDatum.id == d.gesture.id; })
-    .transition()
-    .duration(100)
-    .style("stroke", getGenreColor)
-    .style("stroke-width", "1px")
-    .style("opacity", 1);
+    .filter( function(d){ return gestureDatum.id == d.gesture.id; })
+      .transition()
+      .duration(100)
+      .style("stroke", getGenreColor)
+      .style("stroke-width", "1px")
+      .style("opacity", 1);
 });
 
 dispatch.on("highlightmeta.scatterplot",function(d){
   svgL.selectAll(".dots")
     .filter( function(e){ return e.mainGenre == d.key; })
-    .transition()
-    .duration(100)
-    // .style("fill","black")
-    .style("stroke", getGenreColor)
-    .style("stroke-width", "1px")
-    .style("opacity", 1);
+      .transition()
+      .duration(100)
+      // .style("fill","black")
+      .style("stroke", getGenreColor)
+      .style("stroke-width", "1px")
+      .style("opacity", 1);
   svgL.selectAll(".dots")
     .filter( function(e){ return e.mainGenre !== d.key; })
-    .transition()
-    .duration(100)
-    .style("opacity", 0.4);
+      .transition()
+      .duration(100)
+      .style("opacity", 0.4);
   svgL.selectAll(".legend")
-    .transition()
-    .duration(100)
-    .style("opacity", 0.2);
+      .transition()
+      .duration(100)
+      .style("opacity", 0.2);
 });
 
 dispatch.on("highlightelem.scatterplot",function(d){
@@ -184,32 +185,33 @@ dispatch.on("highlightelem.scatterplot",function(d){
   });
   svgL.selectAll(".dots")
     .filter( function(e){ return (e.isTop == 1) && (idSet.has(e.filename)); })
-    .transition()
-    .duration(100)
-    .style("stroke", getGenreColor)
-    .style("stroke-width","1px")
-    .style("opacity", 1);
+      .transition()
+      .duration(100)
+      .style("stroke", getGenreColor)
+      .style("stroke-width","1px")
+      .style("opacity", 1);
   svgL.selectAll(".dots")
     .filter( function(e){ return !(idSet.has(e.filename)); })
-    .transition()
-    .duration(100)
-    .style("opacity", 0.4);
+      .transition()
+      .duration(100)
+      .style("opacity", 0.4);
   svgL.selectAll(".legend")
-    .transition()
-    .duration(100)
-    .style("opacity", 0.2);
+      .transition()
+      .duration(100)
+      .style("opacity", 0.2);
 });
 
+/* On an "unhighlight" event, restore the color and opacity of the scatterplot dots. */
 dispatch.on("unhighlight.scatterplot", function(){
   svgL.selectAll(".dots")
-    .transition()
-    .duration(100)
-    .style("fill", getGenreColor)
-    .style("stroke", getGenreColor)
-    .style("stroke-width", "1px")
-    .style("opacity", 0.8);
+      .transition()
+      .duration(100)
+      .style("fill", getGenreColor)
+      .style("stroke", getGenreColor)
+      .style("stroke-width", "1px")
+      .style("opacity", 0.8);
   svgL.selectAll(".legend")
-    .transition()
-    .duration(100)
-    .style("opacity", 0.6);
+      .transition()
+      .duration(100)
+      .style("opacity", 0.6);
 });

@@ -9,15 +9,15 @@ svgL = d3.select("#column-left > .col-content")
     .attr("width", wL)
     .attr("height", hL)
   .append("g")
-    .attr("class","plot")
+    .attr("class", "plot")
     .attr("height", hL)
-    .attr("transform","translate("+ m.l +","+ m.t +")");
+    .attr("transform", "translate("+ m.l +","+ m.t +")");
 
 // scale for scatterplot
 var genreValues = [ 'philosophy', 'religious-writings', 'literature', 'life-writings', 'nonfiction', 'reviews' ],
     genreRange = [];
 genreValues.forEach( function(label, index) {
-  var col = 50 + ((wL-50) * (index / genreValues.length));
+  var col = 45 + ((wL-30) * (index / genreValues.length));
   genreRange.push(col);
 });
 
@@ -25,7 +25,7 @@ var scaleX = d3.scaleOrdinal()
       .domain(genreValues)
       .range(genreRange),
     scaleY = d3.scaleTime()
-      /* The date range is actually 1804 to 1858, here rounded to the nearest 
+      /* The date range is actually 1804 to 1858; here, rounded to the nearest 
         multiple of 10. */
       .domain([ new Date(1800,0,1), new Date(1860,0,1) ])
       .range([ hL-20, 60 ]);
@@ -103,7 +103,7 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
    
    dotEnter = dot.enter()
     .append("circle")
-      .attr("class","dots")
+      .classed("dots selectable", true)
       .attr("cx", function(d) { 
         d.x = scaleX(d.genre) + 4;
         return d.x;
@@ -114,13 +114,13 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       });
     
     dot = dot.merge(dotEnter)
-      .attr("r", 3)
-      .style("fill", getGenreColor)
-      .style("opacity", 0.8);
+        .attr("r", 3)
+        .style("fill", getGenreColor)
+        .style("opacity", 0.8);
     
     simulation.on("tick", function() {
       dot.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
+          .attr("cy", function(d) { return d.y; });
     })
     .nodes(dotData);
 
@@ -129,9 +129,11 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
     intertextual gestures will be foregrounded. */
   dot.on("mouseenter", function(d) {
         var i = 1; // Indicate that the scatterplot triggered the "highlight" event.
+        d3.select(this).classed('selected', true);
         dispatch.call("highlight", this, d.gesture, i);
       })
       .on("mouseout", function(d) {
+        d3.select(this).classed('selected', false);
         dispatch.call("unhighlight", null);
       });
 });

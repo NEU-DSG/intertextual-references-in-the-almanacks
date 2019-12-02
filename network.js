@@ -210,6 +210,7 @@ dispatch.on("dataLoaded.network", function(allData){
         dispatch.call('highlighttype', this, d);
       });
   svgC.selectAll('.label-plot')
+      .classed('selectable', true)
       .on('mouseout', function(d) {
         dispatch.call('unhighlight', this, d);
       });

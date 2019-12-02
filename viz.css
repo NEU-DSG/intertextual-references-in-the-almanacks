@@ -195,22 +195,24 @@ ol::-webkit-scrollbar-thumb {
 }
 
 #myBtn{
-padding-right: 0px;
-background-color:none;
-border: none;
-font-weight: normal;
-font-family: sans-serif;
+  padding-right: 0px;
+  background-color:none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: normal;
+  font-family: sans-serif;
 }
 
 #myBtn:hover{
 background-color:none;
 border: none;
-color:#00ACC1;
+color: #00ACC1;
 }
 
 #note{
-text-align: center;
-font-weight: lighter;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: lighter;
 }
 
 .axis text {

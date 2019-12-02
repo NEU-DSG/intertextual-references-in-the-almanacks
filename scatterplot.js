@@ -131,9 +131,8 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
         d3.event.stopPropagation();
         var el = d3.select(this),
             alreadyClicked = el.classed('selected'),
-            prev = d3.select(".container .selectable.selected"),
             i = 1; // Indicate that the scatterplot triggered the "highlight" event.
-        if ( alreadyClicked || prev.size() >= 1 ) {
+        if ( alreadyClicked || !allowMouseover() ) {
           dispatch.call("unhighlight", null);
         }
         if ( !alreadyClicked ) {

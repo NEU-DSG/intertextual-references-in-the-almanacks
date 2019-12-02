@@ -23,6 +23,19 @@ dispatch.on("dataLoaded.list",function(allData){
       if ( allowMouseover() ) {
         dispatch.call("unhighlight", null);
       }
+    })
+    .on('click', function(d) {
+      d3.event.stopPropagation();
+      var el = d3.select(this),
+          alreadyClicked = el.classed('selected');
+      if ( alreadyClicked || !allowMouseover() ) {
+        dispatch.call("unhighlight", null);
+      }
+      if ( !alreadyClicked ) {
+        var i = 0; // Indicate that the list triggered the "highlight" event.
+        el.classed("selected clicked", true);
+        dispatch.call("highlight", null, d, i);
+      }
     });
     /*.on("click",function(d){
       window.open(d.url);
@@ -39,7 +52,7 @@ dispatch.on("highlight.list", function(d, i){
     matching list item is visible on the page. */
   if ( i === 1 ) {
     targetItem = listItems.filter(k => k.id === d.id).node();
-    targetItem.scrollIntoView({block: 'center'});
+    targetItem.scrollIntoView({ block: 'center' });
   }
   listItems
       .transition()

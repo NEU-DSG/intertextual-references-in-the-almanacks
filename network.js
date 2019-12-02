@@ -173,6 +173,18 @@ dispatch.on("dataLoaded.network", function(allData){
         if ( allowMouseover() ) {
           dispatch.call('highlightgenre', this, d);
         }
+      })
+      .on('click', function(d) {
+        d3.event.stopPropagation();
+        var el = d3.select(this),
+            alreadyClicked = el.classed('selected');
+        if ( alreadyClicked || !allowMouseover() ) {
+          dispatch.call("unhighlight", null);
+        }
+        if ( !alreadyClicked ) {
+          el.classed("selected clicked", true);
+          dispatch.call('highlightgenre', this, d);
+        }
       });
   // Create border rectangles for genre?
   // Create labels for @type.
@@ -210,6 +222,18 @@ dispatch.on("dataLoaded.network", function(allData){
       })
       .on('mouseover', function(d) {
         if ( allowMouseover() ) {
+          dispatch.call('highlighttype', this, d);
+        }
+      })
+      .on('click', function(d) {
+        d3.event.stopPropagation();
+        var el = d3.select(this),
+            alreadyClicked = el.classed('selected');
+        if ( alreadyClicked || !allowMouseover() ) {
+          dispatch.call("unhighlight", null);
+        }
+        if ( !alreadyClicked ) {
+          el.classed("selected clicked", true);
           dispatch.call('highlighttype', this, d);
         }
       });

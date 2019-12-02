@@ -14,7 +14,7 @@ body{
 }
 
 .header{
-  padding: 0.5rem 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
 }
 
 #title{
@@ -57,10 +57,15 @@ h2{
 
 .controls, .container{
   font-weight: lighter;
-  padding-bottom: 0.5rem;
+}
+
+.controls {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
 }
 
 .container{
+  padding-bottom: 0.5rem;
   flex: 1 1 auto;
   display: flex;
   align-items: stretch;

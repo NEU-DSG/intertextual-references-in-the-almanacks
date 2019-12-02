@@ -68,6 +68,7 @@ function drawNetwork() {
 };
 
 function allowMouseover() {
-  var selection = d3.select('.selected.clicked');
-  return selection.empty();
+  var selection = d3.select('.selected.clicked'),
+      userAllowed = d3.select('#mouseover-control').property('checked');
+  return userAllowed && selection.empty();
 };

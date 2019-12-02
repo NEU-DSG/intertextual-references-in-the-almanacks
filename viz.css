@@ -222,6 +222,10 @@ font-weight: lighter;
   text-anchor: end;
 }
 
+.selectable {
+  cursor: pointer;
+}
+
 .path-links {
   fill: none;
   opacity: 0.25;

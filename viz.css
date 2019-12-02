@@ -49,19 +49,23 @@ button{
 }
 
 h2{
-  font-size: 12px;
+  font-size: 1rem;
   margin: auto;
   margin-left: 30px;
   font-weight: lighter;
 }
 
-.container{
+.controls, .container{
+  font-weight: lighter;
   padding-bottom: 0.5rem;
+}
+
+.container{
   flex: 1 1 auto;
   display: flex;
   align-items: stretch;
   overflow: hidden;
-  font-weight: lighter;
+  font-size: 0.75rem;
 }
 
 .col {
@@ -84,7 +88,7 @@ h2{
 
 .col-title {
   margin-left: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   text-align: center;
 }
 
@@ -104,7 +108,6 @@ h2{
 }
 
 .collection{
-  font-size: 12px;
   line-height: 150%;
   list-style-position: inside;
   margin: 10px 0;
@@ -190,7 +193,6 @@ ol::-webkit-scrollbar-thumb {
 padding-right: 0px;
 background-color:none;
 border: none;
-font-size: 14px;
 font-weight: normal;
 font-family: sans-serif;
 }
@@ -204,15 +206,17 @@ color:#00ACC1;
 #note{
 text-align: center;
 font-weight: lighter;
-font-size: 14px;
+}
+
+.axis text {
+  font-size: 0.725rem;
 }
 
 .axis {
   font-family: sans-serif;
-  font-size: 11px;
 }
 .axis.axis-small {
-  font-size: 10px;
+  /*font-size: 0.5rem;*/
 }
 .axis-left .label-plot {
   text-anchor: end;

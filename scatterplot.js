@@ -17,7 +17,7 @@ svgL = d3.select("#column-left > .col-content")
 var genreValues = [ 'philosophy', 'religious-writings', 'literature', 'life-writings', 'nonfiction', 'reviews' ],
     genreRange = [];
 genreValues.forEach( function(label, index) {
-  var col = 40 + ((wL-30) * (index / genreValues.length));
+  var col = 50 + ((wL-50) * (index / genreValues.length));
   genreRange.push(col);
 });
 
@@ -25,8 +25,10 @@ var scaleX = d3.scaleOrdinal()
       .domain(genreValues)
       .range(genreRange),
     scaleY = d3.scaleTime()
-      .domain([ new Date(1804,0,1), new Date(1858,0,1) ])
-      .range([ hL-40, 40 ]);
+      /* The date range is actually 1804 to 1858, here rounded to the nearest 
+        multiple of 10. */
+      .domain([ new Date(1800,0,1), new Date(1860,0,1) ])
+      .range([ hL-20, 60 ]);
 
 // domain for scatterplot
 var axisY = d3.axisLeft()
@@ -40,14 +42,14 @@ var axisX = d3.axisTop()
     .tickSize(0);
 
 svgL.append("g")
-    .attr("id","axis-y")
+    .attr("id", "axis-y")
     .classed('axis axis-left axisColor', true)
-    .attr('transform', 'translate(20,0)')
+    .attr('transform', 'translate(25,0)')
     .attr("fill","#292826")
     .call(axisY);
 svgL.append("g")
     .attr("id","axis-x")
-    .attr("transform", "translate(10,20)")
+    .attr("transform", "translate(10,30)")
     .classed('axis axis-small axis-top', true)
     .call(axisX)
   .selectAll('text')
@@ -125,12 +127,12 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
   /* Define mouseover behaviors. Mousing over a circle on the scatterplot will 
     trigger a "highlight" event, during which relevant network graph paths and 
     intertextual gestures will be foregrounded. */
-  dot.on("mouseenter", function(d){
+  dot.on("mouseenter", function(d) {
         var i = 1; // Indicate that the scatterplot triggered the "highlight" event.
         dispatch.call("highlight", this, d.gesture, i);
       })
-      .on("mouseout",function(d){
-         dispatch.call("unhighlight", null);
+      .on("mouseout", function(d) {
+        dispatch.call("unhighlight", null);
       });
 });
 

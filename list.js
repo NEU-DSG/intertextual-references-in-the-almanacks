@@ -6,7 +6,7 @@ dispatch.on("dataLoaded.list",function(allData){
         .selectAll(".collection"),
       listItems = list.data(gestures).enter()
         .append('li')
-          .attr("class","collection")
+          .attr("class", "collection")
           .text(d => d.plaintext);
   
   /* Define mouseover behaviors. Mousing over a list item will trigger a "highlight" 

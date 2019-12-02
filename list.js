@@ -14,11 +14,15 @@ dispatch.on("dataLoaded.list",function(allData){
     foregrounded. */
   d3.selectAll(".collection")
     .on("mouseenter", function(d) {
-      var i = 0; // Indicate that the list triggered the "highlight" event.
-      dispatch.call("highlight", null, d, i);
+      if ( allowMouseover() ) {
+        var i = 0; // Indicate that the list triggered the "highlight" event.
+        dispatch.call("highlight", null, d, i);
+      }
     })
     .on("mouseleave", function(d) {
-      dispatch.call("unhighlight", null);
+      if ( allowMouseover() ) {
+        dispatch.call("unhighlight", null);
+      }
     });
     /*.on("click",function(d){
       window.open(d.url);
@@ -82,10 +86,9 @@ dispatch.on("highlighttype.list", function(d, i) {
 });
 
 /* On an "unhighlight" event, retore all list items to full opacity. */
-dispatch.on("unhighlight.list", function(){
-  // d3.selectAll("collection")
-  //   .classed("selectedItem",false);
+dispatch.on("unhighlight.list", function() {
   d3.selectAll(".collection")
+      .classed("selected clicked", false)
       .transition()
       .duration(200)
       .style("display", "list-item")

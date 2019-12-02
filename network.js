@@ -170,7 +170,9 @@ dispatch.on("dataLoaded.network", function(allData){
         return position;
       })
       .on('mouseover', function(d) {
-        dispatch.call('highlightgenre', this, d);
+        if ( allowMouseover() ) {
+          dispatch.call('highlightgenre', this, d);
+        }
       });
   // Create border rectangles for genre?
   // Create labels for @type.
@@ -207,12 +209,16 @@ dispatch.on("dataLoaded.network", function(allData){
         return position;
       })
       .on('mouseover', function(d) {
-        dispatch.call('highlighttype', this, d);
+        if ( allowMouseover() ) {
+          dispatch.call('highlighttype', this, d);
+        }
       });
   svgC.selectAll('.label-plot')
       .classed('selectable', true)
       .on('mouseout', function(d) {
-        dispatch.call('unhighlight', this, d);
+        if ( allowMouseover() ) {
+          dispatch.call('unhighlight', this, d);
+        }
       });
   // Create curves joining genres to the types of quotes represented.
   var linkLines = svgC.selectAll('.links')
@@ -279,4 +285,6 @@ dispatch.on("unhighlight.network", function() {
       .style('opacity', 1)
     .filter('.path-links')
       .style('opacity', null);
+  svgC.selectAll('.selectable')
+      .classed("selected clicked", false);
 });

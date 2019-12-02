@@ -65,5 +65,9 @@ function drawNetwork() {
     dispatch.call("dataLoaded", null, meta);
     
   });
-  
+};
+
+function allowMouseover() {
+  var selection = d3.select('.selected.clicked');
+  return selection.empty();
 };

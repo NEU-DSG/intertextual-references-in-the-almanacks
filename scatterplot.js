@@ -127,14 +127,36 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
   /* Define mouseover behaviors. Mousing over a circle on the scatterplot will 
     trigger a "highlight" event, during which relevant network graph paths and 
     intertextual gestures will be foregrounded. */
-  dot.on("mouseenter", function(d) {
-        var i = 1; // Indicate that the scatterplot triggered the "highlight" event.
-        d3.select(this).classed('selected', true);
-        dispatch.call("highlight", this, d.gesture, i);
+    dot.on("click", function(d) {
+        d3.event.stopPropagation();
+        var el = d3.select(this),
+            alreadyClicked = el.classed('selected'),
+            prev = d3.select(".container .selectable.selected"),
+            i = 1; // Indicate that the scatterplot triggered the "highlight" event.
+        if ( alreadyClicked || prev.size() >= 1 ) {
+          dispatch.call("unhighlight", null);
+        }
+        if ( !alreadyClicked ) {
+          el.classed("selected clicked", true);
+          dispatch.call("highlight", this, d.gesture, i);
+          //console.log(this);
+        }
+      })
+      .on("mouseenter", function(d) {
+        var el = d3.select(this),
+            i = 1; // Indicate that the scatterplot triggered the "highlight" event.
+        if ( allowMouseover() ) {
+          d3.select(this).classed('selected', true);
+          dispatch.call("highlight", this, d.gesture, i);
+        }
       })
       .on("mouseout", function(d) {
-        d3.select(this).classed('selected', false);
-        dispatch.call("unhighlight", null);
+        var el = d3.select(this);
+        if ( allowMouseover() ) {
+          //console.log('mouseout');
+          el.classed('selected', false);
+          dispatch.call("unhighlight", null);
+        }
       });
 });
 
@@ -170,6 +192,7 @@ dispatch.on("highlighttype.scatterplot", function(d) {
 /* On an "unhighlight" event, restore the color and opacity of the scatterplot dots. */
 dispatch.on("unhighlight.scatterplot", function(){
   svgL.selectAll(".dots")
+      .classed("selected clicked", false)
       .transition()
       .duration(100)
       .style("fill", getGenreColor)

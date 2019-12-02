@@ -134,59 +134,33 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       });
 });
 
+
 /* During a "highlight" event, reduce opacity of any circles which do not match the 
-  target intertextual gesture. */
-dispatch.on("highlight.scatterplot", function(gestureDatum) {
-  var lDots = svgL.selectAll(".dots");
-  lDots
-    .filter( function(d){ return gestureDatum.id !== d.gesture.id; })
-      .transition()
-      .duration(100)
-      .style("opacity", 0.4);
-  lDots
-      .transition()
-      .duration(100)
-      .style("opacity", 0.2);
-  lDots
-    .filter( function(d){ return gestureDatum.id == d.gesture.id; })
+  currently-selected datum. */
+var highlightScatterplot = function(key, isRelevantFn) {
+  svgL.selectAll(".dots")
       .transition()
       .duration(100)
       .style("fill", getGenreColor)
-      .style("opacity", 1);
-});
+      .style("opacity", function(e) {
+        return isRelevantFn(e, key) ? 1 : 0.25;
+      });
+};
 
-/* On a "highlightgenre" event, increase the opacity of any circles mapping to the 
-  currently-selected source genre. */
+dispatch.on("highlight.scatterplot", function(d) {
+  highlightScatterplot(d.id, function(g, key) {
+    return g.gesture.id === key;
+  });
+});
 dispatch.on("highlightgenre.scatterplot", function(d) {
-  svgL.selectAll(".dots")
-      .transition()
-      .duration(100)
-      .style("fill", getGenreColor)
-      .style("opacity", function(e) {
-        return e.genre === d.key ? 1 : 0.4;
-      });
-  svgL.selectAll(".legend")
-      .transition()
-      .duration(100)
-      .style("opacity", 0.2);
+  highlightScatterplot(d.key, function(g, key) {
+    return g.genre === key;
+  });
 });
-
-/* On a "highlighttype" event, increase the opacity of any circles mapping to the 
-  currently-selected type of intertextual reference. */
 dispatch.on("highlighttype.scatterplot", function(d) {
-  svgL.selectAll(".dots")
-      .transition()
-      .duration(100)
-      .style("fill", getGenreColor)
-      .style("opacity", function(e) {
-        var isRelevant = e.gesture['type'].some(
-          type => type === d.key );
-        return isRelevant ? 1 : 0.4;
-      });
-  svgL.selectAll(".legend")
-      .transition()
-      .duration(100)
-      .style("opacity", 0.2);
+  highlightScatterplot(d.key, function(g, key) {
+    return g.gesture['type'].some(type => type === key);
+  });
 });
 
 /* On an "unhighlight" event, restore the color and opacity of the scatterplot dots. */

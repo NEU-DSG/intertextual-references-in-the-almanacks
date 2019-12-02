@@ -227,7 +227,9 @@ dispatch.on("dataLoaded.network", function(allData){
 });
 
 
-var toggleHighlight = function(key, isRelevantFn) {
+/* On a "highlight" event, reduce the opacity of paths and labels which do not 
+  correspond to the currently-selected datum. */
+var highlightNetwork = function(key, isRelevantFn) {
   var labelSet = new Set();
   // Highlight paths, and keep track of the labels which need to be highlighted.
   svgC.selectAll('.path-links')
@@ -250,24 +252,20 @@ var toggleHighlight = function(key, isRelevantFn) {
       .style('opacity', function(a) {
         return labelSet.has(a.key) ? 1 : 0.2;
       });
-}
+};
 
-/* On a "highlight" event, reduce the opacity of paths and labels which do not 
-  correspond to the target intertextual gesture. */
 dispatch.on("highlight.network", function(d) {
-  toggleHighlight(d.id, function(g, key) {
+  highlightNetwork(d.id, function(g, key) {
     return g.gesture === key;
   });
 });
-
 dispatch.on("highlightgenre.network", function(d) {
-  toggleHighlight(d.key, function(g, key) {
+  highlightNetwork(d.key, function(g, key) {
     return g.genre === key;
   });
 });
-
 dispatch.on("highlighttype.network", function(d) {
-  toggleHighlight(d.key, function(g, key) {
+  highlightNetwork(d.key, function(g, key) {
     return g.type === key;
   });
 });

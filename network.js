@@ -83,6 +83,7 @@ function makePath(data) {
   return data;
 };
 
+
 // dispatch.on("dataLoaded.network",function(meta, metaTop, metaTopGenre, elemDistTop, elemTop){
 dispatch.on("dataLoaded.network", function(allData){
   var genres = allData.genres,
@@ -225,20 +226,19 @@ dispatch.on("dataLoaded.network", function(allData){
       .style('stroke', d => getGenreColor(d[0]))
 });
 
-/* On a "highlight" event, reduce the opacity of paths and labels which do not 
-  correspond to the target intertextual gesture. */
-dispatch.on("highlight.network", function(gestureDatum){
+
+var toggleHighlight = function(key, isRelevantFn) {
   var labelSet = new Set();
   // Highlight paths, and keep track of the labels which need to be highlighted.
   svgC.selectAll('.path-links')
       .transition()
       .duration(200)
       .style('opacity', function(a) {
-        var d = a[0],
+        var pathPart = a[0],
             opacityVal = 0;
-        if ( d.gesture == gestureDatum.id ) {
-          labelSet.add(d.genre);
-          labelSet.add(d.type);
+        if ( isRelevantFn(pathPart, key) ) {
+          labelSet.add(pathPart.genre);
+          labelSet.add(pathPart.type);
           opacityVal = 0.5;
         }
         return opacityVal;
@@ -250,15 +250,27 @@ dispatch.on("highlight.network", function(gestureDatum){
       .style('opacity', function(a) {
         return labelSet.has(a.key) ? 1 : 0.2;
       });
+}
+
+/* On a "highlight" event, reduce the opacity of paths and labels which do not 
+  correspond to the target intertextual gesture. */
+dispatch.on("highlight.network", function(d) {
+  toggleHighlight(d.id, function(g, key) {
+    return g.gesture === key;
+  });
 });
 
-/*dispatch.on("highlightmeta.network", function( ){
-  
-});*/
+dispatch.on("highlightgenre.network", function(d) {
+  toggleHighlight(d.key, function(g, key) {
+    return g.genre === key;
+  });
+});
 
-/*dispatch.on("highlightelem.network", function( ){
-  
-});*/
+dispatch.on("highlighttype.network", function(d) {
+  toggleHighlight(d.key, function(g, key) {
+    return g.type === key;
+  });
+});
 
 /* On an "unhighlight" event, restore the opacity of all paths and labels. */
 dispatch.on("unhighlight.network", function() {

@@ -24,7 +24,7 @@ window.onclick = function(event) {
 }
 
 var dispatch = d3.dispatch("dataLoaded",
-  "highlight","highlightmeta","highlightelem","unhighlight");
+  "highlight", "highlightgenre", "highlighttype", "unhighlight");
 
 var meta;
 

@@ -45,15 +45,15 @@ dispatch.on("highlight.list", function(d, i){
       });
 });
 
-dispatch.on("highlightmeta.list",function(d,i){
+/* On a "highlightgenre" event, hide any list items which do not map to the 
+  currently-selected source genre. */
+dispatch.on("highlightgenre.list", function(d, i) {
   d3.selectAll(".collection")
     .transition()
     .duration(100)
-    .style("display",function(e){
-      if ((e.isTop == 1) && (e.mainGenre == d.key)) {
-        return "list-item";
-      }
-      else{ return "none"; }
+    .style("display", function(e) {
+      var isRelevant = e['sources'].some(src => src.genreBroad === d.key);
+      return isRelevant ? 'list-item' : 'none';
     });
     // .style("opacity",function(e){
     //   if((e.isTop == 1) && (e.mainGenre == d.key)){
@@ -63,19 +63,15 @@ dispatch.on("highlightmeta.list",function(d,i){
     // });
 });
 
-dispatch.on("highlightelem.list",function(d,i){
-  var idSet = new Set();
-  elemTopData.forEach(function(e){
-    if(d.key == e.element){ idSet.add(e.filename); }
-  });
+/* On a "highlighttype" event, hide any list items which do not map to the 
+  currently-selected type of intertextual gesture. */
+dispatch.on("highlighttype.list", function(d, i) {
   d3.selectAll(".collection")
     .transition()
     .duration(100)
-    .style("display", function(e){
-      if ((e.isTop == 1) && (idSet.has(e.filename))) {
-        return "list-item";
-      }
-      else { return "none"; }
+    .style("display", function(e) {
+      var isRelevant = e['type'].some(type => type === d.key);
+      return isRelevant ? 'list-item' : 'none';
     });
     // .style("opacity",function(e){
     //   if((e.isTop == 1) && (idSet.has(e.filename))){

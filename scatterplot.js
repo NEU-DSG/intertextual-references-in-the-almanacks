@@ -112,10 +112,8 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
       });
     
     dot = dot.merge(dotEnter)
-      .attr("r", 2.5)
+      .attr("r", 3)
       .style("fill", getGenreColor)
-      .style("stroke", getGenreColor)
-      .style("stroke-width", "1px")
       .style("opacity", 0.8);
     
     simulation.on("tick", function() {
@@ -138,7 +136,7 @@ dispatch.on("dataLoaded.scatterplot",function(allData){
 
 /* During a "highlight" event, reduce opacity of any circles which do not match the 
   target intertextual gesture. */
-dispatch.on("highlight.scatterplot", function(gestureDatum){
+dispatch.on("highlight.scatterplot", function(gestureDatum) {
   var lDots = svgL.selectAll(".dots");
   lDots
     .filter( function(d){ return gestureDatum.id !== d.gesture.id; })
@@ -153,48 +151,38 @@ dispatch.on("highlight.scatterplot", function(gestureDatum){
     .filter( function(d){ return gestureDatum.id == d.gesture.id; })
       .transition()
       .duration(100)
-      .style("stroke", getGenreColor)
-      .style("stroke-width", "1px")
+      .style("fill", getGenreColor)
       .style("opacity", 1);
 });
 
-dispatch.on("highlightmeta.scatterplot",function(d){
+/* On a "highlightgenre" event, increase the opacity of any circles mapping to the 
+  currently-selected source genre. */
+dispatch.on("highlightgenre.scatterplot", function(d) {
   svgL.selectAll(".dots")
-    .filter( function(e){ return e.mainGenre == d.key; })
       .transition()
       .duration(100)
-      // .style("fill","black")
-      .style("stroke", getGenreColor)
-      .style("stroke-width", "1px")
-      .style("opacity", 1);
-  svgL.selectAll(".dots")
-    .filter( function(e){ return e.mainGenre !== d.key; })
-      .transition()
-      .duration(100)
-      .style("opacity", 0.4);
+      .style("fill", getGenreColor)
+      .style("opacity", function(e) {
+        return e.genre === d.key ? 1 : 0.4;
+      });
   svgL.selectAll(".legend")
       .transition()
       .duration(100)
       .style("opacity", 0.2);
 });
 
-dispatch.on("highlightelem.scatterplot",function(d){
-  var idSet = new Set();
-  elemTopData.forEach( function(e){
-    if (d.key == e.element) { idSet.add(e.filename); }
-  });
+/* On a "highlighttype" event, increase the opacity of any circles mapping to the 
+  currently-selected type of intertextual reference. */
+dispatch.on("highlighttype.scatterplot", function(d) {
   svgL.selectAll(".dots")
-    .filter( function(e){ return (e.isTop == 1) && (idSet.has(e.filename)); })
       .transition()
       .duration(100)
-      .style("stroke", getGenreColor)
-      .style("stroke-width","1px")
-      .style("opacity", 1);
-  svgL.selectAll(".dots")
-    .filter( function(e){ return !(idSet.has(e.filename)); })
-      .transition()
-      .duration(100)
-      .style("opacity", 0.4);
+      .style("fill", getGenreColor)
+      .style("opacity", function(e) {
+        var isRelevant = e.gesture['type'].some(
+          type => type === d.key );
+        return isRelevant ? 1 : 0.4;
+      });
   svgL.selectAll(".legend")
       .transition()
       .duration(100)
@@ -207,8 +195,6 @@ dispatch.on("unhighlight.scatterplot", function(){
       .transition()
       .duration(100)
       .style("fill", getGenreColor)
-      .style("stroke", getGenreColor)
-      .style("stroke-width", "1px")
       .style("opacity", 0.8);
   svgL.selectAll(".legend")
       .transition()

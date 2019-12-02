@@ -167,6 +167,9 @@ dispatch.on("dataLoaded.network", function(allData){
         ypos += (yPx * 2) + (gapPx / 2);
         //console.log(position);
         return position;
+      })
+      .on('mouseover', function(d) {
+        dispatch.call('highlightgenre', this, d);
       });
   // Create border rectangles for genre?
   // Create labels for @type.
@@ -201,10 +204,17 @@ dispatch.on("dataLoaded.network", function(allData){
         ypos += yPx + (gapPx / 2);
         d.y = ypos;
         return position;
+      })
+      .on('mouseover', function(d) {
+        dispatch.call('highlighttype', this, d);
+      });
+  svgC.selectAll('.label-plot')
+      .on('mouseout', function(d) {
+        dispatch.call('unhighlight', this, d);
       });
   // Create curves joining genres to the types of quotes represented.
-  var linkLines = svgC.selectAll('.links');
-  linkLines.data(makePath(pathsList))
+  var linkLines = svgC.selectAll('.links')
+      .data(makePath(pathsList))
       .enter()
     .append('g')
       .classed('links', true)

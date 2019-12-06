@@ -111,6 +111,14 @@
       "genreBroad":"life-writings"
      },
      {
+      "titleDisplay":"[ unpublished ]",
+      "genreSpecific":null,
+      "id":"UNPUB",
+      "year":null,
+      "genderRelevant":false,
+      "genreBroad":"life-writings"
+     },
+     {
       "titleDisplay":"Discourse Concerning the Divine Providence",
       "genreSpecific": [
         "theology"
@@ -417,6 +425,14 @@
       "year":"1808",
       "genderRelevant":false,
       "genreBroad":"literature"
+     },
+     {
+      "titleDisplay":"[ proverb, saying, etc. ]",
+      "genreSpecific":null,
+      "id":"IT99999",
+      "year":null,
+      "genderRelevant":false,
+      "genreBroad":null
      },
      {
       "titleDisplay":"2 Samuel",
@@ -743,6 +759,14 @@
       "year":"1806",
       "genderRelevant":false,
       "genreBroad":"literature"
+     },
+     {
+      "titleDisplay":"[ unfindable ]",
+      "genreSpecific":null,
+      "id":"UNFINDABLE",
+      "year":null,
+      "genderRelevant":false,
+      "genreBroad":null
      },
      {
       "titleDisplay":"Exodus",
@@ -1351,7 +1375,7 @@
          {
           "cert":"high",
           "id":"UNPUB",
-          "genreBroad":null
+          "genreBroad":"life-writings"
          }
        ],
       "type": [

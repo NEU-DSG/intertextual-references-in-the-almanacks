@@ -13,8 +13,10 @@ var svgC = d3.select("#column-center > .col-content")
 
 var col1 = wC/5,
     col2 = (wC/5)*4,
-    networkHeight = hC * 0.85
+    gapPx = 10,
+    networkHeight = hC * 1,
     clicked = 0;
+console.log(networkHeight);
 
 var curve = d3.line()
     .x( function(d) { return d.x; })
@@ -29,7 +31,8 @@ var getGenreColor = function(d) {
         'literature':         '#00ACC1',  // blue
         'life-writings':      '#43A047',  // green
         'nonfiction':         '#999999',  // gray
-        'reviews':            '#FF7F00'   // orange
+        'reviews':            '#FF7F00',  // orange
+        'unknown':            '#000000'   // 
       },
       thisGenre = d.genre;
   return genreColors[thisGenre];
@@ -48,10 +51,16 @@ function makePath(data) {
         type = pathJoin.typeDatum,
         typeX = type.x,
         typeY = type.y;
-    if ( countTotal === 0 ) { instancePrev = genre.key; }
-    else if ( instancePrev !== genre.key ) { countInstance = 0; }
+    if ( countTotal === 0 ) { 
+      console.log(genre);
+      instancePrev = genre.key; }
+    else if ( instancePrev !== genre.key ) { 
+      console.log("Previous: "+instancePrev+" with "+countInstance+". New genre: "+genre.key);
+      countInstance = 0;
+      console.log(genre);
+    }
 
-    increment = ((genre.percent * networkHeight) / genre.value.length) * countInstance;
+    increment = (genre.yFree / genre.value.length) * countInstance;
     y = genre.y + increment;
 
     pathJoin.path = [
@@ -84,7 +93,6 @@ function makePath(data) {
 };
 
 
-// dispatch.on("dataLoaded.network",function(meta, metaTop, metaTopGenre, elemDistTop, elemTop){
 dispatch.on("dataLoaded.network", function(allData){
   var genres = allData.genres,
       gestures = allData.gestures,
@@ -121,12 +129,11 @@ dispatch.on("dataLoaded.network", function(allData){
           'gesture': entry,
           'typeDatum': typeList.filter(typeObj => typeObj['key'] === type)[0]
         };
-        //console.log(pathDatum);
         pathsList.push(pathDatum);
       });
     });
   }
-  //console.log(pathsList);
+  console.log(pathsList);
   
   // Create labels for genres.
   var genreLabels,
@@ -145,12 +152,11 @@ dispatch.on("dataLoaded.network", function(allData){
         /* While we're looking at this datum, add to the running count of IT 
            gestures (needed for label placement). */
         totalGestures += d.value.length;
-        //console.log(d);
-        return d.key;
+        return d.key.replace(/[-_]/, " ");
       });
   // Position the genre labels along their axis. Use a 4px gap in between ranges.
-  var gapPx = 4,
-      hCFree = hC - ( genreList.length * gapPx );
+  var hCFree = networkHeight - ( (genreList.length - 1) * gapPx );
+  console.log(hCFree);
   genreLabels
       .attr("x", function(d) { 
         d.x = col1 + 4;
@@ -160,13 +166,14 @@ dispatch.on("dataLoaded.network", function(allData){
         var numGestures = d.value.length,
             percentTotal = numGestures / totalGestures,
             // Place labels halfway within the datum's range.
-            yPx = ( (numGestures / 2) * hCFree) / totalGestures,
-            position = ypos + yPx + gapPx;
+            yPx = Math.floor( percentTotal * hCFree ) / 2,
+            position = ypos + yPx;
         d.y = ypos;
         d.percent = percentTotal;
+        d.yFree = Math.floor(percentTotal * hCFree);
         // Use the full range of this datum to determine where the next should start.
-        ypos += (yPx * 2) + (gapPx / 2);
-        //console.log(position);
+        ypos += d.yFree + gapPx;
+        console.log(ypos);
         return position;
       })
       .on('mouseover', function(d) {
@@ -188,7 +195,7 @@ dispatch.on("dataLoaded.network", function(allData){
       });
   // Create border rectangles for genre?
   // Create labels for @type.
-  var typeAxis, typeLabels,
+  var typeAxis, typeLabels, interval,
       totalTypes = 0;
   typeAxis = svgC.append('g')
       .classed('axis axis-right', true);
@@ -200,11 +207,12 @@ dispatch.on("dataLoaded.network", function(allData){
       .attr("fill", "#292826")
       .text( function(d) {
         totalTypes += d.value.length;
-        //console.log(d);
-        return d.key;
+        return d.key.replace(/[-_]/, " ");
       });
-  ypos = 0;
-  hCFree = hC - ( typeList.length * gapPx );
+  ypos = gapPx;
+  hCFree = networkHeight - ( typeList.length * gapPx );
+  interval = hCFree / typeList.length;
+  console.log(interval);
   typeLabels
       .attr("x", function(d) { 
         d.x = col2 - 4;
@@ -213,11 +221,11 @@ dispatch.on("dataLoaded.network", function(allData){
       .attr("y", function(d, i) {
         var numGestures = d.value.length,
             // Place labels at regular intervals along their axis.
-            yPx = hCFree / typeList.length,
-            position = ypos + yPx + gapPx;
+            yPx = interval / 2,
+            position = ypos + yPx;
         // Use the full range of this datum to determine where the next should start.
-        ypos += yPx + (gapPx / 2);
-        d.y = ypos;
+        ypos += interval + gapPx;
+        d.y = position;
         return position;
       })
       .on('mouseover', function(d) {

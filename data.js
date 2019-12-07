@@ -56,6 +56,8 @@ function drawNetwork() {
       // Retrieve only the IT gestures matching the current entry's ID. 
       gestures = gestures.concat(meta['gestures'].filter(
         gesture => gesture['sources'].some(src => src.id === id)));
+      // Map null genres to "unknown"
+      mainGenre = mainGenre === null ? 'unknown' : mainGenre;
       genreGrp.set(mainGenre, gestures);
     });
     meta['genres'] = genreGrp;

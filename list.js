@@ -47,19 +47,27 @@ dispatch.on("dataLoaded.list",function(allData){
 dispatch.on("highlight.list", function(d, i){
   var targetItem,
       list = document.getElementById("list"),
-      listItems = d3.selectAll(".collection");
+      listItems = d3.selectAll(".collection"),
+      selected = listItems.filter('.selected.clicked');
+  listItems
+      .transition()
+      /*.duration(100)*/
+      .style("opacity", function(e){
+        return d.id === e.id ? null : 0.2;
+      });
   /* When the event has been triggered by the scatterplot, make sure that the 
     matching list item is visible on the page. */
   if ( i === 1 ) {
     targetItem = listItems.filter(k => k.id === d.id).node();
     targetItem.scrollIntoView({ block: 'center' });
-  }
-  listItems
-      .transition()
-      .duration(100)
-      .style("opacity", function(e){
-        return d.id === e.id ? null : 0.2;
-      });
+  } /*else if ( !selected.empty() ) {
+    targetItem = d3.select(".selected").node();
+    targetItem.scrollIntoView({ block: 'center' });
+    console.log(targetItem)
+  } else {
+    console.log(list.scrollTop);
+    list.scrollTo(0, list.scrollTop);
+  }*/
 });
 
 /* On a "highlightgenre" event, hide any list items which do not map to the 
@@ -69,7 +77,10 @@ dispatch.on("highlightgenre.list", function(d, i) {
     .transition()
     .duration(100)
     .style("display", function(e) {
-      var isRelevant = e['sources'].some(src => src.genreBroad === d.key);
+      var isRelevant = e['sources'].some( function(src) {
+            var useGenre = src.genreBroad === null ? 'unknown' : src.genreBroad;
+            return useGenre === d.key;
+          });
       return isRelevant ? 'list-item' : 'none';
     });
     // .style("opacity",function(e){

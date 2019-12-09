@@ -41,7 +41,8 @@ function drawNetwork() {
     meta = data;
     meta['genres'] = new Map();
     meta['gestures'].forEach( function(gesture) {
-      var sources = gesture.sources,
+      var myGenres = [],
+          sources = gesture.sources,
           types = gesture.type;
       // Build out map of reference types.
       types.forEach( function(typeStr) {
@@ -55,13 +56,16 @@ function drawNetwork() {
             mainGenre = src['genreBroad'];
         mainGenre = mainGenre === null ? 'unknown' : mainGenre;
         genreGestures = meta['genres'].get(mainGenre);
-        if ( genreGestures === undefined ) {
-          genreGestures = meta['genres']
-              .set(mainGenre, [])
-            .get(mainGenre);
-        }
-        for (var i = 0; i < types.length; i++) {
+        // Once and once only, map this gesture to this genre.
+        if ( !myGenres.includes(mainGenre) ) {
+          // Make sure this genre exists before adding the gesture.
+          if ( genreGestures === undefined ) {
+            genreGestures = meta['genres']
+                .set(mainGenre, [])
+              .get(mainGenre);
+          }
           genreGestures.push(gesture);
+          myGenres.push(mainGenre);
         }
       });
       gesture.id = totalExcerpts;

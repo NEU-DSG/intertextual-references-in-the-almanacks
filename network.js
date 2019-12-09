@@ -16,7 +16,7 @@ var col1 = wC/5,
     gapPx = 10,
     networkHeight = hC * 1,
     clicked = 0;
-console.log(networkHeight);
+//console.log(networkHeight);
 
 var curve = d3.line()
     .x( function(d) { return d.x; })
@@ -32,7 +32,7 @@ var getGenreColor = function(d) {
         'life-writings':      '#43A047',  // green
         'nonfiction':         '#999999',  // gray
         'reviews':            '#FF7F00',  // orange
-        'unknown':            '#000000'   // 
+        'unknown':            '#000000'   // black
       },
       thisGenre = d.genre;
   return genreColors[thisGenre];
@@ -140,7 +140,7 @@ dispatch.on("dataLoaded.network", function(allData){
   
   // Create labels for genres.
   var genreLabels,
-      totalGestures = 0,
+      totalPaths = 0,
       ypos = 0,
       genreAxis = svgC.append('g')
           .classed('axis axis-left', true);
@@ -152,12 +152,24 @@ dispatch.on("dataLoaded.network", function(allData){
       .classed('label-plot', true)
       .attr("fill", "#292826")
       .text( function(d) {
-        /* While we're looking at this datum, add to the running count of IT 
-           gestures (needed for label placement). */
-        totalGestures += d.value.length;
+        var gestures = d.value,
+            numPaths = 0;
+        /* While we're looking at this datum, add to the running count of paths 
+           corresponding to IT gestures (needed for label placement). */
+        gestures.forEach( function(itg) {
+          var numSrcs,
+              useKey = d.key === 'unknown' ? null : d.key,
+              numTypes = itg['type'].length;
+          numSrcs = itg['sources'].filter( 
+            src => src['genreBroad'] === useKey 
+          ).length;
+          numPaths += numSrcs * numTypes;
+        });
+        d.numPaths = numPaths;
+        totalPaths +=numPaths;
         return d.key.replace(/[-_]/, " ");
       });
-  // Position the genre labels along their axis. Use a 4px gap in between ranges.
+  // Position the genre labels along their axis. Include gaps in between ranges.
   var hCFree = networkHeight - ( (genreList.length - 1) * gapPx );
   //console.log(hCFree);
   genreLabels
@@ -166,11 +178,13 @@ dispatch.on("dataLoaded.network", function(allData){
         return col1 - 4;
       })
       .attr("y", function(d, i) {
-        var numGestures = d.value.length,
-            percentTotal = numGestures / totalGestures,
-            // Place labels halfway within the datum's range.
-            yPx = Math.floor( percentTotal * hCFree ) / 2,
-            position = ypos + yPx;
+        var percentTotal, yPx, position,
+            numPaths = 0;
+        percentTotal = d.numPaths / totalPaths;
+        // Place labels halfway within the datum's range.
+        yPx = Math.floor( percentTotal * hCFree ) / 2;
+        position = ypos + yPx;
+        
         d.y = ypos;
         d.percent = percentTotal;
         d.yFree = Math.floor(percentTotal * hCFree);

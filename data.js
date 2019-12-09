@@ -39,38 +39,34 @@ function drawNetwork() {
         qTypes = new Map();
     
     meta = data;
+    meta['genres'] = new Map();
     meta['gestures'].forEach( function(gesture) {
-      var types = gesture.type;
+      var sources = gesture.sources,
+          types = gesture.type;
+      // Build out map of reference types.
       types.forEach( function(typeStr) {
         var qTypeEntry = qTypes.get(typeStr) || [];
         qTypeEntry.push(gesture);
         qTypes.set(typeStr, qTypeEntry);
       });
+      // Build out map of broad genres.
+      sources.forEach( function(src) {
+        var genreGestures,
+            mainGenre = src['genreBroad'];
+        mainGenre = mainGenre === null ? 'unknown' : mainGenre;
+        genreGestures = meta['genres'].get(mainGenre);
+        if ( genreGestures === undefined ) {
+          genreGestures = meta['genres']
+              .set(mainGenre, [])
+            .get(mainGenre);
+        }
+        for (var i = 0; i < types.length; i++) {
+          genreGestures.push(gesture);
+        }
+      });
       gesture.id = totalExcerpts;
       totalExcerpts++;
     });
-    meta['bibliography'].forEach( function(entry) {
-      var gestures, filteredITGs,
-          id = entry['id'],
-          mainGenre = entry['genreBroad'],
-      mainGenre = mainGenre === null ? 'unknown' : mainGenre;
-      // Retrieve only the IT gestures matching the current entry's ID. 
-      gestures = genreGrp.get(mainGenre) || [];
-      filteredITGs = meta['gestures'].filter( function(gesture) {
-        var matches = gesture['sources'].some(src => src.id === id);
-        // Handle multiple ITG types.
-        if ( matches && gesture['type'].length > 1 ) {
-          for (var i = 1; i < gesture['type'].length; i++) {
-            gestures.push(gesture);
-          }
-        }
-        return matches;
-      });
-      gestures = gestures.concat(filteredITGs);
-      // Map null genres to "unknown"
-      genreGrp.set(mainGenre, gestures);
-    });
-    meta['genres'] = genreGrp;
     meta['types'] = qTypes;
     console.log(meta);
     

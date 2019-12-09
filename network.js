@@ -41,11 +41,12 @@ var getGenreColor = function(d) {
 
 // function to make list of texts
 function makePath(data) {
-  var increment, instancePrev, y,
+  var instancePrev,
       countInstance = 0,
       countTotal = 0;
   data.forEach( function(pathJoin, index) {
-    var genre = pathJoin.genreDatum,
+    var increment, y,
+        genre = pathJoin.genreDatum,
         genreX = genre.x,
         gestureId = pathJoin.gesture.id,
         type = pathJoin.typeDatum,
@@ -55,7 +56,8 @@ function makePath(data) {
       console.log(genre);
       instancePrev = genre.key; }
     else if ( instancePrev !== genre.key ) { 
-      console.log("Previous: "+instancePrev+" with "+countInstance+". New genre: "+genre.key);
+      console.log("Previous: "+instancePrev+" with "+countInstance
+        +". New genre: "+genre.key);
       countInstance = 0;
       console.log(genre);
     }
@@ -88,6 +90,7 @@ function makePath(data) {
     countTotal++;
     instancePrev = genre.key;
   })
+  console.log(countTotal);
   //console.log(data);
   return data;
 };
@@ -156,7 +159,7 @@ dispatch.on("dataLoaded.network", function(allData){
       });
   // Position the genre labels along their axis. Use a 4px gap in between ranges.
   var hCFree = networkHeight - ( (genreList.length - 1) * gapPx );
-  console.log(hCFree);
+  //console.log(hCFree);
   genreLabels
       .attr("x", function(d) { 
         d.x = col1 + 4;
@@ -173,7 +176,7 @@ dispatch.on("dataLoaded.network", function(allData){
         d.yFree = Math.floor(percentTotal * hCFree);
         // Use the full range of this datum to determine where the next should start.
         ypos += d.yFree + gapPx;
-        console.log(ypos);
+        //console.log(ypos);
         return position;
       })
       .on('mouseover', function(d) {
@@ -253,6 +256,7 @@ dispatch.on("dataLoaded.network", function(allData){
         }
       });
   // Create curves joining genres to the types of quotes represented.
+  console.log(pathsList);
   var linkLines = svgC.selectAll('.links')
       .data(makePath(pathsList))
       .enter()

@@ -50,14 +50,24 @@ function drawNetwork() {
       totalExcerpts++;
     });
     meta['bibliography'].forEach( function(entry) {
-      var id = entry['id'],
+      var gestures, filteredITGs,
+          id = entry['id'],
           mainGenre = entry['genreBroad'],
-          gestures = genreGrp.get(mainGenre) || [];
-      // Retrieve only the IT gestures matching the current entry's ID. 
-      gestures = gestures.concat(meta['gestures'].filter(
-        gesture => gesture['sources'].some(src => src.id === id)));
-      // Map null genres to "unknown"
       mainGenre = mainGenre === null ? 'unknown' : mainGenre;
+      // Retrieve only the IT gestures matching the current entry's ID. 
+      gestures = genreGrp.get(mainGenre) || [];
+      filteredITGs = meta['gestures'].filter( function(gesture) {
+        var matches = gesture['sources'].some(src => src.id === id);
+        // Handle multiple ITG types.
+        if ( matches && gesture['type'].length > 1 ) {
+          for (var i = 1; i < gesture['type'].length; i++) {
+            gestures.push(gesture);
+          }
+        }
+        return matches;
+      });
+      gestures = gestures.concat(filteredITGs);
+      // Map null genres to "unknown"
       genreGrp.set(mainGenre, gestures);
     });
     meta['genres'] = genreGrp;
@@ -65,7 +75,6 @@ function drawNetwork() {
     console.log(meta);
     
     dispatch.call("dataLoaded", null, meta);
-    
   });
 };
 

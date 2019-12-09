@@ -13,10 +13,9 @@ var svgC = d3.select("#column-center > .col-content")
 
 var col1 = wC/5,
     col2 = (wC/5)*4,
-    gapPx = 10,
+    gapPx = 6,
     networkHeight = hC * 1,
     clicked = 0;
-//console.log(networkHeight);
 
 var curve = d3.line()
     .x( function(d) { return d.x; })
@@ -53,16 +52,16 @@ function makePath(data) {
         typeX = type.x,
         typeY = type.y;
     if ( countTotal === 0 ) { 
-      console.log(genre);
+      //console.log(genre);
       instancePrev = genre.key; }
     else if ( instancePrev !== genre.key ) { 
-      console.log("Previous: "+instancePrev+" with "+countInstance
-        +". New genre: "+genre.key);
+      /*console.log("Previous: "+instancePrev+" with "+countInstance
+        +". New genre: "+genre.key);*/
       countInstance = 0;
-      console.log(genre);
+      //console.log(genre);
     }
 
-    increment = (genre.yFree / genre.value.length) * countInstance;
+    increment = (genre.yFree / genre.numPaths) * countInstance;
     y = genre.y + increment;
 
     pathJoin.path = [
@@ -90,8 +89,6 @@ function makePath(data) {
     countTotal++;
     instancePrev = genre.key;
   })
-  console.log(countTotal);
-  //console.log(data);
   return data;
 };
 
@@ -125,18 +122,26 @@ dispatch.on("dataLoaded.network", function(allData){
       if ( matchesType ) { targets.push(type); }
     });
     genreList.push(genreObj);
+    // Create a path object for each source/type combination.
     bibEntries.forEach( function(entry) {
       entry['type'].forEach( function(type) {
-        var pathDatum = {
-          'genreDatum': genreObj,
-          'gesture': entry,
-          'typeDatum': typeList.filter(typeObj => typeObj['key'] === type)[0]
-        };
-        pathsList.push(pathDatum);
+        entry['sources'].filter( function(src) {
+          var useKey = key === 'unknown' ? null : key;
+          return src['genreBroad'] === useKey;
+        }).forEach( function(src) {
+          var pathDatum = {
+            'genreDatum': genreObj,
+            'gesture': entry,
+            'typeDatum': typeList.filter(
+              typeObj => typeObj['key'] === type
+            )[0]
+          };
+          pathsList.push(pathDatum);
+        })
       });
     });
   }
-  console.log(pathsList);
+  //console.log(pathsList);
   
   // Create labels for genres.
   var genreLabels,
@@ -229,7 +234,6 @@ dispatch.on("dataLoaded.network", function(allData){
   ypos = gapPx;
   hCFree = networkHeight - ( typeList.length * gapPx );
   interval = hCFree / typeList.length;
-  console.log(interval);
   typeLabels
       .attr("x", function(d) { 
         d.x = col2 - 4;
@@ -270,7 +274,6 @@ dispatch.on("dataLoaded.network", function(allData){
         }
       });
   // Create curves joining genres to the types of quotes represented.
-  console.log(pathsList);
   var linkLines = svgC.selectAll('.links')
       .data(makePath(pathsList))
       .enter()

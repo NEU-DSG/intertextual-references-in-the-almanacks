@@ -51,62 +51,63 @@ dispatch.on("highlight.list", function(d, i){
       selected = listItems.filter('.selected.clicked');
   listItems
       .transition()
-      /*.duration(100)*/
+      //.duration(100)
       .style("opacity", function(e){
         return d.id === e.id ? null : 0.2;
-      });
-  /* When the event has been triggered by the scatterplot, make sure that the 
-    matching list item is visible on the page. */
-  if ( i === 1 ) {
-    targetItem = listItems.filter(k => k.id === d.id).node();
-    targetItem.scrollIntoView({ block: 'center' });
-  } /*else if ( !selected.empty() ) {
-    targetItem = d3.select(".selected").node();
-    targetItem.scrollIntoView({ block: 'center' });
-    console.log(targetItem)
-  } else {
-    console.log(list.scrollTop);
+      })
+    /* Attempt to move the first relevant list item into view. */
+    .filter( function(k) {
+      var bool = false;
+      if ( i === 1 ) {
+        bool = k.id === d.id;
+      } else if ( i === 0 ) {
+        bool = d3.select(this).classed('selected');
+      }
+      return bool;
+    })
+      .on('end', function() {
+        this.scrollIntoView({ block: 'center' });
+      })
+  if ( i !== 1 && i !== 0 ) {
     list.scrollTo(0, list.scrollTop);
-  }*/
+  }
 });
 
 /* On a "highlightgenre" event, hide any list items which do not map to the 
   currently-selected source genre. */
 dispatch.on("highlightgenre.list", function(d, i) {
-  d3.selectAll(".collection")
-    .transition()
-    .duration(100)
-    .style("display", function(e) {
-      var isRelevant = e['sources'].some( function(src) {
-            var useGenre = src.genreBroad === null ? 'unknown' : src.genreBroad;
-            return useGenre === d.key;
-          });
-      return isRelevant ? 'list-item' : 'none';
+  var checkRelevancy = function(datum) {
+    return datum['sources'].some( function(src) {
+      var useGenre = src.genreBroad === null ? 'unknown' : src.genreBroad;
+      return useGenre === d.key;
     });
-    // .style("opacity",function(e){
-    //   if((e.isTop == 1) && (e.mainGenre == d.key)){
-    //     return 1;
-    //   }
-    //   else{ return 0.2; }
-    // });
+  };
+  d3.selectAll(".collection")
+      .transition()
+      .duration(100)
+      .style("display", function(e) {
+        var isRelevant = checkRelevancy(e);
+        return isRelevant ? 'list-item' : 'none';
+      })
+    .filter(checkRelevancy)
+      .style('opacity', 1);
 });
 
 /* On a "highlighttype" event, hide any list items which do not map to the 
   currently-selected type of intertextual gesture. */
 dispatch.on("highlighttype.list", function(d, i) {
+  var checkRelevancy = function(datum) {
+    return datum['type'].some(type => type === d.key);
+  };
   d3.selectAll(".collection")
-    .transition()
-    .duration(100)
-    .style("display", function(e) {
-      var isRelevant = e['type'].some(type => type === d.key);
-      return isRelevant ? 'list-item' : 'none';
-    });
-    // .style("opacity",function(e){
-    //   if((e.isTop == 1) && (idSet.has(e.filename))){
-    //     return 1;
-    //   }
-    //   else{ return 0.2; }
-    // });
+      .transition()
+      .duration(100)
+      .style("display", function(e) {
+        var isRelevant = checkRelevancy(e);
+        return isRelevant ? 'list-item' : 'none';
+      })
+    .filter(checkRelevancy)
+      .style("opacity", 1);
 });
 
 /* On an "unhighlight" event, retore all list items to full opacity. */

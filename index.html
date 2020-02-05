@@ -13,11 +13,14 @@
       An exploration of the <a href="https://wwp.northeastern.edu/wwo" target="_blank">Women Writers Online</a> text collection<br />
       including the top words and phrases of the following encoded elements:
     </p>-->
-    <div class="controls">
-      <span class="control">
-        <label for="mouseover-control">Update visualization on mouseover </label>
-        <input type="checkbox" id="mouseover-control" name="mouseover" value="allow" />
-      </span>
+    <div class="controls" role="form">
+      <fieldset class="control">
+        <legend>Update visualization on:</legend>
+        <label for="click-control">Click </label>
+        <input type="radio" id="click-control" name="upmethod" value="click" checked="checked" />
+        <label for="mouseover-control">Mouseover </label>
+        <input type="radio" id="mouseover-control" name="upmethod" value="mouseover" />
+      </fieldset>
     </div>
   </div><!--
   <div class="buttons">

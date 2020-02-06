@@ -1,13 +1,45 @@
 /* Set up the list of intertextual gestures. */
-dispatch.on("dataLoaded.list",function(allData){
+dispatch.on("dataLoaded.list", function(allData){
   var gestures = allData.gestures,
+      showMetadata = function(selection) {
+        selection.append('dt')
+            .classed('gloss', true)
+            .text( function(d) {
+              var folder = meta['folders'][d.folder];
+              return folder['title'] + ', ' + folder['date'];
+            });
+        selection.append('dt')
+            .classed('term', true)
+            .text('Reference to:');
+        selection.selectAll('dl')
+          .data(d => d.sources)
+          .enter().append('dd')
+            .classed('gloss', true)
+            .text( function(src) {
+              var bibYear,
+                  str = src.id,
+                  cert = src.cert === 'high' ? '' : ' ('+src.cert+' certainty)',
+                  bibEntry = meta['bibliography'].filter(
+                    entry => entry.id === src.id )[0];
+              if ( bibEntry !== undefined ) {
+                console.log(cert);
+                bibYear = bibEntry['year'];
+                bibYear = bibYear !== null ? ', '+bibYear : '';
+                str = bibEntry['titleDisplay'] + bibYear + cert;
+              }
+              return str;
+            });
+      },
       list = d3.select("#column-right")
         .select(".list")
         .selectAll(".collection"),
       listItems = list.data(gestures).enter()
         .append('li')
           .classed("collection selectable", true)
-          .text(d => d.plaintext);
+          .text(d => d.plaintext)
+        .append('dl')
+          .classed("item-meta", true)
+          .call(showMetadata);
   
   /* Define mouseover behaviors. Mousing over a list item will trigger a "highlight" 
     event, during which relevant scatterplot dots and network graph paths will be 

@@ -24,7 +24,7 @@ dispatch.on("dataLoaded.list", function(allData){
                 console.log(cert);
                 bibYear = bibEntry['year'];
                 bibYear = bibYear !== null ? ', '+bibYear : '';
-                str = bibEntry['titleDisplay'] + bibYear + cert;
+                str = '<em>'+bibEntry['titleDisplay']+'</em>' + bibYear + cert;
               }
               return str;
             });

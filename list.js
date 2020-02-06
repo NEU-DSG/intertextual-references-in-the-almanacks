@@ -21,7 +21,6 @@ dispatch.on("dataLoaded.list", function(allData){
                   bibEntry = meta['bibliography'].filter(
                     entry => entry.id === src.id )[0];
               if ( bibEntry !== undefined ) {
-                console.log(cert);
                 bibYear = bibEntry['year'];
                 bibYear = bibYear !== null ? ', '+bibYear : '';
                 str = '<em>'+bibEntry['titleDisplay']+'</em>' + bibYear + cert;
@@ -41,6 +40,15 @@ dispatch.on("dataLoaded.list", function(allData){
       listItems.append('span')
           .classed("item-meta", true)
           .call(showMetadata);
+      /* Sort the list by folder order. */
+      listItems = listItems.sort( function(a, b) {
+          var folderReg = /emerson\.folder(\d\d)\.xml/,
+              folA = parseInt(folderReg.exec(a.folder)[1]),
+              folB = parseInt(folderReg.exec(b.folder)[1]);
+          if ( folA < folB ) { return -1; } 
+          else if ( folA > folB ) { return 1; }
+          return 0;
+        });
   
   /* Define mouseover behaviors. Mousing over a list item will trigger a "highlight" 
     event, during which relevant scatterplot dots and network graph paths will be 

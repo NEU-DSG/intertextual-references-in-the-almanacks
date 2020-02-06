@@ -6,7 +6,7 @@ dispatch.on("dataLoaded.list", function(allData){
             .classed('gloss', true)
             .text( function(d) {
               var folder = meta['folders'][d.folder];
-              return folder['title'] + ', ' + folder['date'];
+              return folder['title'] + ", " + folder['date'];
             });
         selection.append('dt')
             .classed('term', true)
@@ -18,7 +18,7 @@ dispatch.on("dataLoaded.list", function(allData){
             .text( function(src) {
               var bibYear,
                   str = src.id,
-                  cert = src.cert === 'high' ? '' : ' ('+src.cert+' certainty)',
+                  cert = src.cert === 'high' ? '' : " ("+src.cert+" certainty)",
                   bibEntry = meta['bibliography'].filter(
                     entry => entry.id === src.id )[0];
               if ( bibEntry !== undefined ) {
@@ -31,13 +31,15 @@ dispatch.on("dataLoaded.list", function(allData){
             });
       },
       list = d3.select("#column-right")
-        .select(".list")
-        .selectAll(".collection"),
-      listItems = list.data(gestures).enter()
+        .select(".list");
+      listItems = list.selectAll('li')
+        .data(gestures).enter()
         .append('li')
-          .classed("collection selectable", true)
-          .text(d => d.plaintext)
-        .append('dl')
+          .classed("collection", true);
+      listItems.append('span')
+          .classed("selectable", true)
+          .text(d => d.plaintext);
+      listItems.append('dl')
           .classed("item-meta", true)
           .call(showMetadata);
   

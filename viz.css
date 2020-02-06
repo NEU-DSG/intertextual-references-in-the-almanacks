@@ -112,11 +112,22 @@ h2{
   fill: #292826;
 }
 
-.collection{
+#list{
+  font-size: 0.85rem;
+}
+
+#list > li{
   line-height: 150%;
-  list-style-position: inside;
-  margin: 10px 0;
+  margin: 10px 0 10px 1rem;
   opacity: 0.85;
+}
+
+#list .selectable{
+  display: block;
+}
+
+#list .item-meta{
+  font-size: 0.75rem;
 }
 
 ol::-webkit-scrollbar {

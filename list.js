@@ -3,22 +3,19 @@ dispatch.on("dataLoaded.list", function(allData){
   var gestures = allData.gestures,
       showMetadata = function(selection) {
         selection.append('dt')
-            .classed('gloss', true)
             .text( function(d) {
               var folder = meta['folders'][d.folder];
               return folder['title'] + ", " + folder['date'];
             });
         selection.append('dt')
-            .classed('term', true)
             .text('Reference to:');
         selection.selectAll('dl')
           .data(d => d.sources)
           .enter().append('dd')
-            .classed('gloss', true)
-            .text( function(src) {
+            .html( function(src) {
               var bibYear,
                   str = src.id,
-                  cert = src.cert === 'high' ? '' : " ("+src.cert+" certainty)",
+                  cert = src.cert === 'high' ? '' : "<br />("+src.cert+" certainty)",
                   bibEntry = meta['bibliography'].filter(
                     entry => entry.id === src.id )[0];
               if ( bibEntry !== undefined ) {

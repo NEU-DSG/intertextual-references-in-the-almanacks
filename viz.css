@@ -130,6 +130,11 @@ h2{
   font-size: 0.75rem;
 }
 
+.item-meta dd{
+  margin-left: 2rem;
+  text-indent: -1rem;
+}
+
 ol::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;

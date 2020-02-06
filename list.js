@@ -2,20 +2,22 @@
 dispatch.on("dataLoaded.list", function(allData){
   var gestures = allData.gestures,
       showMetadata = function(selection) {
-        selection.append('dt')
+        var defList;
+        selection.append('span')
             .text( function(d) {
               var folder = meta['folders'][d.folder];
               return folder['title'] + ", " + folder['date'];
             });
-        selection.append('dt')
+        defList = selection.append('dl');
+        defList.append('dt')
             .text('Reference to:');
-        selection.selectAll('dl')
+        defList.selectAll('dl')
           .data(d => d.sources)
           .enter().append('dd')
             .html( function(src) {
               var bibYear,
                   str = src.id,
-                  cert = src.cert === 'high' ? '' : "<br />("+src.cert+" certainty)",
+                  cert = src.cert === 'high' ? '' : " ("+src.cert+" certainty)",
                   bibEntry = meta['bibliography'].filter(
                     entry => entry.id === src.id )[0];
               if ( bibEntry !== undefined ) {
@@ -36,14 +38,14 @@ dispatch.on("dataLoaded.list", function(allData){
       listItems.append('span')
           .classed("selectable", true)
           .text(d => d.plaintext);
-      listItems.append('dl')
+      listItems.append('span')
           .classed("item-meta", true)
           .call(showMetadata);
   
   /* Define mouseover behaviors. Mousing over a list item will trigger a "highlight" 
     event, during which relevant scatterplot dots and network graph paths will be 
     foregrounded. */
-  d3.selectAll(".collection")
+  d3.selectAll(".collection .selectable")
     .on("mouseenter", function(d) {
       if ( allowMouseover() ) {
         var i = 0; // Indicate that the list triggered the "highlight" event.

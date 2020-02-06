@@ -127,7 +127,9 @@ h2{
 }
 
 #list .item-meta{
+  display: block;
   font-size: 0.75rem;
+  margin: 0 0.5rem 0 -0.5rem;
 }
 
 .item-meta dd{

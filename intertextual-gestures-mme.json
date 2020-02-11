@@ -6,6 +6,9 @@
         "philosophy",
         "theology"
        ],
+      "contributors": [
+        "Henry Grove"
+       ],
       "id":"Grove_System",
       "year":"1755",
       "genderRelevant":false,
@@ -17,6 +20,9 @@
         "essay-group",
         "philosophy"
        ],
+      "contributors": [
+        "Dugald Stewart"
+       ],
       "id":"Stewart_Philosophical_Essays",
       "year":"1810",
       "genderRelevant":false,
@@ -24,7 +30,12 @@
      },
      {
       "titleDisplay":"Matthew",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50060",
       "year":null,
       "genderRelevant":false,
@@ -32,7 +43,12 @@
      },
      {
       "titleDisplay":"Luke",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50057",
       "year":null,
       "genderRelevant":false,
@@ -40,7 +56,12 @@
      },
      {
       "titleDisplay":"Psalms",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50072",
       "year":null,
       "genderRelevant":false,
@@ -52,6 +73,9 @@
         "theology",
         "philosophy"
        ],
+      "contributors": [
+        "Robert Fellowes"
+       ],
       "id":"Fellowes_Picture",
       "year":"1803",
       "genderRelevant":false,
@@ -59,7 +83,12 @@
      },
      {
       "titleDisplay":"1 Corinthians",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50001",
       "year":null,
       "genderRelevant":false,
@@ -67,7 +96,12 @@
      },
      {
       "titleDisplay":"Romans",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50074",
       "year":null,
       "genderRelevant":false,
@@ -75,7 +109,12 @@
      },
      {
       "titleDisplay":"Jeremiah",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50045",
       "year":null,
       "genderRelevant":false,
@@ -83,7 +122,12 @@
      },
      {
       "titleDisplay":"Colossians",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50028",
       "year":null,
       "genderRelevant":false,
@@ -93,6 +137,9 @@
       "titleDisplay":"Othello",
       "genreSpecific": [
         "fiction"
+       ],
+      "contributors": [
+        "William Shakespeare"
        ],
       "id":"Shakespeare_Othello",
       "year":null,
@@ -105,6 +152,9 @@
         "classical",
         "letters"
        ],
+      "contributors": [
+        "Marcus Tullius Cicero"
+       ],
       "id":"Cicero_Letters",
       "year":"1804",
       "genderRelevant":false,
@@ -112,7 +162,12 @@
      },
      {
       "titleDisplay":"[ unpublished ]",
-      "genreSpecific":null,
+      "genreSpecific": [
+        
+       ],
+      "contributors": [
+        
+       ],
       "id":"UNPUB",
       "year":null,
       "genderRelevant":false,
@@ -122,6 +177,9 @@
       "titleDisplay":"Discourse Concerning the Divine Providence",
       "genreSpecific": [
         "theology"
+       ],
+      "contributors": [
+        "William Sherlock"
        ],
       "id":"Sherlock_Discourse",
       "year":"1776",
@@ -133,6 +191,9 @@
       "genreSpecific": [
         "theology"
        ],
+      "contributors": [
+        "Joseph Butler"
+       ],
       "id":"Butler_Analogy",
       "year":"1793",
       "genderRelevant":false,
@@ -140,7 +201,12 @@
      },
      {
       "titleDisplay":"John",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50048",
       "year":null,
       "genderRelevant":false,
@@ -148,7 +214,12 @@
      },
      {
       "titleDisplay":"Acts",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50023",
       "year":null,
       "genderRelevant":false,
@@ -156,7 +227,12 @@
      },
      {
       "titleDisplay":"Isaiah",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50043",
       "year":null,
       "genderRelevant":false,
@@ -164,7 +240,12 @@
      },
      {
       "titleDisplay":"Proverbs",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50070",
       "year":null,
       "genderRelevant":false,
@@ -172,7 +253,12 @@
      },
      {
       "titleDisplay":"Hebrews",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50041",
       "year":null,
       "genderRelevant":false,
@@ -180,7 +266,12 @@
      },
      {
       "titleDisplay":"1 Thessalonians",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50008",
       "year":null,
       "genderRelevant":false,
@@ -191,6 +282,9 @@
       "genreSpecific": [
         "theology"
        ],
+      "contributors": [
+        "Jonathan Edwards"
+       ],
       "id":"Edwards_Thoughts",
       "year":"1742",
       "genderRelevant":false,
@@ -200,7 +294,13 @@
       "titleDisplay":"Dissertations on the History of Metaphysical and Ethical, and of the Mathematical and Physical Science",
       "genreSpecific": [
         "essay-group",
-        "history #scientific-writing #ethics #metaphysics"
+        "history",
+        "scientific-writing",
+        "ethics",
+        "metaphysics"
+       ],
+      "contributors": [
+        "Dugald, James Mackintosh, John Playfair, and John Leslie Stewart"
        ],
       "id":"Stewart_Dissertations",
       "year":"1835",
@@ -209,7 +309,12 @@
      },
      {
       "titleDisplay":"Song of Solomon",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50076",
       "year":null,
       "genderRelevant":false,
@@ -219,6 +324,9 @@
       "titleDisplay":"“No. II: The Advantages of a Revelation” Monthly Anthology and Boston Review",
       "genreSpecific": [
         "theology"
+       ],
+      "contributors": [
+        
        ],
       "id":"Theologist_Advantages",
       "year":null,
@@ -230,6 +338,9 @@
       "genreSpecific": [
         "theology"
        ],
+      "contributors": [
+        
+       ],
       "id":"Theologist_Necessity",
       "year":null,
       "genderRelevant":false,
@@ -239,6 +350,9 @@
       "titleDisplay":"Careful and Strict Inquiry into the Modern Prevailing Notions of that Freedom of Will . . .",
       "genreSpecific": [
         "philosophy"
+       ],
+      "contributors": [
+        "Jonathan Edwards"
        ],
       "id":"Edwards_Freedom",
       "year":"1804",
@@ -250,6 +364,9 @@
       "genreSpecific": [
         
        ],
+      "contributors": [
+        "Ben Johnson"
+       ],
       "id":"Johnson_Alchemist",
       "year":"1739",
       "genderRelevant":false,
@@ -260,6 +377,10 @@
       "genreSpecific": [
         
        ],
+      "contributors": [
+        "Friedrich Schiller",
+        "Samuel Taylor Colerdidge (translator)"
+       ],
       "id":"Schiller_Wallenstein",
       "year":"1800",
       "genderRelevant":false,
@@ -267,7 +388,12 @@
      },
      {
       "titleDisplay":"Job",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50046",
       "year":null,
       "genderRelevant":false,
@@ -275,7 +401,12 @@
      },
      {
       "titleDisplay":"Ephesians",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50032",
       "year":null,
       "genderRelevant":false,
@@ -286,6 +417,9 @@
       "genreSpecific": [
         "literary-criticism"
        ],
+      "contributors": [
+        
+       ],
       "id":"NA_Review_of_New_Publications",
       "year":null,
       "genderRelevant":false,
@@ -295,7 +429,13 @@
       "titleDisplay":"Works of the Rev. P. Doddridge",
       "genreSpecific": [
         "theology",
-        "sermon #lecture #philosophy #letters"
+        "sermon",
+        "lecture",
+        "philosophy",
+        "letters"
+       ],
+      "contributors": [
+        "Philip Doddridge"
        ],
       "id":"Doddridge_Works",
       "year":null,
@@ -306,7 +446,12 @@
       "titleDisplay":"Lectures on the History of Literature, Ancient and Modern",
       "genreSpecific": [
         "lecture-group",
-        "literary-criticism #history"
+        "literary-criticism",
+        "history"
+       ],
+      "contributors": [
+        "Friedrich von Schlegel",
+        "John Gibson Lockhart (translator)"
        ],
       "id":"Schlegel_Lectures",
       "year":"1818",
@@ -319,6 +464,9 @@
         "philosophy",
         "education"
        ],
+      "contributors": [
+        "Francis Bacon"
+       ],
       "id":"Bacon_Advancement",
       "year":"1800",
       "genderRelevant":false,
@@ -328,7 +476,12 @@
       "titleDisplay":"Aristotle’s Ethics and Politics, Comprising His Practical Philosophy . . .",
       "genreSpecific": [
         "classical",
-        "ethics #philosophy"
+        "ethics",
+        "philosophy"
+       ],
+      "contributors": [
+        "Aristotle",
+        "John Gillies (translator)"
        ],
       "id":"Gillies_Aristotles_Ethics",
       "year":"1813",
@@ -340,6 +493,9 @@
       "genreSpecific": [
         "history"
        ],
+      "contributors": [
+        "Charles Rollin"
+       ],
       "id":"Rollin_Ancient_History",
       "year":"1805",
       "genderRelevant":false,
@@ -350,6 +506,9 @@
       "genreSpecific": [
         "philosophy"
        ],
+      "contributors": [
+        "Thomas Reid"
+       ],
       "id":"Reid_Inquiry",
       "year":"1801",
       "genderRelevant":false,
@@ -359,7 +518,13 @@
       "titleDisplay":"Germany",
       "genreSpecific": [
         "travel-writing",
-        "literary-criticism #history #theology #philosophy"
+        "literary-criticism",
+        "history",
+        "theology",
+        "philosophy"
+       ],
+      "contributors": [
+        "Anne Louise Germaine De Staël-Holstein"
        ],
       "id":"De_Staël_Germany",
       "year":"1814",
@@ -371,6 +536,9 @@
       "genreSpecific": [
         "literary-criticism"
        ],
+      "contributors": [
+        "Anne Louise Germaine De Staël-Holstein"
+       ],
       "id":"De_Staël_Influence",
       "year":"1813",
       "genderRelevant":false,
@@ -380,6 +548,9 @@
       "titleDisplay":"Melmoth the Wanderer: A Tale",
       "genreSpecific": [
         "fiction"
+       ],
+      "contributors": [
+        "Charles Robert Maturin"
        ],
       "id":"Maturin_Melmoth",
       "year":"1820",
@@ -391,6 +562,9 @@
       "genreSpecific": [
         "philosophy"
        ],
+      "contributors": [
+        "Adam Smith"
+       ],
       "id":"Smith_Theory",
       "year":"1817",
       "genderRelevant":false,
@@ -400,6 +574,9 @@
       "titleDisplay":"Elements of the Philosophy of the Human Mind",
       "genreSpecific": [
         "philosophy"
+       ],
+      "contributors": [
+        "Dugald Stewart"
        ],
       "id":"Stewart_Elements",
       "year":"1821",
@@ -411,6 +588,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        
+       ],
       "id":"Wordsworth_Wanderer",
       "year":"1814",
       "genderRelevant":false,
@@ -421,6 +601,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        "Felicia Dorothea Browne Hemans"
+       ],
       "id":"Hemans_Poems",
       "year":"1808",
       "genderRelevant":false,
@@ -428,7 +611,12 @@
      },
      {
       "titleDisplay":"[ proverb, saying, etc. ]",
-      "genreSpecific":null,
+      "genreSpecific": [
+        
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT99999",
       "year":null,
       "genderRelevant":false,
@@ -436,7 +624,12 @@
      },
      {
       "titleDisplay":"2 Samuel",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50017",
       "year":null,
       "genderRelevant":false,
@@ -448,6 +641,9 @@
         "theology",
         "philosophy"
        ],
+      "contributors": [
+        "William Paley"
+       ],
       "id":"Paley_Works",
       "year":null,
       "genderRelevant":false,
@@ -458,6 +654,9 @@
       "genreSpecific": [
         "theology"
        ],
+      "contributors": [
+        "John Wesley"
+       ],
       "id":"Wesley_Hymns",
       "year":"1781",
       "genderRelevant":false,
@@ -465,7 +664,12 @@
      },
      {
       "titleDisplay":"The Bible",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT55555",
       "year":null,
       "genderRelevant":false,
@@ -477,6 +681,9 @@
         "history",
         "theology"
        ],
+      "contributors": [
+        "Joseph Milner"
+       ],
       "id":"Milner_History",
       "year":"1794",
       "genderRelevant":false,
@@ -484,7 +691,12 @@
      },
      {
       "titleDisplay":"2 Peter",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50016",
       "year":null,
       "genderRelevant":false,
@@ -495,6 +707,9 @@
       "genreSpecific": [
         "history",
         "theology"
+       ],
+      "contributors": [
+        "John Foxe"
        ],
       "id":"Foxe_Martyrs",
       "year":"1807",
@@ -507,6 +722,9 @@
         "letter-group",
         "history"
        ],
+      "contributors": [
+        "John Savage (translator)"
+       ],
       "id":"Savage_Collection",
       "year":"1703",
       "genderRelevant":false,
@@ -516,7 +734,11 @@
       "titleDisplay":"Lectures on Ecclesiastical History",
       "genreSpecific": [
         "lecture-group",
-        "history #theology"
+        "history",
+        "theology"
+       ],
+      "contributors": [
+        "George and David Hume Campbell"
        ],
       "id":"CampbellandHume_Lectures",
       "year":"1807",
@@ -528,6 +750,9 @@
       "genreSpecific": [
         "sacred-text"
        ],
+      "contributors": [
+        
+       ],
       "id":"NA_Augsburg_Confession",
       "year":"1813",
       "genderRelevant":false,
@@ -538,6 +763,9 @@
       "genreSpecific": [
         "theology"
        ],
+      "contributors": [
+        "Ernest Hazelius"
+       ],
       "id":"Hazelius_Luther",
       "year":"1813",
       "genderRelevant":false,
@@ -545,7 +773,12 @@
      },
      {
       "titleDisplay":"Wisdom of Jesus Son of Sirach",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50080",
       "year":null,
       "genderRelevant":false,
@@ -553,7 +786,12 @@
      },
      {
       "titleDisplay":"James",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50044",
       "year":null,
       "genderRelevant":false,
@@ -565,6 +803,9 @@
         "theology",
         "philosophy"
        ],
+      "contributors": [
+        "Samuel Clarke"
+       ],
       "id":"Clarke_Demonstration",
       "year":"1704",
       "genderRelevant":false,
@@ -574,6 +815,9 @@
       "titleDisplay":"The Rules and Exercises of Holy Living",
       "genreSpecific": [
         "theology"
+       ],
+      "contributors": [
+        "Jeremy Taylor"
        ],
       "id":"Taylor_Exercises",
       "year":"1650",
@@ -585,6 +829,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        
+       ],
       "id":"Young_Resignation",
       "year":"1805",
       "genderRelevant":false,
@@ -594,6 +841,9 @@
       "titleDisplay":"Poems, by Gavin Turnbull, Comedian",
       "genreSpecific": [
         "poetry"
+       ],
+      "contributors": [
+        "Gavin Turnbull"
        ],
       "id":"Turnbull_Poems",
       "year":"1794",
@@ -605,6 +855,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        "Edward Young"
+       ],
       "id":"Young_Complaint",
       "year":"1805",
       "genderRelevant":false,
@@ -614,6 +867,9 @@
       "titleDisplay":"Principles of Moral Philosophy",
       "genreSpecific": [
         "philosophy"
+       ],
+      "contributors": [
+        "George Turnbull"
        ],
       "id":"Turnbull_Principles",
       "year":"1740",
@@ -625,6 +881,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        "John Blair Linn"
+       ],
       "id":"Linn_Powers",
       "year":"1801",
       "genderRelevant":false,
@@ -634,6 +893,9 @@
       "titleDisplay":"“Il Penseroso” Comus, a Mask . . .",
       "genreSpecific": [
         "fiction"
+       ],
+      "contributors": [
+        
        ],
       "id":"Milton_Il_Penseroso",
       "year":"1799",
@@ -646,6 +908,9 @@
         "poetry",
         "theology"
        ],
+      "contributors": [
+        "John Milton"
+       ],
       "id":"Milton_Samson",
       "year":"1765",
       "genderRelevant":false,
@@ -657,6 +922,9 @@
         "letters",
         "essay-group"
        ],
+      "contributors": [
+        "Sir William Jones"
+       ],
       "id":"Jones_Memoirs",
       "year":"1805",
       "genderRelevant":false,
@@ -666,6 +934,9 @@
       "titleDisplay":"“The Scripture A Good Book, written by Divine Inspiration” Seventeen Discourses on Several Texts of Scripture . . .",
       "genreSpecific": [
         "theology"
+       ],
+      "contributors": [
+        
        ],
       "id":"Robinson_Scripture",
       "year":"1805",
@@ -677,6 +948,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        "Sir Walter Scott"
+       ],
       "id":"Scott_Lay",
       "year":"1805",
       "genderRelevant":false,
@@ -686,7 +960,11 @@
       "titleDisplay":"Vindication of Natural Society",
       "genreSpecific": [
         "political-writing",
-        "philosophy #reform"
+        "philosophy",
+        "reform"
+       ],
+      "contributors": [
+        "Edmund Burke"
        ],
       "id":"Burke_Vindication",
       "year":"1806",
@@ -699,6 +977,9 @@
         "poetry",
         "philosophy"
        ],
+      "contributors": [
+        
+       ],
       "id":"Pope_Essay",
       "year":"1806",
       "genderRelevant":false,
@@ -710,6 +991,9 @@
         "philosophy",
         "metaphysics"
        ],
+      "contributors": [
+        "Edmund Burke"
+       ],
       "id":"Burke_Enquiry",
       "year":"1806",
       "genderRelevant":false,
@@ -717,7 +1001,12 @@
      },
      {
       "titleDisplay":"Mark",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50059",
       "year":null,
       "genderRelevant":false,
@@ -725,7 +1014,12 @@
      },
      {
       "titleDisplay":"Jonah",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50049",
       "year":null,
       "genderRelevant":false,
@@ -733,7 +1027,12 @@
      },
      {
       "titleDisplay":"2 Kings",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50014",
       "year":null,
       "genderRelevant":false,
@@ -745,6 +1044,10 @@
         "classical",
         "poetry"
        ],
+      "contributors": [
+        "Virgil",
+        "Malcolm Campbell (translator)"
+       ],
       "id":"Virgil_Aeneid",
       "year":"1803",
       "genderRelevant":false,
@@ -755,6 +1058,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        
+       ],
       "id":"Pope_Satire_IV",
       "year":"1806",
       "genderRelevant":false,
@@ -762,7 +1068,12 @@
      },
      {
       "titleDisplay":"[ unfindable ]",
-      "genreSpecific":null,
+      "genreSpecific": [
+        
+       ],
+      "contributors": [
+        
+       ],
       "id":"UNFINDABLE",
       "year":null,
       "genderRelevant":false,
@@ -770,7 +1081,12 @@
      },
      {
       "titleDisplay":"Exodus",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50034",
       "year":null,
       "genderRelevant":false,
@@ -778,7 +1094,12 @@
      },
      {
       "titleDisplay":"1 Kings",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50004",
       "year":null,
       "genderRelevant":false,
@@ -786,7 +1107,12 @@
      },
      {
       "titleDisplay":"Revelation",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50073",
       "year":null,
       "genderRelevant":false,
@@ -798,6 +1124,10 @@
         "theology",
         "philosophy"
        ],
+      "contributors": [
+        "Johann Gottlieb Fichte",
+        "Mrs. Percy Sinnett (translator)"
+       ],
       "id":"Fichte_Destination",
       "year":"1846",
       "genderRelevant":false,
@@ -808,6 +1138,10 @@
       "genreSpecific": [
         "fiction"
        ],
+      "contributors": [
+        "Fredrika Bremer",
+        "Mary Howitt (translator)"
+       ],
       "id":"Bremer_Hertha",
       "year":"1856",
       "genderRelevant":true,
@@ -817,6 +1151,9 @@
       "titleDisplay":"History of the Decline and Fall of the Roman Empire",
       "genreSpecific": [
         "history"
+       ],
+      "contributors": [
+        "Edward Gibbon"
        ],
       "id":"Gibbon_History",
       "year":null,
@@ -829,6 +1166,10 @@
         "history",
         "theology"
        ],
+      "contributors": [
+        "Johann Lorenz Mosheim",
+        "Archibald Maclaine (translator)"
+       ],
       "id":"Mosheim_History",
       "year":null,
       "genderRelevant":false,
@@ -839,6 +1180,9 @@
       "genreSpecific": [
         "philosophy"
        ],
+      "contributors": [
+        "John Locke"
+       ],
       "id":"Locke_Human_Understanding",
       "year":"1803",
       "genderRelevant":false,
@@ -846,7 +1190,12 @@
      },
      {
       "titleDisplay":"Deuteronomy",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50030",
       "year":null,
       "genderRelevant":false,
@@ -854,7 +1203,12 @@
      },
      {
       "titleDisplay":"1 Timothy",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50009",
       "year":null,
       "genderRelevant":false,
@@ -862,7 +1216,12 @@
      },
      {
       "titleDisplay":"Genesis",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50038",
       "year":null,
       "genderRelevant":false,
@@ -874,6 +1233,9 @@
         "theology",
         "philosophy"
        ],
+      "contributors": [
+        "William Wollaston"
+       ],
       "id":"Wollaston_Religion",
       "year":"1759",
       "genderRelevant":false,
@@ -881,7 +1243,12 @@
      },
      {
       "titleDisplay":"1 Peter",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50006",
       "year":null,
       "genderRelevant":false,
@@ -891,7 +1258,11 @@
       "titleDisplay":"“Bloody Code of Georgia!” Salem Gazette",
       "genreSpecific": [
         "political-writing",
-        "ethics #reform"
+        "ethics",
+        "reform"
+       ],
+      "contributors": [
+        
        ],
       "id":"NA_Bloody_Code",
       "year":null,
@@ -903,6 +1274,9 @@
       "genreSpecific": [
         "essay-group"
        ],
+      "contributors": [
+        
+       ],
       "id":"NA_Summary",
       "year":null,
       "genderRelevant":false,
@@ -913,6 +1287,9 @@
       "genreSpecific": [
         "political-writing"
        ],
+      "contributors": [
+        
+       ],
       "id":"NA_Andover_Constitution",
       "year":"1808",
       "genderRelevant":false,
@@ -922,6 +1299,9 @@
       "titleDisplay":"Letters to a Young Lady, in which the Duties and Character of Women are Considered, Chiefly with a Reference to Prevailing Opinions",
       "genreSpecific": [
         "letters"
+       ],
+      "contributors": [
+        "Jane West"
        ],
       "id":"West_Letters",
       "year":"1806",
@@ -934,6 +1314,9 @@
         "poetry",
         "theology"
        ],
+      "contributors": [
+        "John Milton"
+       ],
       "id":"Milton_Paradise",
       "year":"1801",
       "genderRelevant":false,
@@ -944,6 +1327,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        
+       ],
       "id":"Pope_Epistle_III",
       "year":"1806",
       "genderRelevant":false,
@@ -953,6 +1339,9 @@
       "titleDisplay":"The Dunciad",
       "genreSpecific": [
         "poetry"
+       ],
+      "contributors": [
+        "Alexander Pope"
        ],
       "id":"Pope_Dunciad",
       "year":"1729",
@@ -965,6 +1354,10 @@
         "philosophy",
         "theology"
        ],
+      "contributors": [
+        "René Descartes",
+        "William Molyneux (translator)"
+       ],
       "id":"Descartes_Meditations",
       "year":"1680",
       "genderRelevant":false,
@@ -974,6 +1367,9 @@
       "titleDisplay":"Julie, or the New Heloise",
       "genreSpecific": [
         "fiction"
+       ],
+      "contributors": [
+        "Jean-Jacques Rousseau"
        ],
       "id":"Rousseau_Julie",
       "year":"1761",
@@ -985,6 +1381,9 @@
       "genreSpecific": [
         "poetry"
        ],
+      "contributors": [
+        "Alexander Pope"
+       ],
       "id":"Pope_Eloisa",
       "year":"1717",
       "genderRelevant":false,
@@ -992,7 +1391,12 @@
      },
      {
       "titleDisplay":"2 Corinthians",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50011",
       "year":null,
       "genderRelevant":false,
@@ -1000,7 +1404,12 @@
      },
      {
       "titleDisplay":"3 John",
-      "genreSpecific":"sacred-text",
+      "genreSpecific": [
+        "sacred-text"
+       ],
+      "contributors": [
+        
+       ],
       "id":"IT50020",
       "year":null,
       "genderRelevant":false,

@@ -15,15 +15,24 @@ dispatch.on("dataLoaded.list", function(allData){
           .data(d => d.sources)
           .enter().append('dd')
             .html( function(src) {
-              var bibYear,
+              var bibYear, authors,
                   str = src.id,
                   cert = src.cert === 'high' ? '' : " ("+src.cert+" certainty)",
                   bibEntry = meta['bibliography'].filter(
                     entry => entry.id === src.id )[0];
               if ( bibEntry !== undefined ) {
+                console.log(bibEntry['contributors']);
+                authors = bibEntry['contributors'].length <= 0 ? '' : ", by ";
+                bibEntry['contributors'].forEach( function(name, index, arr) {
+                  authors += name;
+                  if ( index + 1 < arr.length ) {
+                    authors += ", "
+                  }
+                });
                 bibYear = bibEntry['year'];
                 bibYear = bibYear !== null ? ', '+bibYear : '';
-                str = '<em>'+bibEntry['titleDisplay']+'</em>' + bibYear + cert;
+                str = '<em>'+bibEntry['titleDisplay']+'</em>' + bibYear 
+                  + authors + '<span class="certainty">' + cert + '</span>';
               }
               return str;
             });

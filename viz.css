@@ -143,16 +143,17 @@ h2{
 }
 
 #list .item-meta{
+  margin: 0.25rem 0.5rem 0.25rem 0.2rem;
   display: block;
+  line-height: 1.05rem;
   font-size: 0.75rem;
-  margin: 0 0.5rem 0 0.2rem;
 }
 
 .item-meta dl{
   margin: 0;
 }
 .item-meta dd{
-  margin-left: 2rem;
+  margin-left: 1.75rem;
   text-indent: -1rem;
 }
 

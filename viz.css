@@ -14,17 +14,32 @@ body{
 }
 
 .header{
-  padding: 0.5rem 0.5rem;
+  margin: 0.5rem 0 1rem;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+.header p{
+  margin: 0;
 }
 
 #title{
+  margin: 0;
   font-size: 26px;
   font-weight: lighter;
 }
 
 #info{
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  justify-self: left;
   font-weight: lighter;
-  font-size: 14px;
+  font-size: 0.9rem;
   line-height: 120%;
 }
 
@@ -60,7 +75,7 @@ h2{
 }
 
 .controls {
-  margin-bottom: 1rem;
+  justify-self: end;
   font-size: 0.8rem;
 }
 
@@ -69,6 +84,7 @@ h2{
   flex: 1 1 auto;
   display: flex;
   align-items: stretch;
+  justify-content: left;
   overflow: hidden;
   font-size: 0.75rem;
 }
@@ -132,6 +148,9 @@ h2{
   margin: 0 0.5rem 0 0.2rem;
 }
 
+.item-meta dl{
+  margin: 0;
+}
 .item-meta dd{
   margin-left: 2rem;
   text-indent: -1rem;

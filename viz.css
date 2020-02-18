@@ -13,15 +13,18 @@ body{
   color: #292826;
 }
 
-.header{
-  margin: 0.5rem 0 1rem;
+.header, .footer{
   padding: 0.5rem;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr auto;
   grid-template-rows: auto;
   grid-gap: 1rem;
   gap: 1rem;
   align-items: center;
+}
+
+.header {
+  margin: 0.5rem 0 1rem;
 }
 
 .header p{
@@ -40,6 +43,16 @@ body{
   justify-self: left;
   font-weight: lighter;
   font-size: 0.9rem;
+  line-height: 120%;
+}
+
+.footer {
+  margin: 0 1rem;
+}
+
+.footer p {
+  font-size: 0.85rem;
+  font-weight: lighter;
   line-height: 120%;
 }
 
@@ -167,86 +180,6 @@ ol::-webkit-scrollbar-thumb {
     box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 50px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px 20px;
-    border: 1px solid #888;
-    width: 60%;
-    font-weight: lighter;
-    line-height: 120%;
-    height: 80%;
-    overflow: scroll;
-}
-
-.modal-content p{
-  font-size: 14px;
-  padding: 0px 30px;
-}
-
-.modal-content ul{
-  font-size: 14px;
-  padding: 0px 50px;
-}
-
-.modal-content h4{
-  font-size: 16px;
-  padding: 0px 30px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
-
-#model-firstp {
-  padding-top: 30px;
-  margin-top: 0px;
-}
-
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#myBtn{
-  padding-right: 0px;
-  background-color:none;
-  border: none;
-  font-size: 0.9rem;
-  font-weight: normal;
-  font-family: sans-serif;
-}
-
-#myBtn:hover{
-background-color:none;
-border: none;
-color: #00ACC1;
-}
-
 #note{
   text-align: center;
   font-size: 0.9rem;
@@ -275,4 +208,8 @@ color: #00ACC1;
   fill: none;
   opacity: 0.25;
   stroke-width: 1;
+}
+
+.italic {
+  font-style: italic;
 }

@@ -21,7 +21,7 @@ dispatch.on("dataLoaded.list", function(allData){
                   bibEntry = meta['bibliography'].filter(
                     entry => entry.id === src.id )[0];
               if ( bibEntry !== undefined ) {
-                console.log(bibEntry['contributors']);
+                //console.log(bibEntry['contributors']);
                 authors = bibEntry['contributors'].length <= 0 ? '' : ", by ";
                 bibEntry['contributors'].forEach( function(name, index, arr) {
                   authors += name;

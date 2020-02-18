@@ -18,10 +18,13 @@
         <input type="radio" id="mouseover-control" name="upmethod" value="mouseover" />
       </fieldset>
     </div>
-    <!--<p id="info">
-      An exploration of the <a href="https://wwp.northeastern.edu/wwo" target="_blank">Women Writers Online</a> text collection
-      including the top words and phrases of the following encoded elements:
-    </p>-->
+    <p id="info">This visualization was produced as part of the Intertextual Networks project, working with data from 
+      the <span class="italic">Almanacks of Mary Moody Emerson: A Scholarly Digital Edition</span>, an NEH 
+      <span class="italic">We the People</span> designee and recipient of two NEH Scholarly Edition Grants that is 
+      edited by Noelle A. Baker and Sandra Harbert Petrulionis. This edition is being published in phases, with 
+      eighteen of a projected forty-eight Almanacks published to date, the data from which populate this visualization. 
+      To read more about the project, discover how the data was prepared, and learn how to navigate the interface, see 
+      here [link to about page].</p>
   </div><!--
   <div class="buttons">
     <button id="btn-persName" type="button" class="btn-primary">person names</button>
@@ -38,73 +41,15 @@
       <div class="col-content"></div>
     </div>
     <div class="col" id="column-right">
-      <h2 id="colR-title" class="col-title">Intertextual References
-        <!--<br /><small>[Subscription required: to request a free trial, see <a href="https://wwp.northeastern.edu/wwo/license/" target="_blank">here</a>]</small>--></h2>
+      <h2 id="colR-title" class="col-title">Intertextual References</h2>
       <div id="list-container" class="col-content">
         <ol class="list" id="list"></ol>
       </div>
     </div>
   </div>
-  <!-- Trigger/Open The Modal -->
-  <p id="note">
-    <button id="myBtn">About this project</button>
-    &nbsp;| &nbsp; Based on code by <a href="https://github.com/sarahsoup/wwo" target="_blank">Sarah Campbell and Zheng-yan Yu</a>
-  </p>
-  
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-  
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p id="model-firstp">This project was designed and developed by Sarah Campbell and Zheng-yan Yu, who are graduate students in the
-        <a href="https://www.northeastern.edu/visualization/" target="_blank">Information Design and Visualization</a>
-        MFA program at Northeastern University. The project was developed as a part of the course
-        <a href="https://codydunne.github.io/cs7295-f17/" target="_blank">CS 7295 Special Topics in Data Visualization</a>,
-         taught by <a href="https://www.ccis.northeastern.edu/people/cody-dunne/" target="_blank">Cody Dunne</a>.
-        <a href="https://library.northeastern.edu/about/library-staff-directory/sarah-connell" target="_blank">Sarah Connell</a>,
-        Assistant Director of the <a href="https://wwp.northeastern.edu">Women Writers Project</a>
-        at the Northeastern <a href="https://dsg.neu.edu/" target="_blank">Digital Scholarship Group</a>,
-        served as the project partner. Both Cody and Sarah Connell provided resources, feedback, and subject matter expertise.
-      </p>
-      <h4>How to Explore</h4>
-      <p>
-        This visualization includes multiple interactions to enable user exploration:
-      </p>
-        <ul>
-          <li>click through the three buttons to visualize one of the three highlighted in-text elements</li>
-          <li>hover over a filled circle in the scatterplot, the text in the network visualization, or a text in the list
-            to see the corresponding information across the three components</li>
-          <li>click on the text in the list to see the text in full on the WWO website</li>
-        </ul>
-      <h4>Methodology</h4>
-      <p>
-        This data was queried from the Women Writers Online textbase and includes metadata for each of the 401 texts
-          as well as three in-text elements. Multiple values for each element can exist in each text; for example, a text
-          can have multiple person names identified. See the <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/REF-ELEMENTS.html" target="_blank">TEI guidelines</a>
-          documentation for more about encoding of in-text elements. Below is the original count of in-text element values:
-      </p>
-          <ul>
-            <li>142 texts included 810 unique organization names</li>
-            <li>396 texts included 19,038 unique place names</li>
-            <li>399	texts included 49,311 unique person names</li>
-          </ul>
-      <p>
-          The original queried data listed the in-text element values as one string for each text, with separators in between. We parsed
-          the data so there existed a row for each combination of text and in-text element value; if a text included 10
-          person names, there would be one line for each name. We then manually aggregated values that were common, like
-          Catholic Church and Catholike Church. These aggregations were based on sense and were not completed for the entirety
-          of the data, but were completed enough in order to truly show the most frequent in-text element values.
-          We visualized the top 20 values for each in-text element and their relationship to texts they reside in.
-          For more information on accessing the Women Writers Online textbase, please see the <a href="https://wwp.northeastern.edu/wwo/license/" target="_blank">licensing and access</a> page.
-        </p>
-      <h4>Links</h4>
-      <ul>
-        <li><a href="https://wwp.northeastern.edu/wwo" target="_blank">Women Writers Online</a></li>
-        <li><a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/REF-ELEMENTS.html" target="_blank">TEI guidelines</a></li>
-        <li><a href="https://wwp.northeastern.edu/wwo/license/" target="_blank">WWO Licensing and Access</a></li>
-      </ul>
-    </div>
+  <div class="footer">
+    <p class="italic">Intertextual Networks has been made possible in part by a major grant from the National Endowment for the Humanities: Exploring the human endeavor. Any views, findings, conclusions, or recommendations expressed in this project, do not necessarily represent those of the National Endowment for the Humanities.</p>
+    <p>Based on code by <a href="https://github.com/sarahsoup/wwo" target="_blank">Sarah Campbell and Zheng-yan Yu</a>.</p>
   </div>
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="data.js"></script>

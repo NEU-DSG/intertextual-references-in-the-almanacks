@@ -7,12 +7,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/utils/gfx/favicon.ico" />
     <!--  CSS  -->
-    <link rel="stylesheet" type="text/css" href="viz.css" />
+    <style>
+html{ background-color: #fcfcfc; height: 100vh; }
+
+body{
+  margin: 0 0 1rem;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 20% 1fr;
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+  gap: 1rem;
+  font-family: sans-serif;
+  font-weight: lighter;
+  line-height: 120%;
+  color: #292826;
+}
+
+h1, h2 { font-weight: inherit; line-height: initial; }
+h1 { grid-column-start: 1; grid-column-end: span 2; }
+
+nav {
+  margin: 1rem 0;
+  padding: 0.5rem 0.15rem;
+  background-color: #fcfcfc;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  font-size: 0.9rem;
+}
+nav ol { margin: 0.5rem 0 1rem; padding-left: 0.75rem; list-style: none; }
+li { margin: 0.35rem 0; }
+
+.italic { font-style: italic; }
+.sup { font-size: 0.95rem; font-variant: super; }
+</style>
   </head>
   <body>
-    <h1></h1>
+    <h1>Intertextual References in the Almanacks of Mary Moody Emerson</h1>
+    <div>
+      <nav>
+        <span id="contents">Contents:</span>
+        <ol aria-labelledby="contents">
+          <li><a href="#about">About this project</a></li>
+          <li><a href="#data-prep">Data preparation</a></li>
+          <li><a href="#interface">Understanding and using the visualization interface</a></li>
+        </ol>
+        <a href="./index.html">Return to the visualization</a>
+      </nav>
+    </div>
     <main>
-      <div>
+      <div id="about">
         <h2>About this project</h2>
         <p><span class="italic">The Almanacks of Mary Moody Emerson: A Scholarly Digital Edition</span> is a collaboration 
           between editors Noelle A. Baker and Sandra Harbert Petrulionis and the Women Writers Project to edit, transcribe, 
@@ -42,11 +87,11 @@
             general introduction to Emerson’s Almanacks</a>,</li>
           <li><a href="/research/projects/intertextuality/index.html">more on the Intertextual 
             Networks project</a>, and</li>
-          <li><a href="/texts/emerson.almanack.html">the Almanacks in WWO</a>.</li>
+          <li><a href="/texts/emerson.almanack.html">the Almanacks in <span class="italic">WWO</span></a>.</li>
         </ul>
       </div>
       
-      <div>
+      <div id="data-prep">
         <h2>Data preparation</h2>
         <p>Emerson’s Almanacks are encoded according to the standards of the Text Encoding Initiative (TEI) markup language. 
           This encoding marks both quotations and other forms of intertextuality, including: allusions, references, 
@@ -86,7 +131,7 @@
           >available on GitHub</a> along with bibliographic data.</p>
       </div>
       
-      <div>
+      <div id="interface">
         <h2>Understanding and using the visualization interface</h2>
         <p>This interface is intended to showcase Emerson’s intertextual references through three deeply interconnected 
           panes. The interface allows interaction with the panes either by mouseover or by click; you can toggle between 

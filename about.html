@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>About | Intertextual References in the Almanacks of Mary Moody Emerson</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/utils/gfx/favicon.ico" />
+    <!--  CSS  -->
+    <link rel="stylesheet" type="text/css" href="viz.css" />
+  </head>
+  <body>
+    <h1></h1>
+    <main>
+      <div>
+        <h2>About this project</h2>
+        <p><span class="italic">The Almanacks of Mary Moody Emerson: A Scholarly Digital Edition</span> is a collaboration 
+          between editors Noelle A. Baker and Sandra Harbert Petrulionis and the Women Writers Project to edit, transcribe, 
+          and encode these Almanacks for publication in the <span class="italic">Women Writers Online (WWO)</span> 
+          collection of early women’s texts.</p>
+        
+        <p>Mary Moody Emerson (1774–1863) was a self-educated scholar, theologian, and author who kept throughout her life a 
+          series of handmade manuscript booklets she called “Almanacks.” This unpublished manuscript series spans over fifty 
+          years and one thousand pages and combines multiple literary genres, including devotional and philosophical 
+          journals, commonplace books, letters, and original compositions. Its subjects range from theology, philosophy, 
+          literary criticism, and science, to war, imperialism, and slavery.</p>
+        
+        <p>This interactive visualization interface was developed as part of the Intertextual Networks project, a three-year 
+          NEH-funded research initiative focusing on intertextuality in early women’s writing. Code for the interface was 
+          adapted from “<a href="https://www.wwp.northeastern.edu/lab/names-viz/index.html">In the Texts of Women Writers</a>,” 
+          a visualization created by Sarah Campbell and Zheng-yan Yu to show genre- and chronology-based reference patterns 
+          for the most common person names, place names, and organization names in <span class="italic">WWO</span>.</p>
+        
+        <p>The holograph Almanack manuscripts are contained in forty-eight fascicles at Houghton Library, Harvard University, 
+          and this visualization displays intertextual references for the 18 Almanacks currently published in WWO, many of 
+          which date from the early nineteenth century. As we continue to add new Almanacks to the collection, we will also 
+          update the interface to reflect Emerson’s writing through the late 1850s.</p>
+        
+        <p>For further information, we recommend these resources:</p>
+        <ul>
+          <li><a href="/research/projects/manuscripts/emerson/general_introduction.html">a 
+            general introduction to Emerson’s Almanacks</a>,</li>
+          <li><a href="/research/projects/intertextuality/index.html">more on the Intertextual 
+            Networks project</a>, and</li>
+          <li><a href="/texts/emerson.almanack.html">the Almanacks in WWO</a>.</li>
+        </ul>
+      </div>
+      
+      <div>
+        <h2>Data preparation</h2>
+        <p>Emerson’s Almanacks are encoded according to the standards of the Text Encoding Initiative (TEI) markup language. 
+          This encoding marks both quotations and other forms of intertextuality, including: allusions, references, 
+          paraphrases, misquotations, distillations of disparate source materials, materials repurposed from their sources 
+          in ways that change the meaning of the original, and what we have called “intertextual echoes” to describe 
+          language that may indicate Emerson had particular sources in mind but that is too indirect for us to identify any 
+          unambiguous reference.</p>
+        
+        <p>We have marked out the language comprising these different forms of intertextuality within Emerson’s Almanacks, 
+          giving each a pointer to the relevant text or texts in the bibliography. For example, in Folder 1 (1804), Emerson 
+          writes: “rather may my right hand forget her use,” which references Psalm 137:5: “If I forget thee, O Jerusalem: 
+          let my right hand forget her cunning.” Emerson’s language here (“rather may my right hand forget her use”) is 
+          encoded as a reference and marked with a <code>@source</code> attribute that points to the bibliography entry for 
+          Psalms. In some cases, we have also indicated if there is any uncertainty about which texts are being referenced, 
+          using the <code>@cert</code> attribute.</p>
+        
+        <p>Within the bibliography, each text displays basic bibliographic information, including titles, authors, 
+          publication locations, and dates. Each text is categorized in one of six broad genres (philosophy, religious 
+          writings, literature, life writings, nonfiction, and reviews) and one of twenty additional specific generic 
+          categories (such as classical texts, essays, history, letters, and sermons). It’s important to keep in mind, 
+          however, that 18<span class="sup">th</span>- and 19<span class="sup">th</span>-century disciplinary boundaries 
+          were considerably blurrier than they are today, such that a text characterized as “religious writings” in this 
+          visualization could also be considered “philosophy.” The same distinction could be applied to science (“natural 
+          history” in the 18<span class="sup">th</span> and 19<span class="sup">th</span> centuries) and philosophy. 
+          Currently, the interface displays only the broader generic categories for the texts that Emerson references, but 
+          we plan to add an option in the near future that allows users to toggle to see the more specific genre information 
+          instead.</p>
+        
+        <p>In order to extract the intertextual references from the TEI encoding, we first regularized the XML using the WWP 
+          “<a href="https://github.com/NEU-DSG/wwp-public-code-share/tree/master/fulltext">FulltextBot</a>,” an XSLT 
+          stylesheet which makes it easier to turn Women Writers Online documents into human-readable plain text. Because 
+          the <span class="italic">Almanacks</span> manuscripts were drafted by a self-educated nineteenth-century woman who 
+          circulated them widely but did not submit them for publication, rather than revised and published texts, we chose 
+          to represent her original text content (abbreviations, errors, &amp;c.) rather than editorial regularizations. We 
+          then identified all tagged references and extracted them into JSON data, <a 
+          href="https://github.com/NEU-DSG/intertextual-references-in-the-almanacks/blob/master/intertextual-gestures-mme.json"
+          >available on GitHub</a> along with bibliographic data.</p>
+      </div>
+      
+      <div>
+        <h2>Understanding and using the visualization interface</h2>
+        <p>This interface is intended to showcase Emerson’s intertextual references through three deeply interconnected 
+          panes. The interface allows interaction with the panes either by mouseover or by click; you can toggle between 
+          these with the button in the top-right of the interface. Selecting an item within any of the three panes will 
+          highlight relevant information across the whole interface.</p>
+        
+        <p>The first pane, “References by Year,” uses dots to represent works in Emerson’s references. These works are 
+          grouped by the year in which they were referenced, and also by the broad genre types assigned to each work. Each 
+          dot is interactable—selecting one will highlight relevant data across all panes.</p>
+        
+        <p>The center pane is a diagram relating the genre of referenced works to the type of intertextual reference at 
+          stake. Each line represents a work in a single reference. In this pane, the axis labels are interactable. 
+          Selecting one of the labels will highlight all intertextual references of that type or genre across all panes.</p>
+        
+        <p>The last pane is a list of intertextual references. The full-text excerpt of each intertextual reference is shown, 
+          as is bibliographic information about the work(s) referenced and in which Almanack the reference is found. The 
+          reference in its original context can be located in the Almanacks published in Women Writers Online. In this pane, 
+          interacting with the text of an intertextual reference will highlight relevant data across all panes.</p>
+      </div>
+    </main>
+  </body>
+</html>

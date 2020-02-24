@@ -8,9 +8,8 @@
     <link rel="icon" type="image/x-icon" href="/utils/gfx/favicon.ico" />
     <!--  CSS  -->
     <style>
-html{ background-color: #fcfcfc; height: 100vh; }
-
-body{
+html { background-color: #fcfcfc; height: 100vh; }
+body {
   margin: 0 0 1rem;
   padding: 0 2rem;
   display: grid;
@@ -23,10 +22,12 @@ body{
   line-height: 120%;
   color: #292826;
 }
-
+.footer { grid-column-start: 2; }
+hr { width: 80%; }
 h1, h2 { font-weight: inherit; line-height: initial; }
 h1 { grid-column-start: 1; grid-column-end: span 2; }
-
+h2 { text-transform: capitalize; }
+h2 .connector { text-transform: initial; }
 nav {
   margin: 1rem 0;
   padding: 0.5rem 0.15rem;
@@ -38,7 +39,6 @@ nav {
 }
 nav ol { margin: 0.5rem 0 1rem; padding-left: 0.75rem; list-style: none; }
 li { margin: 0.35rem 0; }
-
 .italic { font-style: italic; }
 .sup { font-size: 0.95rem; font-variant: super; }
 </style>
@@ -120,19 +120,19 @@ li { margin: 0.35rem 0; }
           we plan to add an option in the near future that allows users to toggle to see the more specific genre information 
           instead.</p>
         
-        <p>In order to extract the intertextual references from the TEI encoding, we first regularized the XML using the WWP 
+        <p>In order to extract the intertextual references from the TEI encoding, we first regularized the XML using the WWP’s 
           “<a href="https://github.com/NEU-DSG/wwp-public-code-share/tree/master/fulltext">FulltextBot</a>,” an XSLT 
           stylesheet which makes it easier to turn <span class="italic">Women Writers Online</span> documents into human-readable plain text. Because 
           the Almanacks manuscripts were drafted by a self-educated nineteenth-century woman who 
           circulated them widely but did not submit them for publication, rather than revised and published texts, we chose 
           to represent her original text content (abbreviations, errors, &amp;c.) rather than editorial regularizations. We 
-          then identified all tagged references and extracted them into JSON data, <a 
+          then identified all tagged references and extracted them into JSON data, which is <a 
           href="https://github.com/NEU-DSG/intertextual-references-in-the-almanacks/blob/master/intertextual-gestures-mme.json"
           >available on GitHub</a> along with bibliographic data.</p>
       </div>
       
       <div id="interface">
-        <h2>Understanding and using the visualization interface</h2>
+        <h2>Understanding <span class="connector">and</span> using <span class="connector">the</span> visualization interface</h2>
         <p>This interface is intended to showcase Emerson’s intertextual references through three deeply interconnected 
           panes. The interface allows interaction with the panes either by mouseover or by click; you can toggle between 
           these with the button in the top-right of the interface. Selecting an item within any of the three panes will 
@@ -152,5 +152,12 @@ li { margin: 0.35rem 0; }
           In this pane, interacting with the text of an intertextual reference will highlight relevant data across all panes.</p>
       </div>
     </main>
+    
+    <div class="footer">
+      <hr />
+      <p class="italic">Intertextual Networks has been made possible in part by a major grant from the National Endowment 
+        for the Humanities: Exploring the human endeavor. Any views, findings, conclusions, or recommendations expressed in 
+        this project, do not necessarily represent those of the National Endowment for the Humanities.</p>
+    </div>
   </body>
 </html>

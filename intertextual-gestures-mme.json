@@ -851,15 +851,15 @@
       "genreBroad":"literature"
      },
      {
-      "titleDisplay":"[ unfindable ]",
+      "titleDisplay":"“Sermon III: Man’s Natural Blindness in the Things of Religion [February 1740]” Life and Character of the Late Reverend, Learned, and Pious Mr. Jonathan Edwards, President of the College of New Jersey . . .",
       "genreSpecific": [
         
        ],
       "contributors": [
         
        ],
-      "id":"UNFINDABLE",
-      "year":null,
+      "id":"Hopkins_Sermon_III",
+      "year":"1804",
       "genderRelevant":false,
       "genreBroad":null
      },
@@ -3471,36 +3471,20 @@
       "id":"an2"
      },
      {
-      "excerpt":"<itg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" type=\"paraphrase\" xml:id=\"an264.1520\" source=\"b:UNFINDABLE\">\n                  <quote source=\"b:UNFINDABLE\" xml:id=\"f02i011\">“would you take the merit of your\n<lb\/>salvation would bring God in debt”<\/quote>?<\/itg>",
+      "excerpt":"<itg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" type=\"intertextual_echo\" xml:id=\"an264.1520\" source=\"bibliography.xml#Hopkins_Sermon_III\">\n                  “would you take the merit of your\n<lb\/>salvation would bring God in debt”?<\/itg>",
       "folder":"emerson.folder02.xml",
       "plaintext":"“would you take the merit of your salvation would bring God in debt”?",
       "sources": [
          {
           "cert":"high",
-          "id":"UNFINDABLE",
+          "id":"Hopkins_Sermon_III",
           "genreBroad":null
          }
        ],
       "type": [
-        "paraphrase"
+        "intertextual_echo"
        ],
       "id":"an264.1520"
-     },
-     {
-      "excerpt":"<quote xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" source=\"b:UNFINDABLE\" xml:id=\"f02i011\">“would you take the merit of your\n<lb\/>salvation would bring God in debt”<\/quote>",
-      "folder":"emerson.folder02.xml",
-      "plaintext":"“would you take the merit of your salvation would bring God in debt”",
-      "sources": [
-         {
-          "cert":"high",
-          "id":"UNFINDABLE",
-          "genreBroad":null
-         }
-       ],
-      "type": [
-        "quote"
-       ],
-      "id":"f02i011"
      },
      {
       "excerpt":"<itg xmlns=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\" xmlns:wms=\"http:\/\/www.wwp.northeastern.edu\/ns\/textbase\/manuscript\" type=\"reference\" source=\"b:IT50072\" xml:id=\"f02i012\">The holy cabinet is surrounde<supplied reason=\"damaged\" source=\"#editors\">d<\/supplied>\n                  <lb\/>\n                  <hi rend=\"underline()\">with clouds &amp; darkness<\/hi><\/itg>",

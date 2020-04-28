@@ -853,7 +853,7 @@
      {
       "titleDisplay":"“Sermon III: Man’s Natural Blindness in the Things of Religion [February 1740]” Life and Character of the Late Reverend, Learned, and Pious Mr. Jonathan Edwards, President of the College of New Jersey . . .",
       "genreSpecific": [
-        
+        "theology"
        ],
       "contributors": [
         
@@ -861,7 +861,7 @@
       "id":"Hopkins_Sermon_III",
       "year":"1804",
       "genderRelevant":false,
-      "genreBroad":null
+      "genreBroad":"religious-writings"
      },
      {
       "titleDisplay":"Exodus",
@@ -3478,7 +3478,7 @@
          {
           "cert":"high",
           "id":"Hopkins_Sermon_III",
-          "genreBroad":null
+          "genreBroad":"religious-writings"
          }
        ],
       "type": [

@@ -39,6 +39,7 @@ nav {
 }
 nav ol { margin: 0.5rem 0 1rem; padding-left: 0.75rem; list-style: none; }
 li { margin: 0.35rem 0; }
+section + section { margin-top: 2.5rem; }
 .italic { font-style: italic; }
 .sup { font-size: 0.95rem; font-variant: super; }
 </style>
@@ -52,16 +53,17 @@ li { margin: 0.35rem 0; }
           <li><a href="#about">About this project</a></li>
           <li><a href="#data-prep">Data preparation</a></li>
           <li><a href="#interface">Understanding and using the visualization interface</a></li>
+          <li><a href="#cite">How to cite</a></li>
         </ol>
         <a href="./index.html">Return to the visualization</a>
       </nav>
     </div>
     <main>
-      <div id="about">
+      <section id="about">
         <h2>About this project</h2>
         <p><span class="italic">The Almanacks of Mary Moody Emerson: A Scholarly Digital Edition</span> is a collaboration 
-          between editors Noelle A. Baker and Sandra Harbert Petrulionis and the Women Writers Project to edit, transcribe, 
-          and encode these Almanacks for publication in the <span class="italic">Women Writers Online (WWO)</span> 
+          between editors Noelle A. Baker and Sandra Harbert Petrulionis and the <a href="https://wwp.northeastern.edu/">Women Writers Project</a> to edit, transcribe, 
+          and encode these Almanacks for publication in the <a href="https://wwp.northeastern.edu/wwo/" class="italic">Women Writers Online (WWO)</a> 
           collection of early women’s texts.</p>
         
         <p>Mary Moody Emerson (1774–1863) was a self-educated scholar, theologian, and author who kept throughout her life a 
@@ -89,9 +91,9 @@ li { margin: 0.35rem 0; }
             Networks project</a>, and</li>
           <li><a href="/texts/emerson.almanack.html">the Almanacks in <span class="italic">WWO</span></a>.</li>
         </ul>
-      </div>
+      </section>
       
-      <div id="data-prep">
+      <section id="data-prep">
         <h2>Data preparation</h2>
         <p>Emerson’s Almanacks are encoded according to the standards of the Text Encoding Initiative (TEI) markup language. 
           This encoding marks both quotations and other forms of intertextuality, including: allusions, references, 
@@ -129,9 +131,9 @@ li { margin: 0.35rem 0; }
           then identified all tagged references and extracted them into JSON data, which is <a 
           href="https://github.com/NEU-DSG/intertextual-references-in-the-almanacks/blob/master/intertextual-gestures-mme.json"
           >available on GitHub</a> along with bibliographic data.</p>
-      </div>
+      </section>
       
-      <div id="interface">
+      <section id="interface">
         <h2>Understanding <span class="connector">and</span> using <span class="connector">the</span> visualization interface</h2>
         <p>This interface is intended to showcase Emerson’s intertextual references through three deeply interconnected 
           panes. The interface allows interaction with the panes either by mouseover or by click; you can toggle between 
@@ -150,7 +152,16 @@ li { margin: 0.35rem 0; }
           as is bibliographic information about the work(s) referenced and in which Almanack the reference is found. The 
           reference in its original context can be located in the Almanacks published in <span class="italic">Women Writers Online</span>. 
           In this pane, interacting with the text of an intertextual reference will highlight relevant data across all panes.</p>
-      </div>
+      </section>
+      
+      <section id="cite">
+        <h2>How to Cite</h2>
+        <p>Here is a sample citation for the visualization:</p>
+        <blockquote>Ash Clark, Sarah Connell, Noelle A. Baker, and Sandra Harbert Petrulionis. 
+          “Intertextual References in the Almanacks of Mary Moody Emerson: Visualization for Close and Distant Reading.” 
+          Northeastern University Women Writers Project. 
+          <br />https://wwp.northeastern.edu/lab/emerson-networks/index.html.</blockquote>
+      </section>
     </main>
     
     <div class="footer">
